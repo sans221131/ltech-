@@ -21,13 +21,13 @@ const DPR_CAP = 1.25;
 const LUCIDE_BRAIN_URL = "https://unpkg.com/lucide-static@latest/icons/brain.svg";
 
 // visuals: calm + legible
-const TRAIL_ALPHA = 0.06;
-const GLOW_ALPHA  = 0.035;
-const SPEED_DAMP  = 0.94;
-const SEEK_BASE   = 0.10;
-const CURL        = 0.038;
-const GRAVITY     = 0.08;
-const DOT_SIZE = (n: number) => Math.max(2.4, Math.min(3.8, 20000 / n)); // big dots
+const TRAIL_ALPHA = 0.0; // Remove trails completely
+const GLOW_ALPHA  = 0.02;
+const SPEED_DAMP  = 0.96; // Smoother motion
+const SEEK_BASE   = 0.05; // Gentler convergence 
+const CURL        = 0.015; // Reduced harsh patterns
+const GRAVITY     = 0.02; // Much lighter gravity
+const DOT_SIZE = (n: number) => Math.max(4.5, Math.min(6.5, 25000 / n)); // Bigger particles
 
 // brain sizing/centering
 const LUCIDE_ICON_SIZE = 24;
@@ -77,8 +77,8 @@ export default function HeroBoids({
     const ctx = _canvas.getContext("2d", { alpha: true })!;
 
     const score = deviceScore();
-    const BASE = window.innerWidth < 520 ? 20000 : 38000;
-    const TARGET_COUNT = Math.floor(Math.min(36000, Math.max(14000, BASE * (score / 2))));
+    const BASE = window.innerWidth < 520 ? 5000 : 10000; // 6k for small, 10k for large
+    const TARGET_COUNT = Math.floor(Math.min(12000, Math.max(4000, BASE * (score / 3)))); // Adjusted limits
 
     // state
     let dpr = 1, width = 0, height = 0;
@@ -135,7 +135,7 @@ export default function HeroBoids({
       off.height = Math.floor(height / dpr);
       octx.clearRect(0, 0, off.width, off.height);
       octx.fillStyle = "#000";
-      const fontPx = clamp(Math.floor(off.width / 8.5), 56, 122);
+      const fontPx = clamp(Math.floor(off.width / 6.5), 72, 150); // Bigger font: 6.5 instead of 8.5, increased min/max
       octx.font = `800 ${fontPx}px "Inter","DM Sans",system-ui,-apple-system,Segoe UI,Roboto`;
       octx.textBaseline = "middle";
       const w = octx.measureText(text).width;
@@ -206,8 +206,8 @@ export default function HeroBoids({
 
       particles = new Array(N);
       for (let i = 0; i < N; i++) {
-        const s = scatter[i];
-        const t = src[i];
+        const s = scatter[i] || { x: Math.random() * (width / dpr), y: Math.random() * (height / dpr) }; // Fallback if scatter is missing
+        const t = src[i] || { x: (width / dpr) * 0.5, y: (height / dpr) * 0.5 }; // Fallback if target is missing
         particles[i] = {
           x: s.x,
           y: s.y,
@@ -236,11 +236,9 @@ export default function HeroBoids({
 
     // ---------- drawing ----------
     function softClear() {
+      // Since TRAIL_ALPHA is 0, this just does a hard clear
       ctx.globalCompositeOperation = "source-over";
-      ctx.fillStyle = bg;
-      ctx.globalAlpha = TRAIL_ALPHA;
-      ctx.fillRect(0, 0, width, height);
-      ctx.globalAlpha = 1;
+      ctx.clearRect(0, 0, width, height);
     }
     function hardClear() {
       ctx.globalCompositeOperation = "source-over";
@@ -282,12 +280,14 @@ export default function HeroBoids({
       for (let i = 0; i < N; i++) {
         const p = particles[i];
 
-        const fx = Math.sin(p.y * 0.03) * CURL;
-        const fy = Math.cos(p.x * 0.03) * CURL;
+        // More organic flow with multiple noise layers
+        const t = performance.now() * 0.0008;
+        const fx = Math.sin(p.y * 0.012 + t) * CURL + Math.sin(p.x * 0.017 + t * 1.3) * CURL * 0.5;
+        const fy = Math.cos(p.x * 0.014 + t * 0.8) * CURL + Math.cos(p.y * 0.019 + t * 1.1) * CURL * 0.6;
 
         const dx = p.tx - p.x, dy = p.ty - p.y;
         p.vx += dx * (SEEK_BASE * ramp) + fx;
-        p.vy += dy * (SEEK_BASE * ramp) + fy + GRAVITY * 0.12;
+        p.vy += dy * (SEEK_BASE * ramp) + fy + GRAVITY;
 
         // repulsion pulse: spread out, then seek brings them back
         if (pulse) {
@@ -306,11 +306,8 @@ export default function HeroBoids({
         p.x += p.vx * dt * 60 * 0.016;
         p.y += p.vy * dt * 60 * 0.016;
 
-        const maxX = width / dpr, maxY = height / dpr;
-        if (p.x < 0) { p.x = 0; p.vx *= -0.8; }
-        if (p.x > maxX) { p.x = maxX; p.vx *= -0.8; }
-        if (p.y < 0) { p.y = 0; p.vy *= -0.8; }
-        if (p.y > maxY) { p.y = maxY; p.vy *= -0.8; }
+        // Remove harsh border collisions - let particles flow naturally beyond bounds
+        // They'll be pulled back by seek behavior toward targets anyway
       }
 
       if (seekRamp.enabled && ramp >= 1) seekRamp.enabled = false;
@@ -438,6 +435,8 @@ function makeJitteredScatter(count: number, widthCss: number, heightCss: number)
   const cellH = heightCss / rows;
 
   const pts: { x: number; y: number }[] = [];
+  
+  // Generate grid points first
   for (let r = 0; r < rows; r++) {
     for (let c = 0; c < cols; c++) {
       if (pts.length >= count) break;
@@ -445,7 +444,17 @@ function makeJitteredScatter(count: number, widthCss: number, heightCss: number)
       const jy = Math.random() * 0.8 + 0.1;
       pts.push({ x: (c + jx) * cellW, y: (r + jy) * cellH });
     }
+    if (pts.length >= count) break;
   }
+  
+  // Fill remaining points with random positions if needed
+  while (pts.length < count) {
+    pts.push({ 
+      x: Math.random() * widthCss, 
+      y: Math.random() * heightCss 
+    });
+  }
+  
   // light shuffle so draw order isn't gridy
   for (let i = pts.length - 1; i > 0; i--) {
     const j = (Math.random() * (i + 1)) | 0;
