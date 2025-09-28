@@ -19,7 +19,7 @@
 }
 
 /* Tailwind v4 inline theme mapping */
-@theme inline {
+:root {
   --color-background: var(--bg);
   --color-foreground: var(--fg);
   --color-accent: var(--accent);
