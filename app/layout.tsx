@@ -16,6 +16,9 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
   title: "LeafWay Tech",
   description: "Architecture-first engineering. Platforms, edge APIs, AI systems.",
+  icons: {
+    icon: "/file.svg",
+  },
 };
 
 export default function RootLayout({
