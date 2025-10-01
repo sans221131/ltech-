@@ -83,14 +83,14 @@ export default function HomePage() {
       <WhatWeDo />
       <ServicesSection />
 
-      {/* New process section (the big number + stacked cards)
+  
       <ProcessScrollDial
         id="process"
         steps={STEPS}
         heading="Get your app live in 6 clear steps."
         subheading="Minimal, predictable flow from alignment to operations. No fine print."
         accent="from-amber-300 to-lime-300"
-      /> */}
+      />
       <TeamReliability />
       <SubmitBrief />
     </>

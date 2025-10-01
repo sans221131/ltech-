@@ -79,7 +79,7 @@ export default function ProcessScrollDial({
   const cardsRef = useRef<HTMLDivElement | null>(null);
   const ringRef = useRef<HTMLDivElement | null>(null);
   const activeIndexRef = useRef(0);
-  const dotsRef = useRef<HTMLSpanElement[]>([]);
+  const dotsRef = useRef<(HTMLSpanElement | null)[]>([]);
 
   // Ensure every step has bullets so the cards never feel empty.
   const sorted = useMemo(() => {
@@ -125,11 +125,8 @@ export default function ProcessScrollDial({
       const updateUI = () => {
         const lastIndex = sorted.length - 1;
         const normalized = lastIndex > 0 ? Math.min(1, state.t / lastIndex) : 1;
-        let nearIndex = Math.round(state.t);
-        if (lastIndex > 0 && nearIndex >= lastIndex && normalized <= LAST_STEP_ACTIVATION) {
-          nearIndex = lastIndex - 1;
-        }
-        const activeIndex = lastIndex >= 0 ? Math.min(lastIndex, Math.max(0, nearIndex)) : 0;
+        // Direct rounding - no threshold, let it naturally progress to the last step
+        const activeIndex = lastIndex >= 0 ? Math.min(lastIndex, Math.max(0, Math.round(state.t))) : 0;
 
         // Left number + ring
         if (numRef.current) numRef.current.textContent = String(activeIndex + 1).padStart(2, "0");
@@ -171,28 +168,32 @@ export default function ProcessScrollDial({
         });
 
         // Legend dots
-        dotsRef.current.forEach((dot, i) => (dot.dataset.active = i === activeIndex ? "true" : "false"));
+        dotsRef.current.forEach((dot, i) => {
+          if (dot) dot.dataset.active = i === activeIndex ? "true" : "false";
+        });
 
         if (activeIndex !== activeIndexRef.current) {
           activeIndexRef.current = activeIndex;
           tick();
-          if (location.hash !== `#step-${activeIndex + 1}`) {
-            history.replaceState(null, "", `#step-${activeIndex + 1}`);
-          }
         }
       };
+
+      // Force end immediately after last step
+      const stepCount = sorted.length;
+      const endPct = Math.max(100, stepCount * 60);
 
       const tl = gsap.timeline({
         defaults: { ease: "none" },
         scrollTrigger: {
           trigger: sectionRef.current!,
           start: "top top",
-          end: "+=620%",
+          end: `+=${endPct}%`,
           scrub: 0.6,
           pin: true,
           anticipatePin: 1,
           snap: {
             snapTo: (v) => {
+              if (sorted.length <= 1) return 0;
               const s = Math.round(v * (sorted.length - 1));
               return s / (sorted.length - 1);
             },
@@ -215,7 +216,9 @@ export default function ProcessScrollDial({
     if (!wrap || prefersReduced()) return;
 
     const onMove = (e: MouseEvent) => {
+      if (!wrap) return;
       const rect = wrap.getBoundingClientRect();
+      if (!rect.width || !rect.height) return;
       const dx = ((e.clientX - rect.left) / rect.width) * 2 - 1;
       const dy = ((e.clientY - rect.top) / rect.height) * 2 - 1;
       const inner = wrap.querySelector<HTMLElement>("[data-card][data-active='true'] .card-inner");
@@ -223,10 +226,11 @@ export default function ProcessScrollDial({
       inner.style.transform = `rotateY(${dx * 6}deg) rotateX(${-dy * 6}deg) translateZ(12px)`;
     };
     const reset = () => {
+      if (!wrap) return;
       const inner = wrap.querySelector<HTMLElement>("[data-card][data-active='true'] .card-inner");
       if (inner) inner.style.transform = "rotateY(0deg) rotateX(0deg) translateZ(0)";
     };
-    wrap.addEventListener("mousemove", onMove);
+    wrap.addEventListener("mousemove", onMove, { passive: true });
     wrap.addEventListener("mouseleave", reset);
     return () => {
       wrap.removeEventListener("mousemove", onMove);
@@ -266,7 +270,11 @@ export default function ProcessScrollDial({
               {sorted.map((s, i) => (
                 <li key={s.id} className="flex items-center gap-2">
                   <span
-                    ref={(el) => { if (el) dotsRef.current[i] = el; }}
+                    ref={(el) => {
+                      if (el) {
+                        dotsRef.current[i] = el;
+                      }
+                    }}
                     className="inline-flex size-2 rounded-full bg-zinc-300 data-[active=true]:bg-zinc-900 transition-colors"
                     data-active={i === 0 ? "true" : "false"}
                   />
@@ -290,7 +298,7 @@ export default function ProcessScrollDial({
                     key={s.id}
                     data-card
                     data-active={i === 0 ? "true" : "false"}
-                    className="relative w-[640px] h-[340px] max-w-full rounded-3xl bg-white border border-black/10 overflow-hidden shadow-[0_10px_24px_rgba(0,0,0,0.08)]"
+                    className="relative w-full max-w-[640px] h-[340px] rounded-3xl bg-white border border-black/10 overflow-hidden shadow-[0_10px_24px_rgba(0,0,0,0.08)]"
                     style={{ transform: "translateZ(0)" }}
                   >
                     {/* top brand rule that grows on active */}
