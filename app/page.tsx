@@ -5,9 +5,8 @@ import ClientsOnlyRail, { type Client } from "@/components/hero/ClientsOnlyRail"
 import WhatWeDo from "@/components/sections/WhatWeDo";
 import ServicesSection from "@/components/sections/ServicesSection";
 import ProcessScrollDial, { type Step } from "@/components/sections/ProcessScrollDial";
-import TeamSection from "@/components/sections/TeamSection";
 import SubmitBrief from "@/components/sections/SubmitBrief";
-import SiteFooter from "@/components/sections/SiteFooter";
+import TeamReliability from "@/components/sections/TeamSection";
 
 const CLIENTS: Client[] = [
   { name: "Acme Bank",    logoSrc: "/logos/acme-bank.svg" },
@@ -84,16 +83,16 @@ export default function HomePage() {
       <WhatWeDo />
       <ServicesSection />
 
-      {/* New process section (the big number + stacked cards) */}
+      {/* New process section (the big number + stacked cards)
       <ProcessScrollDial
+        id="process"
         steps={STEPS}
         heading="Get your app live in 6 clear steps."
         subheading="Minimal, predictable flow from alignment to operations. No fine print."
         accent="from-amber-300 to-lime-300"
-      />
-      <TeamSection />
+      /> */}
+      <TeamReliability />
       <SubmitBrief />
-      <SiteFooter />
     </>
   );
 }

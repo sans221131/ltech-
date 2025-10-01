@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import { poppins, lora } from "./lib/font";
 import "./globals.css";
+import SiteHeader from "@/components/layout/SiteHeader";
+import SiteFooter from "@/components/sections/SiteFooter";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -35,7 +37,13 @@ export default function RootLayout({
           "antialiased",
         ].join(" ")}
       >
-        {children}
+        <div className="relative flex min-h-screen flex-col bg-[var(--bg)] text-[var(--fg)]">
+          <span id="top" className="absolute inset-x-0 top-0 h-0" aria-hidden />
+          <SiteHeader />
+          <div aria-hidden className="h-16" />
+          <main className="flex-1">{children}</main>
+          <SiteFooter />
+        </div>
       </body>
     </html>
   );

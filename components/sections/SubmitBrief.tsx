@@ -1,56 +1,238 @@
 "use client";
 
-import { useState } from "react";
+import { useState, FormEvent } from "react";
 
 export default function SubmitBrief() {
-  const [sent, setSent] = useState(false);
+  const [formState, setFormState] = useState<"idle" | "submitting" | "success" | "error">("idle");
+  const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    company: "",
+    budget: "",
+    timeline: "",
+    message: "",
+  });
+
+  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    setFormState("submitting");
+
+    // Simulate submission (replace with your actual API call)
+    setTimeout(() => {
+      console.log("Form submitted:", formData);
+      setFormState("success");
+      setFormData({ name: "", email: "", company: "", budget: "", timeline: "", message: "" });
+      
+      // Reset after 3 seconds
+      setTimeout(() => setFormState("idle"), 3000);
+    }, 1500);
+  };
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
+    setFormData(prev => ({ ...prev, [e.target.name]: e.target.value }));
+  };
 
   return (
-    <section id="submit-brief" className="section" aria-labelledby="brief-heading">
-      <div className="section-inner">
-        <p className="eyebrow">Start a project</p>
-        <h2 id="brief-heading" className="h2 mt-3">Submit a brief</h2>
+    <section id="submit-brief" className="relative isolate bg-[var(--bg)] text-[var(--fg)] overflow-hidden">
+      {/* Background accents */}
+      <div 
+        aria-hidden 
+        className="pointer-events-none absolute inset-0 opacity-40"
+        style={{
+          background: "radial-gradient(1000px 800px at 20% 10%, rgba(234,179,8,0.08), transparent 50%), radial-gradient(800px 600px at 80% 90%, rgba(163,230,53,0.06), transparent 50%)"
+        }}
+      />
 
-        {!sent ? (
-          <form
-            className="mt-6 grid gap-4 max-w-2xl"
-            onSubmit={(e) => { e.preventDefault(); setSent(true); }}
-          >
-            <label className="grid gap-1">
-              <span className="text-sm text-[var(--muted)]">What are you trying to build?</span>
-              <input className="card p-3" required name="project" placeholder="One sentence" />
-            </label>
+      <div className="relative z-10 mx-auto max-w-[1180px] px-4 sm:px-6 lg:px-8 py-20">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
+          {/* Left: Heading & Info */}
+          <div className="lg:col-span-5 lg:sticky lg:top-24">
+            <p className="eyebrow mb-3 text-sm text-[var(--muted)]">Let's Talk</p>
+            <h2 className="h2 mb-6 text-left">Start a project with us</h2>
+            <p className="text-[var(--muted)] text-[16px] leading-relaxed mb-8 max-w-md">
+              Tell us about your challenge. We'll respond within 24 hours with next steps or a quick call to clarify scope.
+            </p>
 
-            <label className="grid gap-1">
-              <span className="text-sm text-[var(--muted)]">Desired outcomes</span>
-              <textarea className="card p-3" required name="outcomes" rows={4} placeholder="Success looks like..." />
-            </label>
+            <div className="space-y-6 text-sm">
+              <div className="flex items-start gap-4">
+                <span className="inline-flex size-10 items-center justify-center rounded-full bg-gradient-to-br from-amber-300 to-lime-300 text-black font-bold shrink-0">1</span>
+                <div>
+                  <div className="font-medium mb-1">Submit your brief</div>
+                  <div className="text-[var(--muted)] text-[14px]">Share your project goals, timeline, and budget range.</div>
+                </div>
+              </div>
 
-            <div className="grid md:grid-cols-3 gap-4">
-              <label className="grid gap-1">
-                <span className="text-sm text-[var(--muted)]">Timeline</span>
-                <input className="card p-3" name="timeline" placeholder="e.g., 8–12 weeks" />
-              </label>
-              <label className="grid gap-1">
-                <span className="text-sm text-[var(--muted)]">Ballpark</span>
-                <input className="card p-3" name="budget" placeholder="$25k+" />
-              </label>
-              <label className="grid gap-1">
-                <span className="text-sm text-[var(--muted)]">Contact email</span>
-                <input className="card p-3" type="email" required name="email" placeholder="you@company.com" />
-              </label>
+              <div className="flex items-start gap-4">
+                <span className="inline-flex size-10 items-center justify-center rounded-full bg-gradient-to-br from-amber-300 to-lime-300 text-black font-bold shrink-0">2</span>
+                <div>
+                  <div className="font-medium mb-1">We review & respond</div>
+                  <div className="text-[var(--muted)] text-[14px]">Our team evaluates fit and proposes an approach.</div>
+                </div>
+              </div>
+
+              <div className="flex items-start gap-4">
+                <span className="inline-flex size-10 items-center justify-center rounded-full bg-gradient-to-br from-amber-300 to-lime-300 text-black font-bold shrink-0">3</span>
+                <div>
+                  <div className="font-medium mb-1">Kick off together</div>
+                  <div className="text-[var(--muted)] text-[14px]">Align on scope, schedule a kickoff, and start building.</div>
+                </div>
+              </div>
             </div>
-
-            <button className="btn btn-primary w-fit" type="submit">Send</button>
-            <p className="text-[var(--muted)] text-sm">No spam. We email once to schedule a call.</p>
-          </form>
-        ) : (
-          <div className="card p-6 mt-6 max-w-2xl">
-            <div className="text-lg font-medium">Thanks — brief received.</div>
-            <p className="mt-2 text-[var(--muted)]">We’ll reply with a calendar link and a few scoping questions.</p>
           </div>
-        )}
+
+          {/* Right: Form */}
+          <div className="lg:col-span-7">
+            <form onSubmit={handleSubmit} className="relative">
+              {/* Card wrapper with subtle 3D effect */}
+              <div className="rounded-2xl bg-[var(--card)] border border-[var(--border)] p-8 shadow-[0_20px_60px_rgba(0,0,0,0.08)] transition-all duration-300 hover:shadow-[0_24px_70px_rgba(0,0,0,0.12)]">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                  {/* Name */}
+                  <div>
+                    <label htmlFor="name" className="block text-sm font-medium mb-2">
+                      Name <span className="text-amber-500">*</span>
+                    </label>
+                    <input
+                      type="text"
+                      id="name"
+                      name="name"
+                      required
+                      value={formData.name}
+                      onChange={handleChange}
+                      className="w-full px-4 py-3 rounded-lg bg-[var(--bg)] border border-[var(--border)] text-[var(--fg)] placeholder:text-[var(--muted)] focus:outline-none focus:ring-2 focus:ring-amber-400 focus:border-transparent transition-all"
+                      placeholder="John Doe"
+                    />
+                  </div>
+
+                  {/* Email */}
+                  <div>
+                    <label htmlFor="email" className="block text-sm font-medium mb-2">
+                      Email <span className="text-amber-500">*</span>
+                    </label>
+                    <input
+                      type="email"
+                      id="email"
+                      name="email"
+                      required
+                      value={formData.email}
+                      onChange={handleChange}
+                      className="w-full px-4 py-3 rounded-lg bg-[var(--bg)] border border-[var(--border)] text-[var(--fg)] placeholder:text-[var(--muted)] focus:outline-none focus:ring-2 focus:ring-amber-400 focus:border-transparent transition-all"
+                      placeholder="john@company.com"
+                    />
+                  </div>
+
+                  {/* Company */}
+                  <div>
+                    <label htmlFor="company" className="block text-sm font-medium mb-2">
+                      Company
+                    </label>
+                    <input
+                      type="text"
+                      id="company"
+                      name="company"
+                      value={formData.company}
+                      onChange={handleChange}
+                      className="w-full px-4 py-3 rounded-lg bg-[var(--bg)] border border-[var(--border)] text-[var(--fg)] placeholder:text-[var(--muted)] focus:outline-none focus:ring-2 focus:ring-amber-400 focus:border-transparent transition-all"
+                      placeholder="Acme Inc."
+                    />
+                  </div>
+
+                  {/* Budget */}
+                  <div>
+                    <label htmlFor="budget" className="block text-sm font-medium mb-2">
+                      Budget Range
+                    </label>
+                    <select
+                      id="budget"
+                      name="budget"
+                      value={formData.budget}
+                      onChange={handleChange}
+                      className="w-full px-4 py-3 rounded-lg bg-[var(--bg)] border border-[var(--border)] text-[var(--fg)] focus:outline-none focus:ring-2 focus:ring-amber-400 focus:border-transparent transition-all"
+                    >
+                      <option value="">Select range</option>
+                      <option value="10k-25k">$10k - $25k</option>
+                      <option value="25k-50k">$25k - $50k</option>
+                      <option value="50k-100k">$50k - $100k</option>
+                      <option value="100k+">$100k+</option>
+                    </select>
+                  </div>
+
+                  {/* Timeline */}
+                  <div className="sm:col-span-2">
+                    <label htmlFor="timeline" className="block text-sm font-medium mb-2">
+                      Timeline
+                    </label>
+                    <select
+                      id="timeline"
+                      name="timeline"
+                      value={formData.timeline}
+                      onChange={handleChange}
+                      className="w-full px-4 py-3 rounded-lg bg-[var(--bg)] border border-[var(--border)] text-[var(--fg)] focus:outline-none focus:ring-2 focus:ring-amber-400 focus:border-transparent transition-all"
+                    >
+                      <option value="">Select timeline</option>
+                      <option value="asap">ASAP (1-2 weeks)</option>
+                      <option value="1-2months">1-2 months</option>
+                      <option value="3-6months">3-6 months</option>
+                      <option value="flexible">Flexible</option>
+                    </select>
+                  </div>
+
+                  {/* Message */}
+                  <div className="sm:col-span-2">
+                    <label htmlFor="message" className="block text-sm font-medium mb-2">
+                      Project Details <span className="text-amber-500">*</span>
+                    </label>
+                    <textarea
+                      id="message"
+                      name="message"
+                      required
+                      value={formData.message}
+                      onChange={handleChange}
+                      rows={6}
+                      className="w-full px-4 py-3 rounded-lg bg-[var(--bg)] border border-[var(--border)] text-[var(--fg)] placeholder:text-[var(--muted)] focus:outline-none focus:ring-2 focus:ring-amber-400 focus:border-transparent transition-all resize-none"
+                      placeholder="Tell us about your project, key challenges, and what success looks like..."
+                    />
+                  </div>
+                </div>
+
+                {/* Submit Button */}
+                <div className="mt-8 flex items-center justify-between">
+                  <p className="text-xs text-[var(--muted)]">
+                    We'll respond within 24 hours
+                  </p>
+                  <button
+                    type="submit"
+                    disabled={formState === "submitting"}
+                    className="group relative px-8 py-3 rounded-full bg-gradient-to-br from-amber-300 via-yellow-200 to-lime-300 text-black font-semibold shadow-[0_8px_20px_rgba(234,179,8,0.25)] hover:shadow-[0_12px_30px_rgba(234,179,8,0.35)] transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed hover:scale-105"
+                  >
+                    <span className="relative z-10">
+                      {formState === "submitting" ? "Sending..." : formState === "success" ? "Sent! ✓" : "Send Brief"}
+                    </span>
+                  </button>
+                </div>
+
+                {/* Success message */}
+                {formState === "success" && (
+                  <div className="mt-6 p-4 rounded-lg bg-lime-100 border border-lime-300 text-lime-900 text-sm">
+                    ✓ Thanks! We've received your brief and will be in touch soon.
+                  </div>
+                )}
+
+                {formState === "error" && (
+                  <div className="mt-6 p-4 rounded-lg bg-red-100 border border-red-300 text-red-900 text-sm">
+                    Something went wrong. Please try again or email us directly at hello@leafway.tech
+                  </div>
+                )}
+              </div>
+            </form>
+          </div>
+        </div>
       </div>
+
+      {/* Bottom accent bloom */}
+      <div 
+        aria-hidden 
+        className="absolute left-0 bottom-[-20%] size-[600px] rounded-full blur-3xl opacity-20 bg-gradient-to-br from-amber-300 to-lime-300 pointer-events-none"
+      />
     </section>
   );
 }

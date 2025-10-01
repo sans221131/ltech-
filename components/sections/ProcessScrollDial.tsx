@@ -15,6 +15,7 @@ export type Step = {
 };
 
 type Props = {
+  id?: string;
   heading?: string;
   subheading?: string;
   steps: Step[];
@@ -66,6 +67,7 @@ const DEFAULT_POINTS: Record<number, string[]> = {
 };
 
 export default function ProcessScrollDial({
+  id = "process",
   heading = "Get your app live in 6 clear steps.",
   subheading = "Minimal, predictable flow from alignment to operations. No fine print.",
   steps,
@@ -92,6 +94,7 @@ export default function ProcessScrollDial({
 
   useLayoutEffect(() => {
     if (!sectionRef.current || !cardsRef.current || !railRef.current) return;
+    if (!sorted.length) return;
     if (prefersReduced()) return;
 
     const ctx = gsap.context(() => {
@@ -99,6 +102,7 @@ export default function ProcessScrollDial({
         cardsRef.current!.querySelectorAll<HTMLElement>("[data-card]")
       );
       if (!cards.length) return;
+      const LAST_STEP_ACTIVATION = 0.995;
 
       const measure = () => {
         const first = cards[0];
@@ -119,12 +123,19 @@ export default function ProcessScrollDial({
       const state = { t: 0 };
 
       const updateUI = () => {
-        const nearest = Math.round(state.t);
+        const lastIndex = sorted.length - 1;
+        const normalized = lastIndex > 0 ? Math.min(1, state.t / lastIndex) : 1;
+        let nearIndex = Math.round(state.t);
+        if (lastIndex > 0 && nearIndex >= lastIndex && normalized <= LAST_STEP_ACTIVATION) {
+          nearIndex = lastIndex - 1;
+        }
+        const activeIndex = lastIndex >= 0 ? Math.min(lastIndex, Math.max(0, nearIndex)) : 0;
 
         // Left number + ring
-        if (numRef.current) numRef.current.textContent = String(nearest + 1).padStart(2, "0");
+        if (numRef.current) numRef.current.textContent = String(activeIndex + 1).padStart(2, "0");
         if (ringRef.current) {
-          ringRef.current.style.setProperty("--pct", `${(state.t / (sorted.length - 1)) * 100}`);
+          const progressPct = Math.max(0, normalized * 100);
+          ringRef.current.style.setProperty("--pct", `${progressPct}`);
         }
 
         // Move stack and style cards
@@ -140,7 +151,7 @@ export default function ProcessScrollDial({
           const scale = 1 - Math.min(0.015, Math.max(0, Math.abs(delta) * 0.01));
           el.style.opacity = opacity.toFixed(3);
           el.style.transform = `translateZ(0) scale(${scale})`;
-          const active = Math.abs(delta) < 0.5;
+          const active = i === activeIndex;
           el.dataset.active = active ? "true" : "false";
 
           // animate bullets when becoming active
@@ -160,12 +171,14 @@ export default function ProcessScrollDial({
         });
 
         // Legend dots
-        dotsRef.current.forEach((dot, i) => (dot.dataset.active = i === nearest ? "true" : "false"));
+        dotsRef.current.forEach((dot, i) => (dot.dataset.active = i === activeIndex ? "true" : "false"));
 
-        if (nearest !== activeIndexRef.current) {
-          activeIndexRef.current = nearest;
+        if (activeIndex !== activeIndexRef.current) {
+          activeIndexRef.current = activeIndex;
           tick();
-          if (location.hash !== `#step-${nearest + 1}`) history.replaceState(null, "", `#step-${nearest + 1}`);
+          if (location.hash !== `#step-${activeIndex + 1}`) {
+            history.replaceState(null, "", `#step-${activeIndex + 1}`);
+          }
         }
       };
 

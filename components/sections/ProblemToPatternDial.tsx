@@ -172,7 +172,7 @@ export default function ProblemToPatternDial({
 
           {/* rotating ticks */}
           <div
-            className="absolute inset-0 z-10 will-change-transform transition-transform duration-300 ease-out"
+            className="absolute inset-0 z-10 will-change-transform transition-transform duration-700 ease-in-out"
             style={{ transform: `rotate(${angle}deg)` }}
             aria-hidden
           >

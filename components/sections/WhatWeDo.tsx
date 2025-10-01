@@ -78,7 +78,7 @@ export default function WhatWeDo({
 
       const updateFromScroll = (progress: number) => {
         // Start rotation slightly before the dial/detail are fully in
-        const start = 0.85; // set to 0.55 if you want it after the fade
+        const start = 0.65; // set to 0.55 if you want it after the fade
         const dialProgress01 = clamp((progress - start) / (1 - start), 0, 1);
         const adj = Math.pow(dialProgress01, speedExp);
         const floatIndex = adj * (total - 1);
