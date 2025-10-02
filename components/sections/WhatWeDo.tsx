@@ -43,11 +43,13 @@ export default function WhatWeDo({
   const rafLock = useRef(false);
   const pendingFloat = useRef(0);
   const lastActive = useRef(0);
+  const transitionRef = useRef<HTMLDivElement | null>(null);
 
   useLayoutEffect(() => {
     const root = rootRef.current;
     const stage = stageRef.current;
     const headingEl = headingRef.current;
+    const transitionEl = transitionRef.current;
     if (!root || !stage || !headingEl) return;
 
     const prefersReduced =
@@ -69,16 +71,34 @@ export default function WhatWeDo({
         return;
       }
 
+      // Initial fade-in animation (happens before pinning)
       gsap.set(fadeTargets, { opacity: 0, y: 30 });
       if (dialNode) gsap.set(dialNode, { opacity: 0, y: 40 });
       if (detailNode) gsap.set(detailNode, { opacity: 0, x: -30 });
+
+      // Pre-scroll fade-in: elements appear as section comes into view
+      const preTl = gsap.timeline({
+        scrollTrigger: {
+          trigger: stage,
+          start: "top 80%",
+          end: "top 30%",
+          scrub: 1,
+        },
+      });
+
+      // Stagger in all elements during scroll approach
+      if (eyebrowEl) preTl.to(eyebrowEl, { opacity: 1, y: 0, duration: 0.3 }, 0);
+      if (titleEl) preTl.to(titleEl, { opacity: 1, y: 0, duration: 0.3 }, 0.1);
+      if (paraEl) preTl.to(paraEl, { opacity: 1, y: 0, duration: 0.3 }, 0.2);
+      if (dialNode) preTl.to(dialNode, { opacity: 1, y: 0, duration: 0.3 }, 0.3);
+      if (detailNode) preTl.to(detailNode, { opacity: 1, x: 0, duration: 0.3 }, 0.4);
 
       const total = Math.max(1, PROJECT_SOLUTIONS.length);
       const speedExp = 1.6;
 
       const updateFromScroll = (progress: number) => {
-        // Start rotation slightly before the dial/detail are fully in
-        const start = 0.65; // set to 0.55 if you want it after the fade
+        // Dial rotation happens throughout the entire pinned scroll
+        const start = 0.1; // start dial rotation almost immediately after pin
         const dialProgress01 = clamp((progress - start) / (1 - start), 0, 1);
         const adj = Math.pow(dialProgress01, speedExp);
         const floatIndex = adj * (total - 1);
@@ -101,33 +121,22 @@ export default function WhatWeDo({
         }
       };
 
+      // Main pinned scroll timeline - just for dial rotation
       const tl = gsap.timeline({
         scrollTrigger: {
           trigger: stage,
           start: "top top",
-          end: "+=400%",
+          end: "+=500%",
           scrub: 1,
           pin: true,
           anticipatePin: 1,
           onUpdate: self => updateFromScroll(self.progress),
         },
-        defaults: { ease: "power2.out" },
+        defaults: { ease: "none" },
       });
 
-      // Phase 1: stagger in heading
-      if (eyebrowEl) tl.to(eyebrowEl, { opacity: 1, y: 0, duration: 0.15 }, 0);
-      if (titleEl) tl.to(titleEl, { opacity: 1, y: 0, duration: 0.15 }, 0.05);
-      if (paraEl) tl.to(paraEl, { opacity: 1, y: 0, duration: 0.15 }, 0.1);
-
-      // Small hold
-      tl.to({}, { duration: 0.15 });
-
-      // Phase 3: bring in dial and detail
-      if (dialNode) tl.to(dialNode, { opacity: 1, y: 0, duration: 0.35 }, 0.45);
-      if (detailNode) tl.to(detailNode, { opacity: 1, x: 0, duration: 0.35 }, 0.5);
-
-      // tiny filler so ScrollTrigger retains length
-      tl.to({}, { duration: 0.15 });
+      // Just a placeholder for the scroll duration - dial rotation handled by onUpdate
+      tl.to({}, { duration: 1 });
     }, root);
 
     return () => ctx.revert();
@@ -153,13 +162,10 @@ export default function WhatWeDo({
         }}
       />
 
-  {/* Spacer to position section below header/trusted rail; smaller on mobile */}
-  <div className="h-[48vh] md:h-[44vh] lg:h-[60vh]" aria-hidden />
-
       {/* Pinned stage */}
       <div
         ref={stageRef}
-        className="relative min-h-[100svh] flex items-center justify-center py-12 md:py-16 px-4"
+        className="relative min-h-[100svh] flex items-start justify-center pt-20 md:pt-24 lg:pt-28 pb-12 px-4"
       >
         <div className="w-full max-w-[1200px] mx-auto">
           {/* Heading */}

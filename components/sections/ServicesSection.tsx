@@ -115,7 +115,7 @@ export default function ServicesSection() {
                       {svc.blurb && (
                         <CardItem
                           translateZ={15}
-                          className="mt-2 pl-[18px] text-[13px] text-[var(--muted)] leading-relaxed flex-1"
+                          className="mt-2 pl-[18px] text-[13px] text-[var(--fg)] leading-relaxed flex-1 opacity-80"
                         >
                           {svc.blurb}
                         </CardItem>
