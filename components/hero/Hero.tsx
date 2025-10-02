@@ -8,6 +8,7 @@ type Client = { name: string; logoSrc: string; alt?: string };
 type HeroProps = {
   eyebrow?: string;
   headline: string;
+  headline2?: string;
   subhead?: string;
   ctaText?: string;
   ctaHref?: string;
@@ -19,6 +20,7 @@ type HeroProps = {
 export default function Hero({
   eyebrow = "Architecture-first engineering",
   headline,
+  headline2,
   subhead = "Edge-first APIs, resilient data layers, and motion that respects budgets.",
   ctaText = "Explore solutions",
   ctaHref = "/solutions",
@@ -28,28 +30,36 @@ export default function Hero({
 }: HeroProps) {
   return (
     <section
-      className="relative isolate w-full pt-16 md:pt-24"
+      className="relative isolate w-full h-screen flex items-center justify-center"
       style={{backgroundColor: 'var(--bg)', color: 'var(--fg)'}}
       aria-labelledby="hero-heading"
     >
-      <div className="mx-auto px-6 md:px-10 lg:px-16" style={{maxWidth: 'var(--maxw)'}}>
-        <div className="grid grid-cols-12 gap-8 items-center">
-          {/* Left: text */}
-          <div className="col-span-12 md:col-span-7 lg:col-span-6">
+      {/* Main Container */}
+      <div className="relative mx-auto px-6 md:px-10 lg:px-16 w-full" style={{maxWidth: '1400px'}}>
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center w-full">
+          
+          {/* Left: Content */}
+          <div className="relative z-10 flex flex-col justify-center">
             {eyebrow && (
-              <div className="eyebrow">
+              <div className="eyebrow mb-6">
                 {eyebrow}
               </div>
             )}
-            <h1 id="hero-heading" className="mt-3 h1 font-sans">
+            <h1 id="hero-heading" className="h1 font-sans">
               {headline}
+              {headline2 && (
+                <>
+                  <br />
+                  {headline2}
+                </>
+              )}
             </h1>
             {subhead && (
-              <p className="mt-4 font-serif max-w-xl" style={{color: 'var(--muted)', fontSize: '1.1rem', lineHeight: '1.6'}}>
+              <p className="mt-6 font-serif" style={{color: 'var(--muted)', fontSize: '1.25rem', lineHeight: '1.7', maxWidth: '600px'}}>
                 {subhead}
               </p>
             )}
-            <div className="mt-6">
+            <div className="mt-8">
               <a
                 href={ctaHref}
                 className="btn btn-outline"
@@ -62,21 +72,18 @@ export default function Hero({
             </div>
           </div>
 
-          {/* Right: viz (kept responsive, fixed height on desktop) */}
-          <div className="col-span-12 md:col-span-5 lg:col-span-6">
-            <div className="relative h-[42vh] min-h-[320px] max-h-[520px] md:h-[56vh]">
-              <HeroBoids
-                variant="flowGlow"
-                headline={headline}
-                accent="#272727" // Use theme foreground color
-                bg="#F7F7F7" // Use theme background color
-              />
-            </div>
+          {/* Right: Boids Visualization */}
+          <div className="relative h-[550px] md:h-[700px] lg:h-[800px] flex items-center justify-center">
+            <HeroBoids
+              variant="flowGlow"
+              headline={headline2 ? `${headline} ${headline2}` : headline}
+              accent="#272727"
+              bg="#F7F7F7"
+            />
           </div>
+
         </div>
       </div>
-
-      
     </section>
   );
 }

@@ -2,7 +2,7 @@
 
 import { useLayoutEffect, useRef, useState } from "react";
 import ProblemToPatternDial, { DetailPanel } from "@/components/sections/ProblemToPatternDial";
-import { PROBLEM_PATTERNS } from "@/lib/whatwedo/problems";
+import { PROJECT_SOLUTIONS } from "@/lib/whatwedo/projects";
 
 // GSAP
 import { gsap } from "gsap";
@@ -25,7 +25,7 @@ export default function WhatWeDo({
   id = "what-we-do",
   eyebrow = "What we do",
   heading = "Architect. Build. Scale.",
-  paragraph = "We architect, build, and scale custom platforms that survive traffic: clean domain models, edge-first APIs, resilient data layers, and motion that respects performance budgets. The result is boringly reliable software that still feels premium.",
+  paragraph = "We architect, build, and scale traffic-proof platforms with resilient data and edge APIs.",
 }: Props) {
   const rootRef = useRef<HTMLElement | null>(null);
   const stageRef = useRef<HTMLDivElement | null>(null);
@@ -73,7 +73,7 @@ export default function WhatWeDo({
       if (dialNode) gsap.set(dialNode, { opacity: 0, y: 40 });
       if (detailNode) gsap.set(detailNode, { opacity: 0, x: -30 });
 
-      const total = Math.max(1, PROBLEM_PATTERNS.length);
+      const total = Math.max(1, PROJECT_SOLUTIONS.length);
       const speedExp = 1.6;
 
       const updateFromScroll = (progress: number) => {
@@ -133,13 +133,13 @@ export default function WhatWeDo({
     return () => ctx.revert();
   }, []);
 
-  const safeIdx = clamp(activeIndex, 0, Math.max(0, PROBLEM_PATTERNS.length - 1));
+  const safeIdx = clamp(activeIndex, 0, Math.max(0, PROJECT_SOLUTIONS.length - 1));
 
   return (
     <section
       id={id}
       ref={rootRef}
-      className="relative overflow-visible bg-[#F8F7F3] text-[#101010]"
+      className="relative overflow-visible bg-[var(--bg)] text-[var(--fg)]"
       aria-labelledby="what-we-do-heading"
     >
       {/* soft background accent */}
@@ -159,34 +159,33 @@ export default function WhatWeDo({
       {/* Pinned stage */}
       <div
         ref={stageRef}
-        className="relative min-h-[100svh] flex items-start justify-center pt-6 md:pt-10 lg:pt-14"
+        className="relative min-h-[100svh] flex items-center justify-center py-12 md:py-16 px-4"
       >
-        <div className="w-full max-w-7xl transform -translate-y-0 lg:-translate-y-8 mx-auto px-6 md:px-10 lg:px-16">
+        <div className="w-full max-w-[1200px] mx-auto">
           {/* Heading */}
-          <div ref={headingRef} className="text-left mb-16 max-w-4xl">
+          <div ref={headingRef} className="text-center mb-8 md:mb-10 max-w-4xl mx-auto px-4">
             <p className="eyebrow wwd-eyebrow">{eyebrow}</p>
             <h2 id="what-we-do-heading" className="h2 mt-3 wwd-heading">
               {heading}
             </h2>
-            <p className="mt-6 text-[var(--muted)] wwd-paragraph text-lg leading-relaxed">{paragraph}</p>
+            <p className="mt-4 text-[var(--muted)] wwd-paragraph text-lg leading-relaxed">{paragraph}</p>
           </div>
 
           {/* Detail left, Dial right */}
-          <div className="grid lg:grid-cols-2 gap-16 lg:gap-20 items-start">
-            <div ref={detailRef} className="order-2 lg:order-1">
-              <DetailPanel item={PROBLEM_PATTERNS[safeIdx]} />
+          <div className="grid lg:grid-cols-2 gap-6 md:gap-10 items-start justify-items-center px-4">
+            <div ref={detailRef} className="order-2 lg:order-1 w-full max-w-[550px]">
+              <DetailPanel item={PROJECT_SOLUTIONS[safeIdx]} />
             </div>
 
-            <div ref={dialRef} className="flex flex-col items-center justify-start order-1 lg:order-2">
-              <div className="mb-8 text-center">
-                <p className="eyebrow">Problem → Pattern</p>
-                <p className="mt-3 text-[var(--muted)] max-w-sm leading-relaxed">
-                  Architecture-first fixes to real problems.
-                </p>
+            <div ref={dialRef} className="flex flex-col items-center justify-start order-1 lg:order-2 w-full max-w-[550px]">
+              <div className="mb-6 text-center w-full">
+                <p className="eyebrow">Project → Solution</p>
               </div>
 
               {/* Fixed: removed unsupported prop */}
-              <ProblemToPatternDial selectedIndex={dialFloat} />
+              <div className="w-full flex justify-center">
+                <ProblemToPatternDial selectedIndex={dialFloat} />
+              </div>
             </div>
           </div>
         </div>

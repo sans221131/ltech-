@@ -1,33 +1,36 @@
 // /components/sections/ProcessScrollDial.tsx
 "use client";
 
-import React, { useLayoutEffect, useMemo, useRef } from "react";
-import gsap from "gsap";
+import React, { useLayoutEffect, useRef } from "react";
+import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-gsap.registerPlugin(ScrollTrigger);
 
+if (typeof window !== "undefined") {
+  gsap.registerPlugin(ScrollTrigger);
+}
+
+/* ---------------- Types & defaults (kept) ---------------- */
 export type Step = {
   id: string;
-  index: number;     // 0..5
+  index: number;      // 0..5
   title: string;
-  blurb: string;     // 2–5 lines
-  points?: string[]; // optional bullets, 2–4 items
+  blurb: string;      // 2–5 lines
+  points?: string[];  // optional bullets, 2–4 items
 };
 
-type Props = {
+export type Props = {
   id?: string;
   heading?: string;
   subheading?: string;
   steps: Step[];
-  accent?: string; // Tailwind gradient tokens: "from-amber-300 via-yellow-200 to-lime-300"
+  accent?: string;
 };
 
-const prefersReduced = () =>
-  typeof window !== "undefined" &&
-  window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+export const DEFAULT_HEADING = "Get your app live in 6 clear steps.";
+export const DEFAULT_SUBHEADING =
+  "Minimal, predictable flow from alignment to operations. No fine print.";
 
-/** Fallback bullets if none are provided. */
-const DEFAULT_POINTS: Record<number, string[]> = {
+export const PROCESS_DEFAULT_POINTS: Record<number, string[]> = {
   0: [
     "Clarify goals, success metrics, and guardrails",
     "Map constraints: budget, timeline, compliance",
@@ -66,279 +69,247 @@ const DEFAULT_POINTS: Record<number, string[]> = {
   ],
 };
 
+export function normalizeSteps(steps: Step[]): Step[] {
+  return [...steps]
+    .sort((a, b) => a.index - b.index)
+    .slice(0, 6)
+    .map((s) => ({
+      ...s,
+      points:
+        s.points && s.points.length ? s.points : PROCESS_DEFAULT_POINTS[s.index] || [],
+    }));
+}
+
+
+
+/* ---------------- Curly Arrow Component ---------------- */
+function CurlyArrow({ 
+  direction = "down-right",
+  className = "" 
+}: { 
+  direction?: "down-right" | "down-left";
+  className?: string;
+}) {
+  return (
+    <img
+      src="/curved-arrow-with-broken-line.svg"
+      alt=""
+      aria-hidden="true"
+      className={`${className} ${direction === "down-left" ? "-scale-x-100" : ""} opacity-40`}
+    />
+  );
+}
+
+/* ---------------- Layout ---------------- */
 export default function ProcessScrollDial({
   id = "process",
-  heading = "Get your app live in 6 clear steps.",
-  subheading = "Minimal, predictable flow from alignment to operations. No fine print.",
+  heading = DEFAULT_HEADING,
+  subheading = DEFAULT_SUBHEADING,
   steps,
-  accent = "from-amber-300 via-yellow-200 to-lime-300",
 }: Props) {
-  const sectionRef = useRef<HTMLDivElement | null>(null);
-  const numRef = useRef<HTMLDivElement | null>(null);
-  const railRef = useRef<HTMLDivElement | null>(null);
-  const cardsRef = useRef<HTMLDivElement | null>(null);
-  const ringRef = useRef<HTMLDivElement | null>(null);
-  const activeIndexRef = useRef(0);
-  const dotsRef = useRef<(HTMLSpanElement | null)[]>([]);
-
-  // Ensure every step has bullets so the cards never feel empty.
-  const sorted = useMemo(() => {
-    return [...steps]
-      .sort((a, b) => a.index - b.index)
-      .slice(0, 6)
-      .map((s) => ({
-        ...s,
-        points: s.points && s.points.length ? s.points : DEFAULT_POINTS[s.index] || [],
-      }));
-  }, [steps]);
+  const items = normalizeSteps(steps);
+  const sectionRef = useRef<HTMLElement>(null);
+  const headerRef = useRef<HTMLDivElement>(null);
 
   useLayoutEffect(() => {
-    if (!sectionRef.current || !cardsRef.current || !railRef.current) return;
-    if (!sorted.length) return;
-    if (prefersReduced()) return;
+    const section = sectionRef.current;
+    const header = headerRef.current;
+    if (!section || !header) return;
 
     const ctx = gsap.context(() => {
-      const cards = Array.from(
-        cardsRef.current!.querySelectorAll<HTMLElement>("[data-card]")
-      );
-      if (!cards.length) return;
-      const LAST_STEP_ACTIVATION = 0.995;
-
-      const measure = () => {
-        const first = cards[0];
-        const gap = parseFloat(getComputedStyle(cardsRef.current!).rowGap || "24");
-        const h = first.getBoundingClientRect().height;
-        return { stepY: h + gap };
-      };
-
-      const tick = () => {
-        if (!numRef.current) return;
-        gsap.fromTo(
-          numRef.current,
-          { yPercent: -25, opacity: 0.6, scale: 0.96 },
-          { yPercent: 0, opacity: 1, scale: 1, duration: 0.22, ease: "power2" }
-        );
-      };
-
-      const state = { t: 0 };
-
-      const updateUI = () => {
-        const lastIndex = sorted.length - 1;
-        const normalized = lastIndex > 0 ? Math.min(1, state.t / lastIndex) : 1;
-        // Direct rounding - no threshold, let it naturally progress to the last step
-        const activeIndex = lastIndex >= 0 ? Math.min(lastIndex, Math.max(0, Math.round(state.t))) : 0;
-
-        // Left number + ring
-        if (numRef.current) numRef.current.textContent = String(activeIndex + 1).padStart(2, "0");
-        if (ringRef.current) {
-          const progressPct = Math.max(0, normalized * 100);
-          ringRef.current.style.setProperty("--pct", `${progressPct}`);
-        }
-
-        // Move stack and style cards
-        const { stepY } = measure();
-        gsap.set(cardsRef.current, { y: -state.t * stepY });
-
-        cards.forEach((el, i) => {
-          const delta = i - state.t;
-          // Fade and scale as it passes
-          let opacity = 1;
-          if (delta < 0) opacity = 1 - Math.min(1, Math.abs(delta)) * 0.85; // 1 -> 0.15
-          else if (delta > 0) opacity = 1 - Math.min(1, delta) * 0.12;      // 1 -> 0.88
-          const scale = 1 - Math.min(0.015, Math.max(0, Math.abs(delta) * 0.01));
-          el.style.opacity = opacity.toFixed(3);
-          el.style.transform = `translateZ(0) scale(${scale})`;
-          const active = i === activeIndex;
-          el.dataset.active = active ? "true" : "false";
-
-          // animate bullets when becoming active
-          const bullets = el.querySelectorAll<HTMLElement>("[data-bullet]");
-          bullets.forEach((b, idx) => {
-            if (active) {
-              b.style.transition = "transform .35s ease, opacity .35s ease";
-              b.style.transitionDelay = `${idx * 40}ms`;
-              b.style.transform = "translateY(0)";
-              b.style.opacity = "1";
-            } else {
-              b.style.transition = "none";
-              b.style.transform = "translateY(6px)";
-              b.style.opacity = "0.0";
-            }
-          });
-        });
-
-        // Legend dots
-        dotsRef.current.forEach((dot, i) => {
-          if (dot) dot.dataset.active = i === activeIndex ? "true" : "false";
-        });
-
-        if (activeIndex !== activeIndexRef.current) {
-          activeIndexRef.current = activeIndex;
-          tick();
-        }
-      };
-
-      // Force end immediately after last step
-      const stepCount = sorted.length;
-      const endPct = Math.max(100, stepCount * 60);
-
-      const tl = gsap.timeline({
-        defaults: { ease: "none" },
+      // Animate header on scroll into view
+      gsap.from(header.children, {
         scrollTrigger: {
-          trigger: sectionRef.current!,
-          start: "top top",
-          end: `+=${endPct}%`,
-          scrub: 0.6,
-          pin: true,
-          anticipatePin: 1,
-          snap: {
-            snapTo: (v) => {
-              if (sorted.length <= 1) return 0;
-              const s = Math.round(v * (sorted.length - 1));
-              return s / (sorted.length - 1);
-            },
-            duration: 0.35,
-            ease: "power1.inOut",
-          },
-          onRefresh: updateUI,
+          trigger: header,
+          start: "top 80%",
+          end: "top 50%",
+          scrub: 1,
         },
+        opacity: 0,
+        y: 40,
+        stagger: 0.1,
       });
 
-      tl.to(state, { t: sorted.length - 1, onUpdate: updateUI });
-    }, sectionRef);
+      // Animate each step
+      const steps = section.querySelectorAll("[data-step]");
+      steps.forEach((step, i) => {
+        const isEven = i % 2 === 0;
+        const number = step.querySelector("[data-number]");
+        const card = step.querySelector("[data-card]");
+        const arrow = step.querySelector("[data-arrow]");
+
+        // Number animation - scale and fade in
+        gsap.from(number, {
+          scrollTrigger: {
+            trigger: step,
+            start: "top 85%",
+            end: "top 50%",
+            scrub: 1,
+          },
+          scale: 0.5,
+          opacity: 0,
+          rotation: isEven ? -15 : 15,
+        });
+
+        // Card animation - slide and fade from side
+        gsap.from(card, {
+          scrollTrigger: {
+            trigger: step,
+            start: "top 80%",
+            end: "top 45%",
+            scrub: 1,
+          },
+          x: isEven ? -100 : 100,
+          opacity: 0,
+          scale: 0.9,
+        });
+
+        // Arrow animation - draw in
+        if (arrow) {
+          gsap.from(arrow, {
+            scrollTrigger: {
+              trigger: arrow,
+              start: "top 90%",
+              end: "top 60%",
+              scrub: 1,
+            },
+            opacity: 0,
+            scale: 0.8,
+            rotation: isEven ? -20 : 20,
+          });
+        }
+      });
+    }, section);
 
     return () => ctx.revert();
-  }, [sorted]);
-
-  // tilt only on active card
-  useLayoutEffect(() => {
-    const wrap = railRef.current;
-    if (!wrap || prefersReduced()) return;
-
-    const onMove = (e: MouseEvent) => {
-      if (!wrap) return;
-      const rect = wrap.getBoundingClientRect();
-      if (!rect.width || !rect.height) return;
-      const dx = ((e.clientX - rect.left) / rect.width) * 2 - 1;
-      const dy = ((e.clientY - rect.top) / rect.height) * 2 - 1;
-      const inner = wrap.querySelector<HTMLElement>("[data-card][data-active='true'] .card-inner");
-      if (!inner) return;
-      inner.style.transform = `rotateY(${dx * 6}deg) rotateX(${-dy * 6}deg) translateZ(12px)`;
-    };
-    const reset = () => {
-      if (!wrap) return;
-      const inner = wrap.querySelector<HTMLElement>("[data-card][data-active='true'] .card-inner");
-      if (inner) inner.style.transform = "rotateY(0deg) rotateX(0deg) translateZ(0)";
-    };
-    wrap.addEventListener("mousemove", onMove, { passive: true });
-    wrap.addEventListener("mouseleave", reset);
-    return () => {
-      wrap.removeEventListener("mousemove", onMove);
-      wrap.removeEventListener("mouseleave", reset);
-    };
   }, []);
 
   return (
-    <section ref={sectionRef} className="relative isolate bg-[#F8F7F3] text-zinc-900">
-      <div className="mx-auto max-w-[1180px] px-4 sm:px-6 lg:px-8 py-12">
-        <header className="mb-10 text-left">
-          <p className="eyebrow text-sm text-neutral-500 mb-2">Process</p>
-          <h2 className="h2 mb-3">{heading}</h2>
-          <p className="mt-3 text-[var(--muted)] max-w-2xl">{subheading}</p>
+    <section 
+      ref={sectionRef}
+      id={id} 
+      className="relative isolate overflow-hidden"
+      style={{
+        background: "radial-gradient(circle at 50% 20%, rgba(64, 64, 64, 0.04) 0%, var(--bg) 50%)"
+      }}
+    >
+      {/* Animated background elements */}
+      <div 
+        aria-hidden 
+        className="absolute inset-0 pointer-events-none opacity-30"
+        style={{
+          background: "radial-gradient(circle at 20% 30%, rgba(64, 64, 64, 0.06), transparent 40%), radial-gradient(circle at 80% 70%, rgba(64, 64, 64, 0.06), transparent 40%)"
+        }}
+      />
+
+      <div className="relative z-10 mx-auto max-w-[1100px] px-6 sm:px-8 lg:px-12 py-24 md:py-32">
+        <header ref={headerRef} className="mb-20 md:mb-28 text-center">
+          <p className="eyebrow mb-4">Process</p>
+          <h2 className="h2 mt-2 mb-6">{heading}</h2>
+          <p className="text-[var(--muted)] max-w-2xl mx-auto text-lg leading-relaxed">{subheading}</p>
         </header>
 
-        <div className="grid grid-cols-1 md:grid-cols-12 gap-6 items-start">
-          {/* LEFT: dial + legend */}
-          <div className="md:col-span-5 sticky top-16 self-start">
-            <div className="mx-auto w-[200px] aspect-square relative">
-              <div
-                ref={ringRef}
-                className="absolute inset-0 rounded-full"
-                style={{
-                  background:
-                    "conic-gradient(#eab308 calc(var(--pct,0) * 1%), #e5e7eb 0)",
-                }}
-              />
-              <div className={["absolute inset-[10px] rounded-full bg-gradient-to-br", accent].join(" ")} />
-              <div className="absolute inset-[24px] rounded-full border border-black/5 grid place-items-center backdrop-blur-md bg-white/65 supports-[backdrop-filter]:bg-white/45 shadow-[0_10px_30px_rgba(0,0,0,0.08)]">
-                <div ref={numRef} className="text-6xl font-black tabular-nums leading-none">01</div>
-              </div>
-              <div className="absolute -inset-2 rounded-full border border-black/10 opacity-40" />
-            </div>
+        <div className="relative">
+          {/* Progress line */}
+          <div 
+            className="hidden md:block absolute left-1/2 top-0 bottom-0 w-px bg-gradient-to-b from-transparent via-[var(--border)] to-transparent -translate-x-1/2"
+            aria-hidden
+          />
 
-            <ol className="mx-auto mt-4 w-[240px] space-y-2 text-sm text-[var(--muted)]">
-              {sorted.map((s, i) => (
-                <li key={s.id} className="flex items-center gap-2">
-                  <span
-                    ref={(el) => {
-                      if (el) {
-                        dotsRef.current[i] = el;
-                      }
-                    }}
-                    className="inline-flex size-2 rounded-full bg-zinc-300 data-[active=true]:bg-zinc-900 transition-colors"
-                    data-active={i === 0 ? "true" : "false"}
-                  />
-                  <span className="tabular-nums w-6 text-zinc-500">{String(i + 1).padStart(2, "0")}</span>
-                  <span className="truncate">{s.title}</span>
-                </li>
-              ))}
-            </ol>
-          </div>
-
-          {/* RIGHT: stack panels */}
-          <div className="md:col-span-7 flex justify-center">
-            <div ref={railRef} className="relative">
-              {/* peek masks only */}
-              <div className="pointer-events-none absolute inset-x-0 top-0 h-12 from-[#F8F7F3] to-transparent bg-gradient-to-b z-20" />
-              <div className="pointer-events-none absolute inset-x-0 bottom-0 h-12 from-[#F8F7F3] to-transparent bg-gradient-to-t z-20" />
-
-              <div ref={cardsRef} className="relative grid grid-rows-1 gap-5" style={{ transform: "translateZ(0)" }}>
-                {sorted.map((s, i) => (
-                  <article
-                    key={s.id}
-                    data-card
-                    data-active={i === 0 ? "true" : "false"}
-                    className="relative w-full max-w-[640px] h-[340px] rounded-3xl bg-white border border-black/10 overflow-hidden shadow-[0_10px_24px_rgba(0,0,0,0.08)]"
-                    style={{ transform: "translateZ(0)" }}
-                  >
-                    {/* top brand rule that grows on active */}
-                    <div className={`absolute left-0 right-1/3 top-0 h-[3px] bg-gradient-to-r ${accent} transition-all duration-300 data-[active=true]:right-0`} />
-
-                    <div className="card-inner relative h-full p-6 md:p-8">
-                      <h3 className="h3 mb-2 text-left">{s.title}</h3>
-                      <p className="text-[var(--muted)] text-[16px] leading-relaxed max-w-[58ch] mb-3">
-                        {s.blurb}
-                      </p>
-
-                      {/* Bullets always present (fallbacks apply) */}
-                      <ul className="mt-1 grid grid-cols-1 sm:grid-cols-2 gap-y-2 gap-x-6 text-[15px] text-zinc-800">
-                        {s.points!.slice(0, 6).map((p, idx) => (
-                          <li
-                            key={idx}
-                            data-bullet
-                            className="flex items-start gap-2 opacity-0 translate-y-[6px]"
-                          >
-                            <span className="mt-[7px] inline-block size-[6px] rounded-full bg-zinc-400" />
-                            <span>{p}</span>
-                          </li>
-                        ))}
-                      </ul>
+          {items.map((s, i) => {
+            const isEven = i % 2 === 0;
+            const isLast = i === items.length - 1;
+            
+            return (
+              <div key={s.id} data-step className="relative mb-20 md:mb-32">
+                {/* Step container */}
+                <div className={`flex items-start gap-10 md:gap-20 ${isEven ? 'flex-row' : 'flex-row-reverse'}`}>
+                  {/* Number with circle indicator */}
+                  <div className={`flex-shrink-0 relative ${isEven ? 'text-left' : 'text-right'}`}>
+                    <div 
+                      data-number
+                      className="relative inline-block"
+                    >
+                      {/* Circular indicator */}
+                      <div className="hidden md:block absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-20 h-20 rounded-full border-2 border-[var(--accent)] bg-[var(--bg)] shadow-lg z-0" />
+                      <span className="relative z-10 inline-block text-5xl md:text-7xl font-black text-[var(--fg)] leading-none select-none">
+                        {i + 1}
+                      </span>
                     </div>
+                  </div>
 
-                    {/* active emphasis */}
-                    <style jsx>{`
-                      [data-card][data-active="true"] {
-                        box-shadow: 0 24px 48px rgba(0,0,0,0.14);
-                        border-color: rgba(0,0,0,0.12);
-                      }
-                    `}</style>
-                  </article>
-                ))}
+                  {/* Card with enhanced styling */}
+                  <div data-card className="flex-1 max-w-[500px]">
+                    <StepCard step={s} align={isEven ? "left" : "right"} />
+                  </div>
+                </div>
+
+                {/* Enhanced curly arrow */}
+                {!isLast && (
+                  <div 
+                    data-arrow
+                    className={`hidden md:block absolute ${isEven ? 'left-[45%]' : 'right-[45%]'} w-32 h-32 text-[var(--fg)]`}
+                    style={{ top: '100%', marginTop: '-20px' }}
+                  >
+                    <CurlyArrow direction={isEven ? "down-right" : "down-left"} className="w-full h-full" />
+                  </div>
+                )}
               </div>
-            </div>
-          </div>
+            );
+          })}
         </div>
       </div>
     </section>
+  );
+}
+
+function StepCard({
+  step,
+  align = "right",
+  className = "",
+}: {
+  step: Step;
+  align?: "left" | "right";
+  className?: string;
+}) {
+  return (
+    <article
+      className={[
+        "group w-full bg-[var(--card)] rounded-3xl border border-[var(--border)]",
+        "shadow-[0_8px_30px_rgba(0,0,0,0.08)] hover:shadow-[0_12px_40px_rgba(0,0,0,0.12)]",
+        "p-8 md:p-10 transition-all duration-500",
+        "hover:scale-[1.02] hover:border-[var(--accent)]",
+        className,
+      ].join(" ")}
+    >
+      {/* Step title with accent */}
+      <div className="flex items-center gap-3 mb-4">
+        <div className="w-2 h-8 bg-[var(--accent)] rounded-full" />
+        <h3 className="text-2xl md:text-3xl font-bold text-[var(--fg)] group-hover:text-[var(--accent)] transition-colors">
+          {step.title}
+        </h3>
+      </div>
+      
+      <p className="text-base md:text-lg text-[var(--muted)] leading-relaxed mb-6">
+        {step.blurb}
+      </p>
+      
+      {!!step.points?.length && (
+        <div className="border-t border-[var(--border)] pt-6 mt-6">
+          <p className="text-xs font-bold text-[var(--fg)] mb-4 uppercase tracking-wider flex items-center gap-2">
+            <span className="w-6 h-px bg-[var(--accent)]" />
+            Deliverables
+          </p>
+          <ul className="text-sm md:text-base text-[var(--fg)] space-y-3">
+            {step.points.slice(0, 4).map((p, idx) => (
+              <li key={idx} className="flex items-start gap-3 group/item">
+                <span className="mt-1.5 inline-flex w-2 h-2 rounded-full bg-[var(--accent)] flex-shrink-0 group-hover/item:scale-125 transition-transform" />
+                <span className="leading-relaxed">{p}</span>
+              </li>
+            ))}
+          </ul>
+        </div>
+      )}
+    </article>
   );
 }

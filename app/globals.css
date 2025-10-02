@@ -5,40 +5,40 @@
 
 /* ---------- Brand Tokens (light palette) ---------- */
 :root {
-  --bg: #F7F7F7;      /* Seasalt */
-  --fg: #272727;      /* Raisin black */
-  --accent: oklch(0.967 0.003 264.542);  /* Blue (Munsell) */
+  --bg: #FAFAFA;      /* Soft off-white background (60%) - easy on eyes */
+  --fg: #272727;      /* Brand charcoal for primary text (30%) */
+  --accent: #404040;  /* Lighter charcoal for hover states - monochrome scheme */
 
-  --muted: #6b7280;   /* secondary text on light bg - gray-500 */
-  --card: oklch(1 0 0);    /* surfaces */
-  --border: oklch(0.928 0.006 264.531);  /* light hairlines */
+  --muted: #71717A;   /* Medium gray for secondary text - readable */
+  --card: #FFFFFF;    /* Pure white for card elevation */
+  --border: #E4E4E7;  /* Subtle border - visible but not harsh */
 
   --radius: 0.625rem;
   --maxw: 1280px;
 
   /* legacy fallbacks */
 
-  --background: oklch(1 0 0);
+  --background: #FAFAFA;
 
-  --foreground: oklch(0.13 0.028 261.692);
+  --foreground: #272727;
 
-  --card-foreground: oklch(0.13 0.028 261.692);
+  --card-foreground: #272727;
 
-  --popover: oklch(1 0 0);
+  --popover: #FFFFFF;
 
-  --popover-foreground: oklch(0.13 0.028 261.692);
+  --popover-foreground: #272727;
 
-  --primary: oklch(0.21 0.034 264.665);
+  --primary: #272727;
 
-  --primary-foreground: oklch(0.985 0.002 247.839);
+  --primary-foreground: #FFFFFF;
 
-  --secondary: oklch(0.967 0.003 264.542);
+  --secondary: #404040;
 
-  --secondary-foreground: oklch(0.21 0.034 264.665);
+  --secondary-foreground: #FFFFFF;
 
-  --muted-foreground: oklch(0.551 0.027 264.364);
+  --muted-foreground: #71717A;
 
-  --accent-foreground: oklch(0.21 0.034 264.665);
+  --accent-foreground: #FFFFFF;
 
   --destructive: oklch(0.577 0.245 27.325);
 
@@ -123,6 +123,14 @@ p, span, li, a {
   font-family: var(--font-lora), Georgia, Cambria, "Times New Roman", Times, serif;
 }
 
+/* Ensure white text on dark backgrounds */
+[class*="bg-[var(--fg)]"] *,
+.bg-black *,
+[style*="background: var(--fg)"] *,
+[style*="background-color: var(--fg)"] * {
+  color: #FFFFFF !important;
+}
+
 /* Tailwind font utilities */
 .font-sans {
   font-family: var(--font-poppins), var(--font-geist-sans), system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
@@ -173,11 +181,14 @@ p, span, li, a {
 .btn:active { transform: translateY(1px); }
 
 .btn-primary {
-  background: var(--accent);
-  color: #FFFFFF;
-  border-color: color-mix(in srgb, var(--accent) 70%, black);
+  background: var(--fg);
+  color: #FFFFFF !important;
+  border-color: var(--fg);
 }
-.btn-primary:hover { opacity: .95; }
+.btn-primary:hover { 
+  background: var(--accent);
+  opacity: .95; 
+}
 
 .btn-ghost {
   background: transparent;
@@ -200,8 +211,8 @@ p, span, li, a {
   color: var(--muted);
 }
 
-.h1 { font-size: clamp(2rem, 4vw + 1rem, 3.1rem); line-height: 1.08; }
-.h2 { font-size: clamp(1.5rem, 2.2vw + 1rem, 2.15rem); line-height: 1.18; }
+.h1 { font-size: clamp(2.25rem, 4.5vw + 0.9rem, 4.05rem); line-height: 1.08; }
+.h2 { font-size: clamp(2rem, 3vw + 1rem, 3.5rem); line-height: 1.18; }
 
 /* ---------- Motion respect ---------- */
 @media (prefers-reduced-motion: reduce) {

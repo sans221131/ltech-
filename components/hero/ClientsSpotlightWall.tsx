@@ -187,13 +187,13 @@ export default function ClientsBlueprintRail({
 
                   {/* Micro blurb on hover */}
                   {(hoveredIdx === i) && (it.blurb || it.name) && (
-                    <div className="absolute left-1/2 top-[calc(100%+8px)] -translate-x-1/2 whitespace-nowrap rounded-full border border-black/10 bg-white/80 px-2.5 py-1 text-[11px] text-neutral-800 shadow-sm backdrop-blur-sm">
+                    <div className="absolute left-1/2 top-[calc(100%+8px)] -translate-x-1/2 whitespace-nowrap rounded-full border border-black/10 bg-white/80 px-2.5 py-1 text-[11px] text-[var(--fg)] shadow-sm backdrop-blur-sm">
                       {it.blurb ?? it.name}
                     </div>
                   )}
 
                   {/* divider dot between items */}
-                  <div className="ml-6 h-1 w-1 rounded-full bg-neutral-300/80" />
+                  <div className="ml-6 h-1 w-1 rounded-full bg-[var(--muted)]/80" />
                 </div>
               );
             })}

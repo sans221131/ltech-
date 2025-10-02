@@ -1,29 +1,29 @@
 export default function SiteFooter() {
   const year = new Date().getFullYear();
   return (
-    <footer aria-labelledby="footer-heading" className="relative isolate bg-[var(--bg)] text-[var(--fg)] overflow-hidden">
+    <footer 
+      aria-labelledby="footer-heading" 
+      className="relative isolate text-[var(--fg)] overflow-hidden"
+      style={{
+        background: "radial-gradient(circle at 50% 50%, rgba(64, 64, 64, 0.08) 0%, var(--bg) 60%)"
+      }}
+    >
       <h2 id="footer-heading" className="sr-only">Website footer</h2>
 
-      {/* Background glow continuation from SubmitBrief */}
+      {/* Full background glow */}
       <div 
         aria-hidden 
-        className="pointer-events-none absolute inset-0 opacity-40"
+        className="pointer-events-none absolute inset-0 opacity-30"
         style={{
-          background: "radial-gradient(1000px 800px at 20% 10%, rgba(234,179,8,0.08), transparent 50%), radial-gradient(800px 600px at 80% 90%, rgba(163,230,53,0.06), transparent 50%)"
+          background: "radial-gradient(ellipse 120% 80% at 50% 50%, rgba(64, 64, 64, 0.12), transparent 70%)"
         }}
-      />
-
-      {/* Accent bloom from bottom left */}
-      <div 
-        aria-hidden 
-        className="absolute left-[-10%] top-[-20%] size-[700px] rounded-full blur-3xl opacity-20 bg-gradient-to-br from-amber-300 to-lime-300 pointer-events-none"
       />
 
       {/* Middle: large centered footer block */}
       <div className="relative z-10 mx-auto max-w-[1180px] px-4 sm:px-6 lg:px-8 py-16">
-        <div className="rounded-3xl bg-[var(--card)] p-12 md:p-16 text-center shadow-[0_24px_70px_rgba(0,0,0,0.1)] border border-[var(--border)] transition-all duration-300 hover:shadow-[0_28px_80px_rgba(0,0,0,0.14)]">
+        <div className="rounded-3xl bg-[var(--card)] p-12 md:p-16 text-center shadow-[0_24px_70px_rgba(0,0,0,0.1)] transition-all duration-300 hover:shadow-[0_28px_80px_rgba(0,0,0,0.14)]">
           <a href="#top" className="inline-flex items-center gap-4 mb-8 group">
-            <span className="inline-flex w-16 h-16 rounded-full bg-gradient-to-br from-amber-300 via-yellow-200 to-lime-300 items-center justify-center text-black font-extrabold text-lg shadow-lg group-hover:scale-110 transition-transform duration-300">LW</span>
+            <span className="inline-flex w-16 h-16 rounded-full bg-[var(--accent)] items-center justify-center text-white font-extrabold text-lg shadow-lg group-hover:scale-110 transition-transform duration-300">LW</span>
             <span className="text-3xl font-serif font-semibold tracking-tight">LeafWay Tech</span>
           </a>
 
@@ -73,10 +73,10 @@ export default function SiteFooter() {
       </div>
 
       {/* Bottom: slim bar */}
-      <div className="bg-[var(--bg)] border-t border-[var(--border)]">
+      <div className="bg-[var(--bg)]">
         <div className="mx-auto max-w-[1180px] px-4 sm:px-6 lg:px-8 py-6 flex flex-col sm:flex-row items-center justify-between gap-4 text-[13px] text-[var(--muted)]">
           <div className="inline-flex items-center gap-3">
-            <span className="inline-flex w-9 h-9 rounded-full bg-gradient-to-br from-amber-300 via-yellow-200 to-lime-300 items-center justify-center text-black font-bold">LW</span>
+            <span className="inline-flex w-9 h-9 rounded-full bg-[var(--accent)] items-center justify-center text-white font-bold">LW</span>
             <span className="text-sm">LeafWay Tech</span>
           </div>
 

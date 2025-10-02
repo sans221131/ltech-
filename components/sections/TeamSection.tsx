@@ -88,56 +88,47 @@ export default function TeamReliability({
       id={id}
       ref={ref}
       aria-label="Boringly reliable team"
-      className="relative isolate min-h-[100svh] flex items-center overflow-hidden bg-[var(--bg)] text-[var(--fg)]"
+      className="relative isolate min-h-[100svh] flex items-center overflow-hidden text-[var(--fg)]"
+      style={{
+        background: "radial-gradient(circle at 50% 50%, rgba(64, 64, 64, 0.08) 0%, var(--bg) 60%)"
+      }}
     >
-      {/* background polish */}
+      {/* Full background glow */}
       <div
         aria-hidden
-        className="pointer-events-none absolute inset-0"
+        className="pointer-events-none absolute inset-0 opacity-30"
         style={{
-          background:
-            "radial-gradient(1200px 600px at 50% -10%, rgba(234,179,8,0.08) 0%, rgba(234,179,8,0.03) 35%, transparent 70%), radial-gradient(800px 500px at 90% 90%, rgba(0,0,0,0.02), transparent 60%)"
+          background: "radial-gradient(ellipse 120% 80% at 50% 50%, rgba(64, 64, 64, 0.12), transparent 70%)"
         }}
       />
 
-      {/* soft inner vignette */}
-      <div
-        aria-hidden
-        className="absolute inset-6 rounded-[48px] blur-3xl opacity-30 bg-gradient-to-b from-amber-200/20 via-transparent to-transparent"
-      />
-
-      <div className="relative z-10 mx-auto w-full max-w-[1180px] px-4 sm:px-6 lg:px-8 py-16">
-        <p className="eyebrow mb-8 text-sm text-[var(--muted)]">
+      <div className="relative z-10 mx-auto w-full max-w-[1280px] px-6 sm:px-8 lg:px-12 py-20 md:py-24">
+        <p className="eyebrow mb-10 md:mb-12">
           {eyebrow}
         </p>
 
         {/* Big copy block */}
-        <div className="space-y-3 leading-[0.94] font-black tracking-[-0.02em]">
-          <h2 data-line className="h1 text-[clamp(2.5rem,7vw,7rem)] text-left">
+        <div className="space-y-2 md:space-y-3">
+          <h2 data-line className="text-[clamp(1.5rem,3.5vw,3rem)] leading-[1.2] font-bold tracking-[-0.02em] text-[var(--fg)]">
             {lines[0]}
           </h2>
-          <p data-line className="h1 text-[clamp(2.5rem,7vw,7rem)] text-left">
+          <p data-line className="text-[clamp(1.5rem,3.5vw,3rem)] leading-[1.2] font-semibold tracking-[-0.02em] text-[var(--fg)] opacity-90">
             {lines[1]}
           </p>
-          <p data-line className="h1 text-[clamp(2.5rem,7vw,7rem)] text-left">
+          <p data-line className="text-[clamp(1.5rem,3.5vw,3rem)] leading-[1.2] font-semibold tracking-[-0.02em] text-[var(--fg)] opacity-90">
             {lines[2]}
           </p>
         </div>
 
         {/* understated caption line */}
-        <div className="mt-12 max-w-xl text-[16px] text-[var(--muted)]">
-          <span className="inline-flex items-center gap-4">
-            <span className="h-px w-12 bg-[var(--border)]" />
-            We keep it simple: ship, repeat.
-          </span>
+        <div className="mt-16 md:mt-20 max-w-xl">
+          <p className="flex items-center gap-4 text-base md:text-lg text-[var(--muted)]">
+            <span className="h-px w-16 bg-[var(--muted)] opacity-40" />
+            <span>We keep it simple: ship, repeat.</span>
+          </p>
         </div>
       </div>
 
-      {/* corner bloom for depth */}
-      <div
-        aria-hidden
-        className="absolute right-[-10%] bottom-[-20%] size-[48vmin] rounded-full blur-3xl opacity-15 bg-gradient-to-br from-amber-300 to-lime-300"
-      />
     </section>
   );
 }

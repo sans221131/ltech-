@@ -80,7 +80,7 @@ export default function ClientsOnlyRail({
     <section
       ref={sectionRef}
       aria-label="Clients who trust us"
-      className={`mx-auto max-w-7xl px-6 md:px-10 lg:px-16 w-full ${className}`}
+      className={`mx-auto max-w-7xl px-6 md:px-10 lg:px-16 w-full py-16 ${className}`}
       style={{ ["--gap" as any]: `${gapPx}px` }}
     >
       <div className="mb-3">
@@ -97,19 +97,6 @@ export default function ClientsOnlyRail({
           borderRadius: 'var(--radius)',
         }}
       >
-        {/* subtle grid */}
-        <div
-          aria-hidden
-          className="pointer-events-none absolute inset-0 opacity-60"
-          style={{
-            backgroundImage: `
-              linear-gradient(to right, rgba(0,0,0,0.06) 1px, transparent 1px),
-              linear-gradient(to bottom, rgba(0,0,0,0.06) 1px, transparent 1px)
-            `,
-            backgroundSize: "28px 28px, 28px 28px",
-            maskImage: "radial-gradient(120% 100% at 50% 50%, black, transparent)",
-          }}
-        />
 
         {/* edge fades */}
         <div
@@ -179,7 +166,7 @@ export default function ClientsOnlyRail({
                     Logo
                   )}
                   {/* slimmer separator to keep focus on logos */}
-                  <div className="ml-4 h-1 w-1 rounded-full bg-neutral-300/70" />
+                  <div className="ml-4 h-1 w-1 rounded-full bg-[var(--muted)]/70" />
                 </div>
               );
             })}

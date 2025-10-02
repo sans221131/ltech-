@@ -96,18 +96,18 @@ export default function ServicesSection() {
               >
                 <Link
                   href={svc.href}
-                  className="block focus:outline-none focus-visible:ring-2 focus-visible:ring-amber-400 rounded-2xl h-full"
+                  className="block focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] rounded-2xl h-full"
                 >
-                  <CardBody className="relative w-full h-full rounded-2xl border border-[var(--border)] bg-[var(--card)] p-3.5 sm:p-4 transition-all duration-300 group-hover:shadow-[0_20px_60px_rgba(0,0,0,0.12)] group-hover:border-amber-200 flex flex-col justify-between">
+                  <CardBody className="relative w-full h-full rounded-2xl border border-[var(--border)] bg-[var(--card)] p-3.5 sm:p-4 transition-all duration-300 group-hover:shadow-[0_20px_60px_rgba(0,0,0,0.12)] group-hover:border-[var(--accent)] flex flex-col justify-between">
                     {/* Gradient accent on hover */}
                     <div className="absolute inset-0 rounded-2xl pointer-events-none overflow-hidden">
-                      <div className="absolute inset-x-0 -top-1 h-[2px] opacity-0 group-hover:opacity-100 transition-all duration-300 bg-gradient-to-r from-amber-300 via-yellow-200 to-lime-300" />
+                      <div className="absolute inset-x-0 -top-1 h-[2px] opacity-0 group-hover:opacity-100 transition-all duration-300 bg-[var(--accent)]" />
                     </div>
 
                     <div className="flex-1 min-h-[120px] flex flex-col">
                       <CardItem translateZ={25} className="flex items-start gap-2">
-                        <span className="mt-[4px] inline-block size-2 rounded-full bg-gradient-to-br from-amber-400 to-yellow-500 flex-shrink-0 shadow-sm" />
-                        <h3 className="text-[16px] font-semibold text-[var(--fg)] leading-tight group-hover:text-amber-600 transition-colors duration-200">
+                        <span className="mt-[4px] inline-block size-2 rounded-full bg-[var(--accent)] flex-shrink-0 shadow-sm" />
+                        <h3 className="text-[16px] font-semibold text-[var(--fg)] leading-tight transition-colors duration-200">
                           {svc.title}
                         </h3>
                       </CardItem>
@@ -125,7 +125,7 @@ export default function ServicesSection() {
                     <CardItem
                       translateZ={30}
                       rotateX={3}
-                      className="mt-3 pl-[18px] inline-flex items-center text-[12.5px] font-medium text-[var(--fg)] group-hover:text-amber-600 transition-colors duration-200"
+                      className="mt-3 pl-[18px] inline-flex items-center text-[12.5px] font-medium text-[var(--fg)] transition-colors duration-200"
                     >
                       <span>View details</span>
                       <svg

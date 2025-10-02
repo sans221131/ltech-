@@ -2,7 +2,7 @@
 "use client";
 
 import React, { useEffect, useMemo, useRef, useState } from "react";
-import { PROBLEM_PATTERNS, type ProblemPattern } from "@/lib/whatwedo/problems";
+import { PROJECT_SOLUTIONS, type ProjectSolution } from "@/lib/whatwedo/projects";
 
 /* tiny classnames helper */
 function cx(...classes: Array<string | false | null | undefined>) {
@@ -17,7 +17,7 @@ const q = (n: number, dp = 3) => {
 export type ProblemToPatternDialProps = {
   id?: string;
   className?: string;
-  items?: ProblemPattern[];
+  items?: ProjectSolution[];
   /** May be fractional (e.g., from scroll). */
   selectedIndex?: number;
 
@@ -36,7 +36,7 @@ export type ProblemToPatternDialProps = {
 export default function ProblemToPatternDial({
   id = "problem-to-pattern-dial",
   className,
-  items = PROBLEM_PATTERNS,
+  items = PROJECT_SOLUTIONS,
   selectedIndex = 0,
   variant = "classic",
   enableMotion = true,
@@ -131,11 +131,11 @@ export default function ProblemToPatternDial({
   const selected = ((nearest % count) + count) % count;
 
   // sizing for desktop dial
-  const SIZE = 340;
+  const SIZE = 400;
   const RING = SIZE / 2;
-  const R_TICK_MAJOR = Math.round(RING - 18);
-  const R_TICK_MINOR = Math.round(RING - 14);
-  const R_LABEL = Math.round(RING - 40);
+  const R_TICK_MAJOR = Math.round(RING - 20);
+  const R_TICK_MINOR = Math.round(RING - 16);
+  const R_LABEL = Math.round(RING - 50);
 
   // ——— Mobile compact READOUT mapping ———
   const readout = useMemo(() => {
@@ -231,10 +231,10 @@ export default function ProblemToPatternDial({
                     onClick={() => {
                       try { (containerRef.current as any)?.focus?.(); } catch {}
                     }}
-                    style={{ cursor: 'pointer' }}
+                    style={{ cursor: 'default' }}
                   >
                     <span className="mr-2 text-base">{it.emoji ?? "•"}</span>
-                    <span className="font-medium">{it.problem}</span>
+                    <span className="font-medium">{it.project}</span>
                   </div>
                 </div>
               );
@@ -268,7 +268,7 @@ function MobileReadout({
 }: {
   total: number;
   progressPct: number; // 0..100
-  item: ProblemPattern | undefined;
+  item: ProjectSolution | undefined;
   reduced: boolean;
 }) {
   return (
@@ -289,14 +289,14 @@ function MobileReadout({
             className={cx(
               "inline-flex items-center gap-2",
               "px-3 py-1.5 rounded-full",
-              "bg-neutral-900 text-white",
+              "bg-[var(--fg)] text-white",
               "shadow-[inset_0_-1px_3px_rgba(255,255,255,0.08),0_2px_8px_rgba(0,0,0,0.25)]",
               !reduced && "transition-transform duration-150 will-change-transform"
             )}
           >
             <span className="text-base leading-none">{item?.emoji ?? "•"}</span>
             <span className="text-sm font-medium leading-none whitespace-nowrap">
-              {item?.problem ?? "—"}
+              {item?.project ?? "—"}
             </span>
           </span>
         </div>
@@ -314,27 +314,44 @@ function MobileReadout({
 }
 
 /* One-markup detail panel */
-export function DetailPanel({ item }: { item: ProblemPattern }) {
+export function DetailPanel({ item }: { item: ProjectSolution }) {
   return (
     <div className="mx-auto max-w-none">
-      <div className="rounded-2xl border border-[var(--border)] bg-white shadow-lg p-6 md:p-12">
-        <div className="text-xs font-semibold tracking-widest uppercase text-neutral-500 mb-2">
-          Pattern
+      <div className="rounded-2xl border border-[var(--border)] bg-white shadow-lg p-6 md:p-8">
+        <div className="text-xs font-semibold tracking-widest uppercase text-[var(--muted)] mb-2">
+          Solution
         </div>
-            <h3 className="font-display text-xl md:text-3xl leading-tight text-[var(--fg)] mb-4">
-          {item.pattern}
+        <h3 className="font-display text-xl md:text-2xl leading-tight text-[var(--fg)] mb-3">
+          {item.solution}
         </h3>
-        <p className="text-[var(--muted)] text-base md:text-lg leading-relaxed mb-5">{item.summary}</p>
+        <p className="text-[var(--muted)] text-sm md:text-base leading-relaxed mb-4">{item.summary}</p>
         {item.details?.length ? (
-          <ul className="space-y-3 text-[var(--fg)]">
+          <ul className="space-y-3 text-[var(--fg)] mb-6">
             {item.details.map((d, i) => (
               <li key={i} className="flex items-start">
                 <span className="inline-block w-2 h-2 rounded-full bg-[var(--fg)] mr-3 mt-2 flex-shrink-0" />
-                <span className="text-base leading-relaxed">{d}</span>
+                <span className="text-sm leading-relaxed">{d}</span>
               </li>
             ))}
           </ul>
         ) : null}
+        
+        {/* View Project Button */}
+        <a
+          href={`/projects/${item.id}`}
+          className="inline-flex items-center gap-2 px-5 py-2.5 bg-[var(--fg)] text-white rounded-xl font-semibold hover:bg-[var(--accent)] transition-all hover:scale-105 shadow-md text-sm"
+        >
+          <span>View Full Project</span>
+          <svg 
+            className="w-4 h-4 transition-transform" 
+            fill="none" 
+            viewBox="0 0 24 24" 
+            stroke="currentColor"
+            strokeWidth={2.5}
+          >
+            <path strokeLinecap="round" strokeLinejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+          </svg>
+        </a>
       </div>
     </div>
   );

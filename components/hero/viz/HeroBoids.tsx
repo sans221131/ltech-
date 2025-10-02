@@ -416,6 +416,7 @@ export default function HeroBoids({
 
     // ---------- events ----------
     const onPointerMove = (e: PointerEvent) => {
+      e.preventDefault();
       const rect = canvas.getBoundingClientRect();
       const x = e.clientX - rect.left;
       const y = e.clientY - rect.top;
@@ -436,15 +437,24 @@ export default function HeroBoids({
     const onPointerLeave = () => {
       pointer.active = false;
       pointer.speedInst = 0;
-      pointer.lastT = 0;
     };
     const onPointerEnter = (e: PointerEvent) => {
+      e.preventDefault();
       const rect = canvas.getBoundingClientRect();
       pointer.tx = pointer.x = e.clientX - rect.left;
       pointer.ty = pointer.y = e.clientY - rect.top;
       pointer.active = true;
       pointer.speedInst = 0;
       pointer.speedSm = 0;
+      pointer.lastT = performance.now();
+    };
+    const onPointerDown = (e: PointerEvent) => {
+      e.preventDefault();
+      const rect = canvas.getBoundingClientRect();
+      pointer.tx = pointer.x = e.clientX - rect.left;
+      pointer.ty = pointer.y = e.clientY - rect.top;
+      pointer.active = true;
+      pointer.speedInst = 200; // Give a little initial speed on click
       pointer.lastT = performance.now();
     };
 
@@ -476,9 +486,10 @@ export default function HeroBoids({
     }
 
     // only ResizeObserver; no window resize to avoid double-firing
-    canvas.addEventListener("pointermove", onPointerMove);
-    canvas.addEventListener("pointerleave", onPointerLeave);
-    canvas.addEventListener("pointerenter", onPointerEnter);
+    canvas.addEventListener("pointermove", onPointerMove, { passive: false });
+    canvas.addEventListener("pointerleave", onPointerLeave, { passive: true });
+    canvas.addEventListener("pointerenter", onPointerEnter, { passive: false });
+    canvas.addEventListener("pointerdown", onPointerDown, { passive: false });
     io.observe(wrap);
     ro.observe(wrap);
 
@@ -491,6 +502,7 @@ export default function HeroBoids({
       canvas.removeEventListener("pointermove", onPointerMove);
       canvas.removeEventListener("pointerleave", onPointerLeave);
       canvas.removeEventListener("pointerenter", onPointerEnter);
+      canvas.removeEventListener("pointerdown", onPointerDown);
       stop();
     };
   }, [prefersReduced, periodMs, accent, headline, onPhaseChange]);
@@ -501,6 +513,7 @@ export default function HeroBoids({
         ref={canvasRef}
         aria-hidden
         className="block w-full h-full select-none [image-rendering:pixelated]"
+        style={{ touchAction: 'none' }}
       />
     </div>
   );

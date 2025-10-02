@@ -33,13 +33,19 @@ export default function SubmitBrief() {
   };
 
   return (
-    <section id="submit-brief" className="relative isolate bg-[var(--bg)] text-[var(--fg)] overflow-hidden">
-      {/* Background accents */}
+    <section 
+      id="submit-brief" 
+      className="relative isolate text-[var(--fg)] overflow-hidden"
+      style={{
+        background: "radial-gradient(circle at 50% 50%, rgba(64, 64, 64, 0.08) 0%, var(--bg) 60%)"
+      }}
+    >
+      {/* Full background glow */}
       <div 
         aria-hidden 
-        className="pointer-events-none absolute inset-0 opacity-40"
+        className="pointer-events-none absolute inset-0 opacity-30"
         style={{
-          background: "radial-gradient(1000px 800px at 20% 10%, rgba(234,179,8,0.08), transparent 50%), radial-gradient(800px 600px at 80% 90%, rgba(163,230,53,0.06), transparent 50%)"
+          background: "radial-gradient(ellipse 120% 80% at 50% 50%, rgba(64, 64, 64, 0.12), transparent 70%)"
         }}
       />
 
@@ -55,7 +61,7 @@ export default function SubmitBrief() {
 
             <div className="space-y-6 text-sm">
               <div className="flex items-start gap-4">
-                <span className="inline-flex size-10 items-center justify-center rounded-full bg-gradient-to-br from-amber-300 to-lime-300 text-black font-bold shrink-0">1</span>
+                <span className="inline-flex size-10 items-center justify-center rounded-full bg-[var(--accent)] text-white font-bold shrink-0">1</span>
                 <div>
                   <div className="font-medium mb-1">Submit your brief</div>
                   <div className="text-[var(--muted)] text-[14px]">Share your project goals, timeline, and budget range.</div>
@@ -63,7 +69,7 @@ export default function SubmitBrief() {
               </div>
 
               <div className="flex items-start gap-4">
-                <span className="inline-flex size-10 items-center justify-center rounded-full bg-gradient-to-br from-amber-300 to-lime-300 text-black font-bold shrink-0">2</span>
+                <span className="inline-flex size-10 items-center justify-center rounded-full bg-[var(--accent)] text-white font-bold shrink-0">2</span>
                 <div>
                   <div className="font-medium mb-1">We review & respond</div>
                   <div className="text-[var(--muted)] text-[14px]">Our team evaluates fit and proposes an approach.</div>
@@ -71,7 +77,7 @@ export default function SubmitBrief() {
               </div>
 
               <div className="flex items-start gap-4">
-                <span className="inline-flex size-10 items-center justify-center rounded-full bg-gradient-to-br from-amber-300 to-lime-300 text-black font-bold shrink-0">3</span>
+                <span className="inline-flex size-10 items-center justify-center rounded-full bg-[var(--accent)] text-white font-bold shrink-0">3</span>
                 <div>
                   <div className="font-medium mb-1">Kick off together</div>
                   <div className="text-[var(--muted)] text-[14px]">Align on scope, schedule a kickoff, and start building.</div>
@@ -89,7 +95,7 @@ export default function SubmitBrief() {
                   {/* Name */}
                   <div>
                     <label htmlFor="name" className="block text-sm font-medium mb-2">
-                      Name <span className="text-amber-500">*</span>
+                      Name <span className="text-[var(--accent)]">*</span>
                     </label>
                     <input
                       type="text"
@@ -98,7 +104,7 @@ export default function SubmitBrief() {
                       required
                       value={formData.name}
                       onChange={handleChange}
-                      className="w-full px-4 py-3 rounded-lg bg-[var(--bg)] border border-[var(--border)] text-[var(--fg)] placeholder:text-[var(--muted)] focus:outline-none focus:ring-2 focus:ring-amber-400 focus:border-transparent transition-all"
+                      className="w-full px-4 py-3 rounded-lg bg-[var(--bg)] border border-[var(--border)] text-[var(--fg)] placeholder:text-[var(--muted)] focus:outline-none focus:ring-2 focus:ring-[var(--accent)] focus:border-transparent transition-all"
                       placeholder="John Doe"
                     />
                   </div>
@@ -106,7 +112,7 @@ export default function SubmitBrief() {
                   {/* Email */}
                   <div>
                     <label htmlFor="email" className="block text-sm font-medium mb-2">
-                      Email <span className="text-amber-500">*</span>
+                      Email <span className="text-[var(--accent)]">*</span>
                     </label>
                     <input
                       type="email"
@@ -115,7 +121,7 @@ export default function SubmitBrief() {
                       required
                       value={formData.email}
                       onChange={handleChange}
-                      className="w-full px-4 py-3 rounded-lg bg-[var(--bg)] border border-[var(--border)] text-[var(--fg)] placeholder:text-[var(--muted)] focus:outline-none focus:ring-2 focus:ring-amber-400 focus:border-transparent transition-all"
+                      className="w-full px-4 py-3 rounded-lg bg-[var(--bg)] border border-[var(--border)] text-[var(--fg)] placeholder:text-[var(--muted)] focus:outline-none focus:ring-2 focus:ring-[var(--accent)] focus:border-transparent transition-all"
                       placeholder="john@company.com"
                     />
                   </div>
@@ -131,7 +137,7 @@ export default function SubmitBrief() {
                       name="company"
                       value={formData.company}
                       onChange={handleChange}
-                      className="w-full px-4 py-3 rounded-lg bg-[var(--bg)] border border-[var(--border)] text-[var(--fg)] placeholder:text-[var(--muted)] focus:outline-none focus:ring-2 focus:ring-amber-400 focus:border-transparent transition-all"
+                      className="w-full px-4 py-3 rounded-lg bg-[var(--bg)] border border-[var(--border)] text-[var(--fg)] placeholder:text-[var(--muted)] focus:outline-none focus:ring-2 focus:ring-[var(--accent)] focus:border-transparent transition-all"
                       placeholder="Acme Inc."
                     />
                   </div>
@@ -146,7 +152,7 @@ export default function SubmitBrief() {
                       name="budget"
                       value={formData.budget}
                       onChange={handleChange}
-                      className="w-full px-4 py-3 rounded-lg bg-[var(--bg)] border border-[var(--border)] text-[var(--fg)] focus:outline-none focus:ring-2 focus:ring-amber-400 focus:border-transparent transition-all"
+                      className="w-full px-4 py-3 rounded-lg bg-[var(--bg)] border border-[var(--border)] text-[var(--fg)] focus:outline-none focus:ring-2 focus:ring-[var(--accent)] focus:border-transparent transition-all"
                     >
                       <option value="">Select range</option>
                       <option value="10k-25k">$10k - $25k</option>
@@ -166,7 +172,7 @@ export default function SubmitBrief() {
                       name="timeline"
                       value={formData.timeline}
                       onChange={handleChange}
-                      className="w-full px-4 py-3 rounded-lg bg-[var(--bg)] border border-[var(--border)] text-[var(--fg)] focus:outline-none focus:ring-2 focus:ring-amber-400 focus:border-transparent transition-all"
+                      className="w-full px-4 py-3 rounded-lg bg-[var(--bg)] border border-[var(--border)] text-[var(--fg)] focus:outline-none focus:ring-2 focus:ring-[var(--accent)] focus:border-transparent transition-all"
                     >
                       <option value="">Select timeline</option>
                       <option value="asap">ASAP (1-2 weeks)</option>
@@ -179,7 +185,7 @@ export default function SubmitBrief() {
                   {/* Message */}
                   <div className="sm:col-span-2">
                     <label htmlFor="message" className="block text-sm font-medium mb-2">
-                      Project Details <span className="text-amber-500">*</span>
+                      Project Details <span className="text-[var(--accent)]">*</span>
                     </label>
                     <textarea
                       id="message"
@@ -188,7 +194,7 @@ export default function SubmitBrief() {
                       value={formData.message}
                       onChange={handleChange}
                       rows={6}
-                      className="w-full px-4 py-3 rounded-lg bg-[var(--bg)] border border-[var(--border)] text-[var(--fg)] placeholder:text-[var(--muted)] focus:outline-none focus:ring-2 focus:ring-amber-400 focus:border-transparent transition-all resize-none"
+                      className="w-full px-4 py-3 rounded-lg bg-[var(--bg)] border border-[var(--border)] text-[var(--fg)] placeholder:text-[var(--muted)] focus:outline-none focus:ring-2 focus:ring-[var(--accent)] focus:border-transparent transition-all resize-none"
                       placeholder="Tell us about your project, key challenges, and what success looks like..."
                     />
                   </div>
@@ -202,7 +208,7 @@ export default function SubmitBrief() {
                   <button
                     type="submit"
                     disabled={formState === "submitting"}
-                    className="group relative px-8 py-3 rounded-full bg-gradient-to-br from-amber-300 via-yellow-200 to-lime-300 text-black font-semibold shadow-[0_8px_20px_rgba(234,179,8,0.25)] hover:shadow-[0_12px_30px_rgba(234,179,8,0.35)] transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed hover:scale-105"
+                    className="group relative px-8 py-3 rounded-full bg-[var(--accent)] text-white font-semibold shadow-[0_8px_20px_rgba(0,0,0,0.15)] hover:shadow-[0_12px_30px_rgba(0,0,0,0.2)] transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed hover:scale-105"
                   >
                     <span className="relative z-10">
                       {formState === "submitting" ? "Sending..." : formState === "success" ? "Sent! ✓" : "Send Brief"}
@@ -212,7 +218,7 @@ export default function SubmitBrief() {
 
                 {/* Success message */}
                 {formState === "success" && (
-                  <div className="mt-6 p-4 rounded-lg bg-lime-100 border border-lime-300 text-lime-900 text-sm">
+                  <div className="mt-6 p-4 rounded-lg bg-[var(--card)] border border-[var(--accent)] text-[var(--fg)] text-sm">
                     ✓ Thanks! We've received your brief and will be in touch soon.
                   </div>
                 )}
@@ -228,11 +234,6 @@ export default function SubmitBrief() {
         </div>
       </div>
 
-      {/* Bottom accent bloom */}
-      <div 
-        aria-hidden 
-        className="absolute left-0 bottom-[-20%] size-[600px] rounded-full blur-3xl opacity-20 bg-gradient-to-br from-amber-300 to-lime-300 pointer-events-none"
-      />
     </section>
   );
 }
