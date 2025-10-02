@@ -35,13 +35,13 @@ export default function Hero({
       aria-labelledby="hero-heading"
     >
       {/* Main Container */}
-      <div className="relative mx-auto px-6 md:px-10 lg:px-16 w-full" style={{maxWidth: '1400px'}}>
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center w-full">
+      <div className="relative mx-auto px-6 md:px-10 lg:px-16 w-full h-full flex items-center" style={{maxWidth: '1400px'}}>
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-20 items-center w-full">
           
           {/* Left: Content */}
-          <div className="relative z-10 flex flex-col justify-center">
+          <div className="relative z-10 flex flex-col justify-center order-1">
             {eyebrow && (
-              <div className="eyebrow mb-6">
+              <div className="eyebrow mb-4">
                 {eyebrow}
               </div>
             )}
@@ -55,11 +55,11 @@ export default function Hero({
               )}
             </h1>
             {subhead && (
-              <p className="mt-6 font-serif" style={{color: 'var(--muted)', fontSize: '1.25rem', lineHeight: '1.7', maxWidth: '600px'}}>
+              <p className="mt-4 md:mt-6 font-serif" style={{color: 'var(--muted)', fontSize: '1.1rem', lineHeight: '1.6', maxWidth: '600px'}}>
                 {subhead}
               </p>
             )}
-            <div className="mt-8">
+            <div className="mt-6 md:mt-8">
               <a
                 href={ctaHref}
                 className="btn btn-outline"
@@ -73,7 +73,7 @@ export default function Hero({
           </div>
 
           {/* Right: Boids Visualization */}
-          <div className="relative h-[550px] md:h-[700px] lg:h-[800px] flex items-center justify-center">
+          <div className="relative h-[350px] md:h-[500px] lg:h-[800px] flex items-center justify-center order-2">
             <HeroBoids
               variant="flowGlow"
               headline={headline2 ? `${headline} ${headline2}` : headline}

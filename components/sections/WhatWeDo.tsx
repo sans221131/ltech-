@@ -178,17 +178,12 @@ export default function WhatWeDo({
           </div>
 
           {/* Detail left, Dial right */}
-          <div className="grid lg:grid-cols-2 gap-6 md:gap-10 items-start justify-items-center px-4">
-            <div ref={detailRef} className="order-2 lg:order-1 w-full max-w-[550px]">
+          <div className="grid lg:grid-cols-2 gap-6 md:gap-10 items-start justify-items-center">
+            <div ref={detailRef} className="order-2 lg:order-1 w-full max-w-[550px] px-2">
               <DetailPanel item={PROJECT_SOLUTIONS[safeIdx]} />
             </div>
 
-            <div ref={dialRef} className="flex flex-col items-center justify-start order-1 lg:order-2 w-full max-w-[550px]">
-              <div className="mb-6 text-center w-full">
-                <p className="eyebrow">Project → Solution</p>
-              </div>
-
-              {/* Fixed: removed unsupported prop */}
+            <div ref={dialRef} className="flex flex-col items-center justify-start order-1 lg:order-2 w-full max-w-[550px] px-2">
               <div className="w-full flex justify-center">
                 <ProblemToPatternDial selectedIndex={dialFloat} />
               </div>

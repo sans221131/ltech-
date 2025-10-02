@@ -15,6 +15,7 @@ const NAV_LINKS = [
 export default function SiteHeader() {
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const pathname = usePathname();
 
   useEffect(() => {
@@ -106,16 +107,80 @@ export default function SiteHeader() {
             </Link>
             
             <button
+              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
               className="lg:hidden inline-flex items-center justify-center size-10 rounded-lg border border-[var(--border)] bg-white/50 backdrop-blur-sm text-[var(--fg)] hover:bg-white hover:border-[var(--accent)] transition-all"
               aria-label="Menu"
+              aria-expanded={mobileMenuOpen}
             >
-              <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-                <path strokeLinecap="round" strokeLinejoin="round" d="M4 6h16M4 12h16M4 18h16" />
-              </svg>
+              {mobileMenuOpen ? (
+                <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
+                </svg>
+              ) : (
+                <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M4 6h16M4 12h16M4 18h16" />
+                </svg>
+              )}
             </button>
           </div>
         </div>
       </div>
+
+      {/* Mobile Menu */}
+      {mobileMenuOpen && (
+        <>
+          {/* Backdrop */}
+          <div 
+            className="lg:hidden fixed inset-0 bg-black/20 backdrop-blur-sm z-40"
+            onClick={() => setMobileMenuOpen(false)}
+          />
+          
+          {/* Menu Panel */}
+          <div className="lg:hidden fixed inset-x-0 top-20 bottom-0 bg-white z-50 overflow-y-auto shadow-2xl animate-in slide-in-from-top-4 duration-200">
+            <nav className="px-6 py-8 space-y-1">
+            {/* Solutions Section */}
+            <div className="pb-4 mb-4 border-b border-[var(--border)]">
+              <div className="text-xs font-mono uppercase tracking-wider text-[var(--muted)] mb-3 px-4">
+                Solutions
+              </div>
+              <Link
+                href="/solutions"
+                onClick={() => setMobileMenuOpen(false)}
+                className="block px-4 py-3 text-base font-semibold text-[var(--fg)] hover:text-[var(--accent)] hover:bg-[var(--card)] rounded-lg transition-all"
+              >
+                View all solutions →
+              </Link>
+            </div>
+
+            {/* Main Nav Links */}
+            {NAV_LINKS.map((link) => (
+              <Link
+                key={link.href}
+                href={link.href}
+                onClick={() => setMobileMenuOpen(false)}
+                className="block px-4 py-3 text-base font-medium text-[var(--fg)] hover:text-[var(--accent)] hover:bg-[var(--card)] rounded-lg transition-all"
+              >
+                {link.label}
+              </Link>
+            ))}
+
+            {/* CTA Button */}
+            <div className="pt-6">
+              <Link
+                href="/#submit-brief"
+                onClick={() => setMobileMenuOpen(false)}
+                className="flex items-center justify-center gap-2 w-full px-5 py-3.5 text-sm font-semibold text-white bg-[var(--fg)] rounded-xl hover:bg-[var(--accent)] transition-all"
+              >
+                <span>Start a project</span>
+                <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                </svg>
+              </Link>
+            </div>
+            </nav>
+          </div>
+        </>
+      )}
     </header>
   );
 }

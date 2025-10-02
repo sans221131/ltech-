@@ -234,7 +234,7 @@ export default function ProblemToPatternDial({
                     style={{ cursor: 'default' }}
                   >
                     <span className="mr-2 text-base">{it.emoji ?? "•"}</span>
-                    <span className="font-medium">{it.project}</span>
+                    <span className="font-medium">Project {i + 1}</span>
                   </div>
                 </div>
               );
@@ -253,6 +253,7 @@ export default function ProblemToPatternDial({
           progressPct={readout.progressPct}
           item={items[selected]}
           reduced={reduced}
+          items={items}
         />
       )}
     </div>
@@ -265,11 +266,13 @@ function MobileReadout({
   progressPct,
   item,
   reduced,
+  items,
 }: {
   total: number;
   progressPct: number; // 0..100
   item: ProjectSolution | undefined;
   reduced: boolean;
+  items: ProjectSolution[];
 }) {
   return (
     <div className="w-full mx-auto">
@@ -296,7 +299,7 @@ function MobileReadout({
           >
             <span className="text-base leading-none">{item?.emoji ?? "•"}</span>
             <span className="text-sm font-medium leading-none whitespace-nowrap">
-              {item?.project ?? "—"}
+              Project {items.findIndex(it => it.id === item?.id) + 1}
             </span>
           </span>
         </div>
@@ -316,13 +319,10 @@ function MobileReadout({
 /* One-markup detail panel */
 export function DetailPanel({ item }: { item: ProjectSolution }) {
   return (
-    <div className="mx-auto max-w-none">
-      <div className="rounded-2xl border border-[var(--border)] bg-white shadow-lg p-6 md:p-8">
-        <div className="text-xs font-semibold tracking-widest uppercase text-[var(--muted)] mb-2">
-          Solution
-        </div>
+    <div className="mx-auto w-full">
+      <div className="rounded-2xl border border-[var(--border)] bg-white shadow-lg p-5 md:p-6 lg:p-8">
         <h3 className="font-display text-xl md:text-2xl leading-tight text-[var(--fg)] mb-3">
-          {item.solution}
+          {item.project}
         </h3>
         <p className="text-[var(--muted)] text-sm md:text-base leading-relaxed mb-4">{item.summary}</p>
         {item.details?.length ? (

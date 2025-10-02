@@ -35,9 +35,9 @@ function useReducedMotion() {
 
 export default function ClientsOnlyRail({
   items,
-  railHeight = 84,          // was 68; give the logos room
-  logoHeightRatio = 0.82,   // was ~0.52; use most of the rail
-  gapPx = 32,               // was Tailwind gap-10 (~40px); slightly tighter
+  railHeight = 400,         // 3x bigger for much larger logos
+  logoHeightRatio = 1, // use more of the rail height
+  gapPx = 100,               // much wider spacing between logos
   speedPxPerSec = 64,
   backgroundHex = "#F7F7F7", // Match --bg from global theme
   className = "",
@@ -80,10 +80,10 @@ export default function ClientsOnlyRail({
     <section
       ref={sectionRef}
       aria-label="Clients who trust us"
-      className={`mx-auto max-w-7xl px-6 md:px-10 lg:px-16 w-full py-16 ${className}`}
+      className={`w-full px-6 md:px-10 lg:px-16 py-16 ${className}`}
       style={{ ["--gap" as any]: `${gapPx}px` }}
     >
-      <div className="mb-3">
+      <div className="mb-6">
         <span className="inline-flex items-center gap-2 rounded-full border backdrop-blur-sm px-3 py-1 eyebrow" style={{borderColor: 'var(--border)', backgroundColor: 'var(--card)'}}>
           <span className="inline-block h-1.5 w-1.5 rounded-full" style={{backgroundColor: 'var(--accent)'}} />
           Trusted by teams at
@@ -91,10 +91,9 @@ export default function ClientsOnlyRail({
       </div>
 
       <div
-        className="card relative overflow-hidden"
+        className="relative overflow-hidden"
         style={{
           height: railHeight,
-          borderRadius: 'var(--radius)',
         }}
       >
 
@@ -137,7 +136,7 @@ export default function ClientsOnlyRail({
             style={{ gap: "var(--gap)" }}
           >
             {loopItems.map((c, i) => {
-              const scale = c.scale ?? 1;
+              const scale = (c.scale ?? 1) * 2; // Apply 1.5x additional scale on top of any per-logo scale
               const Logo = (
                 <Image
                   src={c.logoSrc}

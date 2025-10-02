@@ -18,9 +18,9 @@ const prefersReduced = () =>
 
 export default function TeamReliability({
   id = "team-reliability",
-  eyebrow = "Team",
+  eyebrow = "",
   lines = [
-    "Quiet pros. Fewer promises, more commits.",
+    "Fewer promises, more commits.",
     "Boringly reliable: deadlines met, alerts silent.",
     "They make chaos look scheduled."
   ],
@@ -109,13 +109,16 @@ export default function TeamReliability({
 
         {/* Big copy block */}
         <div className="space-y-2 md:space-y-3">
-          <h2 data-line className="text-[clamp(1.5rem,3.5vw,3rem)] leading-[1.2] font-bold tracking-[-0.02em] text-[var(--fg)]">
-            {lines[0]}
+          <h2 data-line className="text-[clamp(1.5rem,3.5vw,3rem)] leading-[1.2] tracking-[-0.02em]">
+            <span className="font-bold text-[var(--fg)] text-[clamp(2rem,4.5vw,4rem)]">Fewer promises</span>
+            <span className="font-semibold text-[var(--muted)]">, </span>
+            <span className="font-bold text-[var(--fg)] text-[clamp(2rem,4.5vw,4rem)]">more commits</span>
+            <span className="font-semibold text-[var(--muted)]">.</span>
           </h2>
-          <p data-line className="text-[clamp(1.5rem,3.5vw,3rem)] leading-[1.2] font-semibold tracking-[-0.02em] text-[var(--fg)] opacity-90">
+          <p data-line className="text-[clamp(1.5rem,3.5vw,3rem)] leading-[1.2] font-semibold tracking-[-0.02em] text-[var(--muted)]">
             {lines[1]}
           </p>
-          <p data-line className="text-[clamp(1.5rem,3.5vw,3rem)] leading-[1.2] font-semibold tracking-[-0.02em] text-[var(--fg)] opacity-90">
+          <p data-line className="text-[clamp(1.5rem,3.5vw,3rem)] leading-[1.2] font-semibold tracking-[-0.02em] text-[var(--muted)]">
             {lines[2]}
           </p>
         </div>
