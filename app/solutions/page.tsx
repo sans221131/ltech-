@@ -1,11 +1,11 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, Suspense } from "react";
 import { useSearchParams } from "next/navigation";
 import Link from "next/link";
 import { INDUSTRIES } from "@/components/layout/megaMenuData";
 
-export default function SolutionsPage() {
+function SolutionsContent() {
   const searchParams = useSearchParams();
   const industryParam = searchParams.get('industry');
   
@@ -180,5 +180,20 @@ export default function SolutionsPage() {
         </div>
       </section>
     </div>
+  );
+}
+
+export default function SolutionsPage() {
+  return (
+    <Suspense fallback={
+      <div className="min-h-screen bg-[var(--bg)] flex items-center justify-center">
+        <div className="text-center">
+          <div className="inline-block size-12 border-4 border-[var(--accent)] border-t-transparent rounded-full animate-spin mb-4" />
+          <p className="text-[var(--muted)]">Loading solutions...</p>
+        </div>
+      </div>
+    }>
+      <SolutionsContent />
+    </Suspense>
   );
 }
