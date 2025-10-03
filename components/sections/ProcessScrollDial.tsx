@@ -210,9 +210,9 @@ export default function ProcessScrollDial({
         </header>
 
         <div className="relative">
-          {/* Progress line */}
+          {/* Progress line - centered on all screens */}
           <div 
-            className="hidden md:block absolute left-1/2 top-0 bottom-0 w-px bg-gradient-to-b from-transparent via-[var(--border)] to-transparent -translate-x-1/2"
+            className="absolute left-1/2 top-0 bottom-0 w-px bg-gradient-to-b from-transparent via-[var(--border)] to-transparent -translate-x-1/2"
             aria-hidden
           />
 
@@ -221,9 +221,31 @@ export default function ProcessScrollDial({
             const isLast = i === items.length - 1;
             
             return (
-              <div key={s.id} data-step className="relative mb-20 md:mb-32">
-                {/* Step container */}
-                <div className={`flex items-start gap-10 md:gap-20 ${isEven ? 'flex-row' : 'flex-row-reverse'}`}>
+              <div key={s.id} data-step className="relative mb-16 md:mb-32">
+                {/* MOBILE: Alternating layout */}
+                <div className={`md:hidden flex items-start gap-6 ${isEven ? 'flex-row' : 'flex-row-reverse'}`}>
+                  {/* Number with circle - aligned to line */}
+                  <div className="flex-shrink-0 relative">
+                    <div 
+                      data-number
+                      className="relative inline-block"
+                    >
+                      {/* Circular indicator on line */}
+                      <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-16 h-16 rounded-full border-2 border-[var(--accent)] bg-[var(--bg)] shadow-lg z-0" />
+                      <span className="relative z-10 inline-block text-4xl font-black text-[var(--fg)] leading-none select-none w-16 text-center">
+                        {i + 1}
+                      </span>
+                    </div>
+                  </div>
+
+                  {/* Card */}
+                  <div data-card className="flex-1">
+                    <StepCard step={s} align={isEven ? "left" : "right"} />
+                  </div>
+                </div>
+
+                {/* DESKTOP: Alternating layout */}
+                <div className={`hidden md:flex items-start gap-10 md:gap-20 ${isEven ? 'flex-row' : 'flex-row-reverse'}`}>
                   {/* Number with circle indicator */}
                   <div className={`flex-shrink-0 relative ${isEven ? 'text-left' : 'text-right'}`}>
                     <div 
@@ -231,8 +253,8 @@ export default function ProcessScrollDial({
                       className="relative inline-block"
                     >
                       {/* Circular indicator */}
-                      <div className="hidden md:block absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-20 h-20 rounded-full border-2 border-[var(--accent)] bg-[var(--bg)] shadow-lg z-0" />
-                      <span className="relative z-10 inline-block text-5xl md:text-7xl font-black text-[var(--fg)] leading-none select-none">
+                      <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-20 h-20 rounded-full border-2 border-[var(--accent)] bg-[var(--bg)] shadow-lg z-0" />
+                      <span className="relative z-10 inline-block text-7xl font-black text-[var(--fg)] leading-none select-none">
                         {i + 1}
                       </span>
                     </div>
@@ -244,7 +266,22 @@ export default function ProcessScrollDial({
                   </div>
                 </div>
 
-                {/* Enhanced curly arrow */}
+                {/* Mobile curly arrow - alternating direction */}
+                {!isLast && (
+                  <div 
+                    data-arrow
+                    className="md:hidden relative w-full flex justify-center py-6"
+                  >
+                    <div className="w-24 h-24">
+                      <CurlyArrow 
+                        direction={isEven ? "down-right" : "down-left"} 
+                        className="w-full h-full opacity-50" 
+                      />
+                    </div>
+                  </div>
+                )}
+
+                {/* Desktop curly arrow */}
                 {!isLast && (
                   <div 
                     data-arrow
