@@ -56,13 +56,15 @@ export default function DialDrivenShowcase({
     window.matchMedia?.("(prefers-reduced-motion: reduce)").matches;
 
   // ---------- drag math ----------
-  const dialRef = useRef<SVGSVGElement | null>(null);
+  const dialRefDesktop = useRef<SVGSVGElement | null>(null);
+  const dialRefMobile = useRef<SVGSVGElement | null>(null);
   const draggingRef = useRef(false);
   const startAngleRef = useRef(0);
   const startIdxRef = useRef(0);
+  const activeDialRef = useRef<SVGSVGElement | null>(null);
 
   const clientAngle = useCallback((clientX: number, clientY: number) => {
-    const el = dialRef.current!;
+    const el = activeDialRef.current!;
     const r = el.getBoundingClientRect();
     const cx = r.left + r.width / 2;
     const cy = r.top + r.height / 2;
@@ -78,7 +80,8 @@ export default function DialDrivenShowcase({
 
   const onPointerDown = useCallback(
     (e: React.PointerEvent<SVGSVGElement>) => {
-      dialRef.current?.setPointerCapture(e.pointerId);
+      activeDialRef.current = e.currentTarget;
+      e.currentTarget?.setPointerCapture(e.pointerId);
       draggingRef.current = true;
       startAngleRef.current = clientAngle(e.clientX, e.clientY);
       startIdxRef.current = idxFloat;
@@ -125,7 +128,7 @@ export default function DialDrivenShowcase({
       draggingRef.current = false;
       if (e) {
         try {
-          dialRef.current?.releasePointerCapture(e.pointerId);
+          e.currentTarget?.releasePointerCapture(e.pointerId);
         } catch {}
       }
       if (prefersReduced) {
@@ -350,7 +353,7 @@ export default function DialDrivenShowcase({
               onMouseDown={(e) => e.preventDefault()}
             >
               <svg
-                ref={dialRef}
+                ref={dialRefDesktop}
                 xmlns="http://www.w3.org/2000/svg"
                 viewBox="0 0 512 512"
                 role="img"
@@ -448,7 +451,7 @@ export default function DialDrivenShowcase({
             onMouseDown={(e) => e.preventDefault()}
           >
             <svg
-              ref={dialRef}
+              ref={dialRefMobile}
               xmlns="http://www.w3.org/2000/svg"
               viewBox="0 0 512 512"
               role="img"
