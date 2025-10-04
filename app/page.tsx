@@ -6,14 +6,68 @@ import ServicesSection from "@/components/sections/ServicesSection";
 import SubmitBrief from "@/components/sections/SubmitBrief";
 import TeamReliability from "@/components/sections/TeamSection";
 
+
 // NEW section
 import DialDrivenShowcase from "@/components/sections/DialDrivenShowcase";
 
 // ✅ Import the actual data array by name.
 // If your file exports a different name, rename it here once and stop suffering.
 import { PROJECT_SOLUTIONS as PROJECTS } from "@/lib/whatwedo/projects";
+import ProcessScrollDial from "@/components/sections/ProcessScrollDial";
 // If your module ALSO had a default export array, you could fallback like this:
 // import DEFAULT_PROJECTS from "@/lib/whatwedo/projects";
+
+type Step = {
+  id: string;
+  index: number;
+  title: string;
+  blurb: string;
+};
+
+const STEPS: Step[] = [
+  {
+    id: "step-0",
+    index: 0,
+    title: "Understand",
+    blurb:
+      "Align outcomes, constraints, and budget so reality doesn’t surprise us.",
+  },
+  {
+    id: "step-1",
+    index: 1,
+    title: "Plan",
+    blurb:
+      "Approve a clear scope, timeline, and investment without fine print.",
+  },
+  {
+    id: "step-2",
+    index: 2,
+    title: "Design",
+    blurb:
+      "Map journeys and wireframes that de-risk build and lock clarity.",
+  },
+  {
+    id: "step-3",
+    index: 3,
+    title: "Build",
+    blurb:
+      "Ship weekly, review together, and steer with working software.",
+  },
+  {
+    id: "step-4",
+    index: 4,
+    title: "Migrate & Launch",
+    blurb:
+      "Dry-run the data, cut over cleanly, and watch live health.",
+  },
+  {
+    id: "step-5",
+    index: 5,
+    title: "Operate & Improve",
+    blurb:
+      "Run with SLAs and grow through analytics-led roadmaps.",
+  },
+];
 
 const CLIENTS: Client[] = [
   { name: "Acme Bank",    logoSrc: "/logos/acme-bank.svg" },
@@ -74,6 +128,7 @@ export default function HomePage() {
       />
 
       <ServicesSection />
+      <ProcessScrollDial steps={STEPS} />
       <TeamReliability />
       <SubmitBrief />
     </>
