@@ -123,7 +123,7 @@ export default function HomePage() {
             href: undefined,
           },
         ]}
-        mantra={["Clarify.", "Engineer.", "Scale."]}
+        mantra={["Scope.", "Design.", "Validate.", "Launch."]}
         accent="#2db7ff"
       />
 

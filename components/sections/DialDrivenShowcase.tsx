@@ -14,7 +14,7 @@ import { PROJECT_SOLUTIONS, type ProjectSolution } from "@/lib/whatwedo/projects
 
 type Props = {
   items?: ProjectSolution[];
-  mantra?: [string, string, string];
+  mantra?: [string, string, string, string];
   accent?: string; // hex recommended, e.g. "#2db7ff"
   className?: string;
 };
@@ -23,7 +23,7 @@ const mod = (n: number, m: number) => ((n % m) + m) % m;
 
 export default function DialDrivenShowcase({
   items = PROJECT_SOLUTIONS,
-  mantra = ["Clarify.", "Engineer.", "Scale."],
+  mantra = ["Scope.", "Design.", "Validate.", "Launch."],
   accent = "#2db7ff",
   className = "",
 }: Props) {
@@ -217,18 +217,13 @@ export default function DialDrivenShowcase({
         
         {/* MOBILE ONLY: Mantra Text (order-1 on mobile) */}
         <div className="lg:hidden flex items-center justify-center py-1 pb-2">
-          <div className="leading-[1.05] select-none space-y-1 text-center">
-            <h2 className="font-[900] tracking-[-0.04em] text-[12vw] sm:text-[10vw] bg-gradient-to-br from-neutral-900 via-neutral-800 to-neutral-700 bg-clip-text text-transparent">
-              <span className="block animate-[fadeIn_0.6s_ease-out_0.1s_both]">
-                {mantra[0]}
-              </span>
-              <span className="block animate-[fadeIn_0.6s_ease-out_0.3s_both]">
-                {mantra[1]}
-              </span>
-              <span className="block animate-[fadeIn_0.6s_ease-out_0.5s_both]">
-                {mantra[2]}
-              </span>
+          <div className="leading-tight select-none space-y-2 text-center">
+            <h2 className="font-[900] tracking-[-0.04em] text-[9vw] sm:text-[7vw] bg-gradient-to-br from-neutral-900 via-neutral-800 to-neutral-700 bg-clip-text text-transparent animate-[fadeIn_0.6s_ease-out_0.1s_both]">
+              {mantra[0]} {mantra[1]} {mantra[2]} {mantra[3]}
             </h2>
+            <p className="text-neutral-600 text-sm sm:text-base font-medium animate-[fadeIn_0.6s_ease-out_0.3s_both]">
+              Our approach to building exceptional solutions
+            </p>
           </div>
         </div>
 
@@ -319,21 +314,16 @@ export default function DialDrivenShowcase({
         </div>
 
         {/* DESKTOP ONLY: Mantra + Dial (right column) */}
-        <div className="hidden lg:grid h-full grid-rows-[minmax(0,1fr)_auto] gap-10 lg:gap-12">
+        <div className="hidden lg:grid h-full grid-rows-[minmax(0,1fr)_auto] gap-10 lg:gap-12 pt-16 lg:pt-20">
           {/* DESKTOP: Mantra Text */}
           <div className="min-h-0 flex items-center justify-center">
-            <div className="leading-[1.1] select-none space-y-4 lg:space-y-5 text-center">
-              <h2 className="font-[900] tracking-[-0.04em] text-[6.2vw] xl:text-[5.8vw] bg-gradient-to-br from-neutral-900 via-neutral-800 to-neutral-700 bg-clip-text text-transparent">
-                <span className="block animate-[fadeIn_0.6s_ease-out_0.1s_both]">
-                  {mantra[0]}
-                </span>
-                <span className="block animate-[fadeIn_0.6s_ease-out_0.3s_both]">
-                  {mantra[1]}
-                </span>
-                <span className="block animate-[fadeIn_0.6s_ease-out_0.5s_both]">
-                  {mantra[2]}
-                </span>
+            <div className="leading-tight select-none space-y-3 lg:space-y-4 text-center">
+              <h2 className="font-[900] tracking-[-0.04em] text-[4.5vw] xl:text-[4vw] bg-gradient-to-br from-neutral-900 via-neutral-800 to-neutral-700 bg-clip-text text-transparent animate-[fadeIn_0.6s_ease-out_0.1s_both]">
+                {mantra[0]} {mantra[1]} {mantra[2]} {mantra[3]}
               </h2>
+              <p className="text-neutral-600 text-base lg:text-lg font-medium animate-[fadeIn_0.6s_ease-out_0.3s_both]">
+                Our approach to building exceptional solutions
+              </p>
             </div>
           </div>
 
@@ -365,8 +355,8 @@ export default function DialDrivenShowcase({
                 style={{
                   touchAction: "none",
                   cursor: "grab",
-                  width: "clamp(200px, 26vh, 320px)",
-                  height: "clamp(200px, 26vh, 320px)",
+                  width: "clamp(280px, 35vh, 420px)",
+                  height: "clamp(280px, 35vh, 420px)",
                   filter: "drop-shadow(0 12px 40px rgba(0,0,0,0.18))",
                   ["--bg" as any]: "#000",
                   ["--center" as any]: "#151515",
