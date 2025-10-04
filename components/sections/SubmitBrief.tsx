@@ -49,7 +49,7 @@ export default function SubmitBrief() {
         }}
       />
 
-      <div className="relative z-10 mx-auto max-w-[1180px] px-4 sm:px-6 lg:px-8 py-20">
+      <div className="relative z-10 mx-auto max-w-[1180px] px-4 sm:px-6 lg:px-8 py-12 md:py-16">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
           {/* Left: Heading & Info */}
           <div className="lg:col-span-5 lg:sticky lg:top-24">

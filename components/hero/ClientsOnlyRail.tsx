@@ -80,7 +80,7 @@ export default function ClientsOnlyRail({
     <section
       ref={sectionRef}
       aria-label="Clients who trust us"
-      className={`w-full px-6 md:px-10 lg:px-16 py-16 ${className}`}
+      className={`w-full px-6 md:px-10 lg:px-16 py-8 ${className}`}
       style={{ ["--gap" as any]: `${gapPx}px` }}
     >
       <div className="mb-6">

@@ -102,9 +102,12 @@ body {
   background: var(--bg);
   color: var(--fg);
   /* Headings via Poppins, body via Lora; Geist is fallback */
-  font-family: var(--font-poppins), var(--font-geist-sans), Arial, Helvetica, sans-serif;
+  font-family: var(--font-poppins), var(--font-geist-sans), -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
   text-rendering: optimizeLegibility;
+  font-feature-settings: "kern" 1, "liga" 1;
+  letter-spacing: -0.01em;
 }
 
 a { color: inherit; text-decoration: none; }
@@ -113,9 +116,11 @@ img { display: block; max-width: 100%; height: auto; }
 button:focus-visible,
 a:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
 
-/* Headings Poppins */
+/* Headings Poppins - crisp and clean */
 h1, h2, h3, h4, h5, h6 {
-  font-family: var(--font-poppins), system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+  font-family: var(--font-poppins), -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;
+  font-weight: 600;
+  letter-spacing: -0.025em;
 }
 
 /* Body Lora */
@@ -309,4 +314,23 @@ p, span, li, a {
   .scrollbar-hide::-webkit-scrollbar {
     display: none;
   }
+}
+
+/* Improved button and interactive states */
+button, a {
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* Better focus states for accessibility */
+*:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+/* Smooth transitions for better UX */
+button, a, input, textarea, select {
+  transition-property: background-color, border-color, color, fill, stroke, opacity, box-shadow, transform;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 150ms;
 }

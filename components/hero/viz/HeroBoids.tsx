@@ -66,8 +66,8 @@ export default function HeroBoids({
     const ctx = canvas.getContext("2d", { alpha: true })!;
 
     const score = deviceScore();
-    const BASE = window.innerWidth < 520 ? 5000 : 10000;
-    const TARGET_COUNT = Math.floor(Math.min(12000, Math.max(4000, BASE * (score / 3))));
+    const BASE = window.innerWidth < 520 ? 2500 : 10000;
+    const TARGET_COUNT = Math.floor(Math.min(12000, Math.max(2000, BASE * (score / 3))));
 
     // ---------- state ----------
     let dpr = 1, width = 0, height = 0;
@@ -77,9 +77,9 @@ export default function HeroBoids({
     let running = false;
 
     // +10% PARTICLES: raise desired and cap
-    // was 3200..12000; allow 10% headroom on the top end too
+    // Reduced for mobile performance
     let desiredCount = Math.floor(TARGET_COUNT * 1.10);
-    const MIN_COUNT = 3200;
+    const MIN_COUNT = 2000;
     const MAX_COUNT = 13200;
 
     // FPS tracking window
@@ -112,11 +112,14 @@ export default function HeroBoids({
     let lastCssW = 0, lastCssH = 0;
     let resizeRAF = 0;
 
-    // DPR-aware, count-aware dot radius
+    // Dot radius calculation - desktop standard sizing
     const dotRadius = (n: number) => {
+      const isMobile = window.innerWidth < 520;
       const base = 9000 / Math.max(1, n);
-      const scaled = base * (1.15 / dpr);
-      return clamp(scaled, 1.1, 3.2);
+      // Mobile uses smaller multiplier for cleaner appearance
+      const multiplier = isMobile ? 0.55 : 1.15;
+      const scaled = base * multiplier;
+      return clamp(scaled, isMobile ? 0.6 : 1.1, isMobile ? 1.5 : 3.2);
     };
 
     function resize() {

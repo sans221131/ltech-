@@ -20,8 +20,8 @@ export default function SiteFooter() {
       />
 
       {/* Middle: large centered footer block */}
-      <div className="relative z-10 mx-auto max-w-[1180px] px-4 sm:px-6 lg:px-8 py-16">
-        <div className="rounded-3xl bg-[var(--card)] p-12 md:p-16 text-center shadow-[0_24px_70px_rgba(0,0,0,0.1)] transition-all duration-300 hover:shadow-[0_28px_80px_rgba(0,0,0,0.14)]">
+      <div className="relative z-10 mx-auto max-w-[1180px] px-4 sm:px-6 lg:px-8 py-12">
+        <div className="rounded-3xl bg-[var(--card)] p-8 md:p-12 text-center shadow-[0_24px_70px_rgba(0,0,0,0.1)] transition-all duration-300 hover:shadow-[0_28px_80px_rgba(0,0,0,0.14)]">
           <a href="#top" className="inline-flex items-center gap-4 mb-8 group">
             <span className="inline-flex w-16 h-16 rounded-full bg-[var(--accent)] items-center justify-center text-white font-extrabold text-lg shadow-lg group-hover:scale-110 transition-transform duration-300">LW</span>
             <span className="text-3xl font-serif font-semibold tracking-tight">LeafWay Tech</span>

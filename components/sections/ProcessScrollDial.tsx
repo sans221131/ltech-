@@ -121,8 +121,8 @@ export default function ProcessScrollDial({
       gsap.from(header.children, {
         scrollTrigger: {
           trigger: header,
-          start: "top 80%",
-          end: "top 50%",
+          start: "top 70%",
+          end: "top 40%",
           scrub: 1,
         },
         opacity: 0,
@@ -142,8 +142,8 @@ export default function ProcessScrollDial({
         gsap.from(number, {
           scrollTrigger: {
             trigger: step,
-            start: "top 85%",
-            end: "top 50%",
+            start: "top 75%",
+            end: "top 40%",
             scrub: 1,
           },
           scale: 0.5,
@@ -155,8 +155,8 @@ export default function ProcessScrollDial({
         gsap.from(card, {
           scrollTrigger: {
             trigger: step,
-            start: "top 80%",
-            end: "top 45%",
+            start: "top 70%",
+            end: "top 35%",
             scrub: 1,
           },
           x: isEven ? -100 : 100,
@@ -169,8 +169,8 @@ export default function ProcessScrollDial({
           gsap.from(arrow, {
             scrollTrigger: {
               trigger: arrow,
-              start: "top 90%",
-              end: "top 60%",
+              start: "top 80%",
+              end: "top 50%",
               scrub: 1,
             },
             opacity: 0,
@@ -202,8 +202,8 @@ export default function ProcessScrollDial({
         }}
       />
 
-      <div className="relative z-10 mx-auto max-w-[1100px] px-6 sm:px-8 lg:px-12 py-24 md:py-32">
-        <header ref={headerRef} className="mb-20 md:mb-28 text-center">
+      <div className="relative z-10 mx-auto max-w-[1100px] px-6 sm:px-8 lg:px-12 py-16 md:py-20">
+        <header ref={headerRef} className="mb-12 md:mb-16 text-center">
           <p className="eyebrow mb-4">Process</p>
           <h2 className="h2 mt-2 mb-6">{heading}</h2>
           <p className="text-[var(--muted)] max-w-2xl mx-auto text-lg leading-relaxed">{subheading}</p>
@@ -221,74 +221,41 @@ export default function ProcessScrollDial({
             const isLast = i === items.length - 1;
             
             return (
-              <div key={s.id} data-step className="relative mb-16 md:mb-32">
-                {/* MOBILE: Alternating layout */}
-                <div className={`md:hidden flex items-start gap-6 ${isEven ? 'flex-row' : 'flex-row-reverse'}`}>
-                  {/* Number with circle - aligned to line */}
+              <div key={s.id} data-step className="relative mb-12 md:mb-20">
+                {/* Unified layout for mobile and desktop */}
+                <div className={`flex items-start gap-6 md:gap-8 ${isEven ? 'flex-row' : 'flex-row-reverse'}`}>
+                  {/* Number with circle - aligned to center line */}
                   <div className="flex-shrink-0 relative">
                     <div 
                       data-number
                       className="relative inline-block"
                     >
                       {/* Circular indicator on line */}
-                      <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-16 h-16 rounded-full border-2 border-[var(--accent)] bg-[var(--bg)] shadow-lg z-0" />
-                      <span className="relative z-10 inline-block text-4xl font-black text-[var(--fg)] leading-none select-none w-16 text-center">
+                      <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-16 h-16 md:w-20 md:h-20 rounded-full border-2 border-[var(--accent)] bg-[var(--bg)] shadow-lg z-0" />
+                      <span className="relative z-10 inline-block text-4xl md:text-7xl font-black text-[var(--fg)] leading-none select-none w-16 md:w-20 text-center">
                         {i + 1}
                       </span>
                     </div>
                   </div>
 
                   {/* Card */}
-                  <div data-card className="flex-1">
-                    <StepCard step={s} align={isEven ? "left" : "right"} />
-                  </div>
-                </div>
-
-                {/* DESKTOP: Alternating layout */}
-                <div className={`hidden md:flex items-start gap-10 md:gap-20 ${isEven ? 'flex-row' : 'flex-row-reverse'}`}>
-                  {/* Number with circle indicator */}
-                  <div className={`flex-shrink-0 relative ${isEven ? 'text-left' : 'text-right'}`}>
-                    <div 
-                      data-number
-                      className="relative inline-block"
-                    >
-                      {/* Circular indicator */}
-                      <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-20 h-20 rounded-full border-2 border-[var(--accent)] bg-[var(--bg)] shadow-lg z-0" />
-                      <span className="relative z-10 inline-block text-7xl font-black text-[var(--fg)] leading-none select-none">
-                        {i + 1}
-                      </span>
-                    </div>
-                  </div>
-
-                  {/* Card with enhanced styling */}
                   <div data-card className="flex-1 max-w-[500px]">
                     <StepCard step={s} align={isEven ? "left" : "right"} />
                   </div>
                 </div>
 
-                {/* Mobile curly arrow - alternating direction */}
+                {/* Curly arrow - alternating direction */}
                 {!isLast && (
                   <div 
                     data-arrow
-                    className="md:hidden relative w-full flex justify-center py-6"
+                    className="relative w-full flex justify-center py-6 md:py-8"
                   >
-                    <div className="w-24 h-24">
+                    <div className="w-24 h-24 md:w-32 md:h-32">
                       <CurlyArrow 
                         direction={isEven ? "down-right" : "down-left"} 
-                        className="w-full h-full opacity-50" 
+                        className="w-full h-full opacity-40" 
                       />
                     </div>
-                  </div>
-                )}
-
-                {/* Desktop curly arrow */}
-                {!isLast && (
-                  <div 
-                    data-arrow
-                    className={`hidden md:block absolute ${isEven ? 'left-[45%]' : 'right-[45%]'} w-32 h-32 text-[var(--fg)]`}
-                    style={{ top: '100%', marginTop: '-20px' }}
-                  >
-                    <CurlyArrow direction={isEven ? "down-right" : "down-left"} className="w-full h-full" />
                   </div>
                 )}
               </div>

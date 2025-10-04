@@ -38,8 +38,8 @@ export default function Hero({
       <div className="relative mx-auto px-6 md:px-10 lg:px-16 w-full h-full flex items-center" style={{maxWidth: '1400px'}}>
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-20 items-center w-full">
           
-          {/* Left: Content */}
-          <div className="relative z-10 flex flex-col justify-center order-1">
+          {/* Left: Content - Order 2 on mobile, 1 on desktop */}
+          <div className="relative z-10 flex flex-col justify-center order-2 lg:order-1">
             {eyebrow && (
               <div className="eyebrow mb-4">
                 {eyebrow}
@@ -72,8 +72,30 @@ export default function Hero({
             </div>
           </div>
 
-          {/* Right: Boids Visualization */}
-          <div className="relative h-[350px] md:h-[500px] lg:h-[800px] flex items-center justify-center order-2">
+          {/* Right: Boids Visualization - Order 1 on mobile, 2 on desktop */}
+          <div className="relative h-[350px] md:h-[500px] lg:h-[800px] flex items-center justify-center order-1 lg:order-2">
+            {/* Interactive Hint - Above cube, different positioning for mobile vs desktop */}
+            <div className="absolute top-2 md:top-20 lg:top-24 left-1/2 -translate-x-1/2 z-10 pointer-events-none">
+              <div className="flex items-center gap-2.5 animate-[bounce_2s_ease-in-out_infinite]">
+                <svg 
+                  className="w-5 h-5 md:w-6 md:h-6 text-[#666] animate-pulse" 
+                  fill="none" 
+                  viewBox="0 0 24 24" 
+                  stroke="currentColor" 
+                  strokeWidth={2}
+                >
+                  <path 
+                    strokeLinecap="round" 
+                    strokeLinejoin="round" 
+                    d="M7 11.5V14m0-2.5v-6a1.5 1.5 0 113 0m-3 6a1.5 1.5 0 00-3 0v2a7.5 7.5 0 0015 0v-5a1.5 1.5 0 00-3 0m-6-3V11m0-5.5v-1a1.5 1.5 0 013 0v1m0 0V11m0-5.5a1.5 1.5 0 013 0v3m0 0V11" 
+                  />
+                </svg>
+                <span className="text-sm md:text-base font-semibold text-[#666] whitespace-nowrap">
+                  Drag to interact
+                </span>
+              </div>
+            </div>
+
             <HeroBoids
               variant="flowGlow"
               headline={headline2 ? `${headline} ${headline2}` : headline}

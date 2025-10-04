@@ -50,7 +50,7 @@ export default function ServicesSection() {
   return (
     <section
       id="services"
-      className="relative min-h-[100vh] flex flex-col py-16 sm:py-20 bg-[var(--bg)] overflow-hidden"
+      className="relative min-h-[100vh] flex flex-col py-12 sm:py-16 bg-[var(--bg)] overflow-hidden"
       aria-label="Services we offer"
     >
       {/* Background accents */}

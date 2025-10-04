@@ -170,35 +170,6 @@ export default function ProblemToPatternDial({
             style={{ boxShadow: undefined }}
           />
 
-          {/* rotating ticks */}
-          <div
-            className="absolute inset-0 z-10 will-change-transform transition-transform duration-700 ease-in-out"
-            style={{ transform: `rotate(${angle}deg)` }}
-            aria-hidden
-          >
-            {/* major ticks */}
-            {items.map((_, i) => (
-              <div
-                key={`maj-${i}`}
-                className="absolute left-1/2 top-1/2 origin-left"
-                style={{ transform: `rotate(${q(i * stepDeg, 4)}deg) translateX(${R_TICK_MAJOR}px)` }}
-              >
-                <div className="w-6 h-1 bg-[var(--border)] rounded-full opacity-90" />
-              </div>
-            ))}
-
-            {/* minor ticks */}
-            {Array.from({ length: 12 }).map((_, i) => (
-              <div
-                key={`min-${i}`}
-                className="absolute left-1/2 top-1/2 origin-left"
-                style={{ transform: `rotate(${q(i * 30, 4)}deg) translateX(${R_TICK_MINOR}px)` }}
-              >
-                <div className="w-3 h-px bg-[var(--border)]/70 rounded-full opacity-80" />
-              </div>
-            ))}
-          </div>
-
           {/* labels kept upright */}
           <div className="absolute inset-0 z-20" role="listbox" aria-activedescendant={`dial-opt-${selected}`}>
             {items.map((it, i) => {
@@ -220,7 +191,7 @@ export default function ProblemToPatternDial({
                 >
                   <div
                     className={cx(
-                      "px-3 py-2 rounded-full text-sm font-serif border whitespace-nowrap shadow-sm transition-transform duration-200",
+                      "px-4 py-2.5 rounded-full text-sm font-sans border whitespace-nowrap shadow-sm transition-all duration-200 flex items-center gap-2.5",
                       isSelected
                         ? "bg-[var(--fg)] text-white border-[var(--fg)] scale-105 shadow-lg"
                         : "bg-white text-[var(--fg)] border-[var(--border)] hover:border-[var(--fg)]/30"
@@ -233,8 +204,15 @@ export default function ProblemToPatternDial({
                     }}
                     style={{ cursor: 'default' }}
                   >
-                    <span className="mr-2 text-base">{it.emoji ?? "•"}</span>
-                    <span className="font-medium">Project {i + 1}</span>
+                    <span className={cx(
+                      "flex items-center justify-center w-5 h-5 rounded-full text-xs font-bold transition-colors",
+                      isSelected 
+                        ? "bg-white/20 text-white" 
+                        : "bg-[var(--accent)]/10 text-[var(--accent)]"
+                    )}>
+                      {i + 1}
+                    </span>
+                    <span className="font-semibold">Project {i + 1}</span>
                   </div>
                 </div>
               );
@@ -286,30 +264,48 @@ function MobileReadout({
         )}
         aria-live="polite"
       >
-        {/* Single-line pill with emoji + problem label */}
+        {/* Single-line pill with number + project label */}
         <div className="flex items-center justify-center gap-2">
           <span
             className={cx(
-              "inline-flex items-center gap-2",
-              "px-3 py-1.5 rounded-full",
+              "inline-flex items-center gap-2.5",
+              "px-4 py-2 rounded-full",
               "bg-[var(--fg)] text-white",
               "shadow-[inset_0_-1px_3px_rgba(255,255,255,0.08),0_2px_8px_rgba(0,0,0,0.25)]",
               !reduced && "transition-transform duration-150 will-change-transform"
             )}
           >
-            <span className="text-base leading-none">{item?.emoji ?? "•"}</span>
-            <span className="text-sm font-medium leading-none whitespace-nowrap">
+            <span className="flex items-center justify-center w-5 h-5 rounded-full bg-white/20 text-white text-xs font-bold leading-none">
+              {items.findIndex(it => it.id === item?.id) + 1}
+            </span>
+            <span className="text-sm font-semibold leading-none whitespace-nowrap">
               Project {items.findIndex(it => it.id === item?.id) + 1}
             </span>
           </span>
         </div>
 
-        {/* ultra-compact progress bar */}
-        <div className="mt-3 h-1 w-full rounded-full bg-[var(--border)]/50 overflow-hidden">
-          <div
-            className="h-full bg-[var(--fg)]/85 transition-[width] duration-150 ease-out"
-            style={{ width: `${progressPct}%` }}
-          />
+        {/* Stepper dots indicator */}
+        <div className="mt-4 flex items-center justify-center gap-2">
+          {items.map((it, idx) => {
+            const currentIdx = items.findIndex(i => i.id === item?.id);
+            const isActive = idx === currentIdx;
+            const isPast = idx < currentIdx;
+            
+            return (
+              <div
+                key={it.id ?? idx}
+                className={cx(
+                  "rounded-full transition-all duration-300",
+                  isActive 
+                    ? "w-8 h-2 bg-[var(--fg)]" 
+                    : isPast
+                    ? "w-2 h-2 bg-[var(--fg)]/60"
+                    : "w-2 h-2 bg-[var(--border)]"
+                )}
+                aria-label={`Project ${idx + 1}${isActive ? ' (current)' : ''}`}
+              />
+            );
+          })}
         </div>
       </div>
     </div>

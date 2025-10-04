@@ -23,9 +23,9 @@ const clamp = (v: number, min: number, max: number) => (v < min ? min : v > max 
 
 export default function WhatWeDo({
   id = "what-we-do",
-  eyebrow = "What we do",
+  eyebrow = "",
   heading = "Architect. Build. Scale.",
-  paragraph = "We architect, build, and scale traffic-proof platforms with resilient data and edge APIs.",
+  paragraph = "",
 }: Props) {
   const rootRef = useRef<HTMLElement | null>(null);
   const stageRef = useRef<HTMLDivElement | null>(null);
@@ -165,11 +165,11 @@ export default function WhatWeDo({
       {/* Pinned stage */}
       <div
         ref={stageRef}
-        className="relative min-h-[100svh] flex items-start justify-center pt-20 md:pt-24 lg:pt-28 pb-12 px-4"
+        className="relative min-h-[100svh] flex items-start justify-center pt-16 md:pt-20 lg:pt-24 pb-8 px-4"
       >
         <div className="w-full max-w-[1200px] mx-auto">
           {/* Heading */}
-          <div ref={headingRef} className="text-center mb-8 md:mb-10 max-w-4xl mx-auto px-4">
+          <div ref={headingRef} className="text-center mb-6 md:mb-8 max-w-4xl mx-auto px-4">
             <p className="eyebrow wwd-eyebrow">{eyebrow}</p>
             <h2 id="what-we-do-heading" className="h2 mt-3 wwd-heading">
               {heading}

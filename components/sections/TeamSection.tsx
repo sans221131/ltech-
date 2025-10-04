@@ -88,7 +88,7 @@ export default function TeamReliability({
       id={id}
       ref={ref}
       aria-label="Boringly reliable team"
-      className="relative isolate min-h-[100svh] flex items-center overflow-hidden text-[var(--fg)]"
+      className="relative isolate flex items-center overflow-hidden text-[var(--fg)]"
       style={{
         background: "radial-gradient(circle at 50% 50%, rgba(64, 64, 64, 0.08) 0%, var(--bg) 60%)"
       }}
@@ -102,8 +102,8 @@ export default function TeamReliability({
         }}
       />
 
-      <div className="relative z-10 mx-auto w-full max-w-[1280px] px-6 sm:px-8 lg:px-12 py-20 md:py-24">
-        <p className="eyebrow mb-10 md:mb-12">
+      <div className="relative z-10 mx-auto w-full max-w-[1280px] px-6 sm:px-8 lg:px-12 py-12 md:py-16">
+        <p className="eyebrow mb-6 md:mb-8">
           {eyebrow}
         </p>
 
@@ -124,7 +124,7 @@ export default function TeamReliability({
         </div>
 
         {/* understated caption line */}
-        <div className="mt-16 md:mt-20 max-w-xl">
+        <div className="mt-10 md:mt-12 max-w-xl">
           <p className="flex items-center gap-4 text-base md:text-lg text-[var(--muted)]">
             <span className="h-px w-16 bg-[var(--muted)] opacity-40" />
             <span>We keep it simple: ship, repeat.</span>
