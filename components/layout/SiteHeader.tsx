@@ -10,8 +10,6 @@ import { INDUSTRIES } from "./megaMenuData";
 const NAV_LINKS = [
   { href: "/#process", label: "Process" },
   { href: "/#team", label: "Team" },
-  { href: "/#careers", label: "Careers" },
-  { href: "/#submit-brief", label: "Contact" },
 ];
 
 export default function SiteHeader() {
@@ -142,20 +140,12 @@ export default function SiteHeader() {
         ].join(" ")}
       >
         <div className="mx-auto px-8 lg:px-16" style={{ maxWidth: "1920px" }}>
-          <div className="flex h-[72px] items-center justify-between">
-            {/* Logo */}
+          <div className="flex h-[64px] items-center justify-between">
+            {/* Logo (text only) */}
             <Link href="/" className="flex items-center gap-3 group">
-              <div className="relative">
-                <div className="relative inline-flex size-11 items-center justify-center rounded-xl bg-gradient-to-br from-[var(--fg)] to-[var(--accent)] text-white font-bold text-base shadow-sm group-hover:shadow-md transition-all duration-200">
-                  LW
-                </div>
-              </div>
-              <div className="flex flex-col">
-                <span className="font-bold text-[17px] text-[var(--fg)] tracking-tight leading-tight">
+              <div className="flex">
+                <span className="font-bold text-[22px] text-[var(--fg)] tracking-tight leading-tight">
                   LeafWay Tech
-                </span>
-                <span className="text-[10.5px] text-[var(--muted)] tracking-[0.1em] uppercase font-semibold leading-none">
-                  Engineering Studio
                 </span>
               </div>
             </Link>
@@ -166,7 +156,6 @@ export default function SiteHeader() {
                 className="group relative"
                 onMouseEnter={() => {
                   if (window.matchMedia("(pointer: fine)").matches) {
-                    // Clear any pending close timeout
                     if (menuCloseTimeoutRef.current) {
                       clearTimeout(menuCloseTimeoutRef.current);
                       menuCloseTimeoutRef.current = null;
@@ -176,7 +165,6 @@ export default function SiteHeader() {
                 }}
                 onMouseLeave={() => {
                   if (window.matchMedia("(pointer: fine)").matches) {
-                    // Add 300ms delay before closing
                     menuCloseTimeoutRef.current = setTimeout(() => {
                       setMenuOpen(false);
                     }, 300);
@@ -184,7 +172,7 @@ export default function SiteHeader() {
                 }}
               >
                 <button
-                  className="group/btn relative px-5 py-2.5 text-[15px] font-semibold text-[var(--fg)] hover:text-[var(--accent)] transition-colors duration-150 flex items-center gap-2 rounded-lg hover:bg-[var(--card)]"
+                  className="group/btn relative px-5 py-2.5 text-[20px] font-semibold text-[var(--fg)] hover:text-[var(--accent)] transition-colors duration-150 flex items-center gap-2 rounded-lg hover:bg-[var(--card)]"
                   aria-haspopup="menu"
                   aria-expanded={menuOpen}
                   aria-controls="solutions-menu"
@@ -214,7 +202,7 @@ export default function SiteHeader() {
                   key={link.href}
                   href={link.href}
                   onClick={() => setMenuOpen(false)}
-                  className="px-5 py-2.5 text-[15px] font-semibold text-[var(--fg)] hover:text-[var(--accent)] transition-colors duration-150 rounded-lg hover:bg-[var(--card)]"
+                  className="px-5 py-2.5 text-[20px] font-semibold text-[var(--fg)] hover:text-[var(--accent)] transition-colors duration-150 rounded-lg hover:bg-[var(--card)]"
                 >
                   {link.label}
                 </Link>
@@ -223,12 +211,13 @@ export default function SiteHeader() {
 
             {/* CTA + Burger */}
             <div className="flex items-center gap-3">
-            <Link
-              href="/#submit-brief"
-              className="hidden lg:inline-flex items-center gap-2.5 px-7 py-3 text-[15px] font-bold text-white bg-[var(--fg)] rounded-full hover:bg-[var(--accent)] hover:shadow-lg transition-all duration-200 border-2 border-transparent hover:border-[var(--accent)] tracking-wide"
-            >
-              <span>REQUEST</span>
-            </Link>              <button
+              <Link
+                href="/#submit-brief"
+                className="hidden lg:inline-flex items-center gap-2.5 px-7 py-3 text-[15px] font-bold text-white bg-[var(--fg)] rounded-full hover:bg-[var(--accent)] hover:shadow-lg transition-all duration-200 border-2 border-transparent hover:border-[var(--accent)] tracking-wide"
+              >
+                <span>CONTACT</span>
+              </Link>
+              <button
                 ref={burgerRef}
                 onClick={() => {
                   const next = !mobileMenuOpen;
@@ -343,22 +332,7 @@ export default function SiteHeader() {
                       </svg>
                     </Link>
 
-                    <Link
-                      href="/#careers"
-                      onClick={() => setMobileMenuOpen(false)}
-                      className="group flex items-center gap-4 p-4 rounded-xl bg-white border border-[var(--border)] hover:border-[var(--accent)] hover:shadow-lg transition-all duration-200"
-                    >
-                      <div className="size-10 rounded-lg bg-[var(--card)] group-hover:bg-[var(--accent)]/10 flex items-center justify-center transition-all">
-                        <div className="size-2 rounded-full bg-[var(--accent)]" />
-                      </div>
-                      <div className="flex-1">
-                        <div className="font-semibold text-[var(--fg)] group-hover:text-[var(--accent)] transition-colors">Careers</div>
-                        <div className="text-xs text-[var(--muted)]">Join our team</div>
-                      </div>
-                      <svg className="w-4 h-4 text-[var(--muted)] group-hover:text-[var(--accent)] transition-colors" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2} aria-hidden="true">
-                        <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
-                      </svg>
-                    </Link>
+                    {/* Careers removed */}
 
                     <Link
                       href="/#submit-brief"
@@ -369,7 +343,7 @@ export default function SiteHeader() {
                         <div className="size-2 rounded-full bg-[var(--accent)]" />
                       </div>
                       <div className="flex-1">
-                        <div className="font-semibold text-[var(--fg)] group-hover:text-[var(--accent)] transition-colors">Contact</div>
+                        <div className="font-semibold text-[var(--fg)] group-hover:text-[var(--accent)] transition-colors">Request</div>
                         <div className="text-xs text-[var(--muted)]">Get in touch</div>
                       </div>
                       <svg className="w-4 h-4 text-[var(--muted)] group-hover:text-[var(--accent)] transition-colors" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2} aria-hidden="true">
@@ -384,7 +358,7 @@ export default function SiteHeader() {
                       onClick={() => setMobileMenuOpen(false)}
                       className="flex items-center justify-center gap-2.5 w-full px-7 py-4 text-[15px] font-bold text-white bg-[var(--fg)] rounded-full hover:bg-[var(--accent)] hover:shadow-lg transition-all duration-200 border-2 border-transparent hover:border-[var(--accent)]"
                     >
-                      <span>REQUEST</span>
+                      <span>CONTACT</span>
                     </Link>
                   </div>
                 </div>

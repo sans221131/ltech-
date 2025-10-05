@@ -108,6 +108,7 @@ export default function HomePage() {
         railHeight={72}
         speedPxPerSec={66}
         backgroundHex="#F8F7F3"
+        className="py-4 md:py-6"
       />
 
       {/* 👇 If SHOWCASE_ITEMS somehow ends up empty, this will still render the frame

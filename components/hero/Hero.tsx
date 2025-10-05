@@ -30,22 +30,22 @@ export default function Hero({
 }: HeroProps) {
   return (
     <section
-      className="relative isolate w-full h-screen flex items-center justify-center"
+      className="relative isolate w-full h-auto md:h-screen flex items-center justify-center mb-6 md:mb-0"
       style={{backgroundColor: 'var(--bg)', color: 'var(--fg)'}}
       aria-labelledby="hero-heading"
     >
       {/* Main Container */}
-      <div className="relative mx-auto px-6 md:px-10 lg:px-16 w-full h-full flex items-center" style={{maxWidth: '1400px'}}>
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-20 items-center w-full">
+  <div className="relative mx-auto px-4 md:px-10 lg:px-16 w-full h-full flex items-center pt-14 pb-8 md:pt-0 md:pb-0" style={{maxWidth: '1400px'}}>
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-20 items-center w-full">
           
           {/* Left: Content - Order 2 on mobile, 1 on desktop */}
-          <div className="relative z-10 flex flex-col justify-center order-2 lg:order-1">
+          <div className="relative z-10 flex flex-col justify-center order-2 lg:order-1 space-y-1 md:space-y-4 pl-6 md:pl-0">
             {eyebrow && (
-              <div className="eyebrow mb-4">
+              <div className="eyebrow mb-2 md:mb-4">
                 {eyebrow}
               </div>
             )}
-            <h1 id="hero-heading" className="h1 font-sans text-3xl sm:text-4xl md:text-5xl lg:text-6xl">
+            <h1 id="hero-heading" className="h1 font-sans text-3xl sm:text-4xl md:text-5xl lg:text-6xl leading-tight">
               {headline}
               {headline2 && (
                 <>
@@ -55,7 +55,7 @@ export default function Hero({
               )}
             </h1>
             {subhead && (
-              <p className="mt-4 md:mt-6 font-serif" style={{color: 'var(--muted)', fontSize: '1.1rem', lineHeight: '1.6', maxWidth: '600px'}}>
+              <p className="mt-5 md:mt-6 font-serif" style={{color: 'var(--muted)', fontSize: '1.1rem', lineHeight: '1.6', maxWidth: '600px'}}>
                 {subhead}
               </p>
             )}
@@ -74,9 +74,9 @@ export default function Hero({
           </div>
 
           {/* Right: Boids Visualization - Order 1 on mobile, 2 on desktop */}
-          <div className="relative h-[350px] md:h-[500px] lg:h-[800px] flex items-center justify-center order-1 lg:order-2">
+          <div className="relative h-[350px] md:h-[500px] lg:h-[800px] flex items-center justify-center order-1 lg:order-2 -mb-4 md:mb-0">
             {/* Interactive Hint - Above cube, different positioning for mobile vs desktop */}
-            <div className="absolute top-2 md:top-20 lg:top-24 left-1/2 -translate-x-1/2 z-10 pointer-events-none">
+            <div className="absolute top-1 md:top-20 lg:top-24 left-1/2 -translate-x-1/2 -translate-y-0 md:-translate-y-0 z-10 pointer-events-none">
               <div className="flex items-center gap-2.5 animate-[bounce_2s_ease-in-out_infinite]">
                 <svg 
                   className="w-5 h-5 md:w-6 md:h-6 text-[#666] animate-pulse" 

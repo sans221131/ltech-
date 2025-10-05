@@ -86,13 +86,14 @@ export default function ClientsOnlyRail({
 
   // Effective logo height in pixels - larger on mobile
   const baseLogoHeight = Math.max(28, Math.floor(railHeight * logoHeightRatio));
-  const imgH = isMobile ? Math.floor(baseLogoHeight * 2) : baseLogoHeight;
+  // Use natural logo height on mobile to avoid upscaling which causes blurriness.
+  const imgH = baseLogoHeight;
 
   return (
     <section
       ref={sectionRef}
       aria-label="Clients who trust us"
-      className={`w-full px-6 md:px-10 lg:px-16 py-8 ${className}`}
+      className={`w-full px-6 md:px-10 lg:px-16 pt-6 pb-12 ${className}`}
       style={{ ["--gap" as any]: `${gapPx}px` }}
     >
       {/* badge removed: Trusted by teams */}
@@ -143,8 +144,8 @@ export default function ClientsOnlyRail({
             style={{ gap: "var(--gap)" }}
           >
             {loopItems.map((c, i) => {
-              // Apply extra scale on mobile for larger icons
-              const baseScale = isMobile ? 3 : 2;
+              // Reduce mobile upscaling to avoid blurry icons while keeping desktop scale
+              const baseScale = isMobile ? 1.6 : 2;
               const scale = (c.scale ?? 1) * baseScale;
               const Logo = (
                 <Image
