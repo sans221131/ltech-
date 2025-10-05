@@ -65,8 +65,9 @@ export default function HeroBoids({
     const canvas = canvasRef.current!;
     const ctx = canvas.getContext("2d", { alpha: true })!;
 
-    const score = deviceScore();
-    const BASE = window.innerWidth < 520 ? 2500 : 10000;
+  const score = deviceScore();
+  // Use desktop BASE for both desktop and mobile to match particle counts
+  const BASE = 10000;
     const TARGET_COUNT = Math.floor(Math.min(12000, Math.max(2000, BASE * (score / 3))));
 
     // ---------- state ----------

@@ -45,7 +45,7 @@ export default function Hero({
                 {eyebrow}
               </div>
             )}
-            <h1 id="hero-heading" className="h1 font-sans">
+            <h1 id="hero-heading" className="h1 font-sans text-3xl sm:text-4xl md:text-5xl lg:text-6xl">
               {headline}
               {headline2 && (
                 <>
@@ -59,7 +59,8 @@ export default function Hero({
                 {subhead}
               </p>
             )}
-            <div className="mt-6 md:mt-8">
+            {/* Hide CTA on small screens - show on md+ */}
+            <div className="mt-6 md:mt-8 hidden md:block">
               <a
                 href={ctaHref}
                 className="btn btn-outline"

@@ -228,7 +228,7 @@ export default function DialDrivenShowcase({
         </div>
 
   {/* Card (order-2 on mobile, left column on desktop) */}
-  <div className="flex items-start justify-center lg:justify-start mb-30 lg:mb-0">
+  <div className="flex items-start justify-center lg:justify-start mb-25 lg:mb-0">
           <div
             className="w-full max-w-[620px] relative"
             style={{ height: "min(340px, 42vh)" }}
