@@ -216,7 +216,7 @@ export default function DialDrivenShowcase({
       <div className="h-auto min-h-screen lg:h-full flex flex-col lg:grid lg:grid-cols-[0.58fr_0.42fr] lg:items-start gap-3 lg:gap-12 xl:gap-16 px-4 lg:px-12 xl:px-16 py-4 lg:py-10">
         
         {/* MOBILE ONLY: Mantra Text (order-1 on mobile) */}
-        <div className="lg:hidden flex items-center justify-center py-1 pb-1">
+        <div className="lg:hidden flex items-center justify-center py-1 pb-0">
           <div className="leading-tight select-none space-y-2 text-center">
             <h2 className="font-[900] tracking-[-0.04em] text-[9vw] sm:text-[7vw] bg-gradient-to-br from-neutral-900 via-neutral-800 to-neutral-700 bg-clip-text text-transparent animate-[fadeIn_0.6s_ease-out_0.1s_both]">
               {mantra[0]} {mantra[1]} {mantra[2]} {mantra[3]}
@@ -227,8 +227,8 @@ export default function DialDrivenShowcase({
           </div>
         </div>
 
-        {/* Card (order-2 on mobile, left column on desktop) */}
-        <div className="flex items-start justify-center lg:justify-start mb-20 lg:mb-0">
+  {/* Card (order-2 on mobile, left column on desktop) */}
+  <div className="flex items-start justify-center lg:justify-start mb-30 lg:mb-0">
           <div
             className="w-full max-w-[620px] relative"
             style={{ height: "min(340px, 42vh)" }}
@@ -425,8 +425,8 @@ export default function DialDrivenShowcase({
           </div>
         </div>
 
-        {/* MOBILE ONLY: Dial (order-3 on mobile) */}
-        <div className="lg:hidden flex items-center justify-center pt-2 pb-4">
+  {/* MOBILE ONLY: Dial (order-3 on mobile) */}
+  <div className="lg:hidden flex items-center justify-center pt-6 pb-6">
           <div
             className="outline-none select-none transition-transform hover:scale-[1.02] active:scale-[0.98]"
             role="slider"

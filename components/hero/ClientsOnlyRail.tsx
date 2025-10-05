@@ -95,12 +95,7 @@ export default function ClientsOnlyRail({
       className={`w-full px-6 md:px-10 lg:px-16 py-8 ${className}`}
       style={{ ["--gap" as any]: `${gapPx}px` }}
     >
-      <div className="mb-6">
-        <span className="inline-flex items-center gap-2 rounded-full border backdrop-blur-sm px-3 py-1 eyebrow" style={{borderColor: 'var(--border)', backgroundColor: 'var(--card)'}}>
-          <span className="inline-block h-1.5 w-1.5 rounded-full" style={{backgroundColor: 'var(--accent)'}} />
-          Trusted by teams at
-        </span>
-      </div>
+      {/* badge removed: Trusted by teams */}
 
       <div
         className="relative overflow-hidden"
