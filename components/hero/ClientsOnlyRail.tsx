@@ -35,9 +35,9 @@ function useReducedMotion() {
 
 export default function ClientsOnlyRail({
   items,
-  railHeight = 400,         // 3x bigger for much larger logos
+  railHeight = 520,         // increase rail height for bigger logos
   logoHeightRatio = 1, // use more of the rail height
-  gapPx = 100,               // much wider spacing between logos
+  gapPx = 100,               // spacing between logos
   speedPxPerSec = 64,
   backgroundHex = "#F7F7F7", // Match --bg from global theme
   className = "",
@@ -93,7 +93,7 @@ export default function ClientsOnlyRail({
     <section
       ref={sectionRef}
       aria-label="Clients who trust us"
-      className={`w-full px-6 md:px-10 lg:px-16 pt-6 pb-12 ${className}`}
+      className={`w-full px-6 md:px-10 lg:px-16 pt-2 pb-8 ${className}`}
       style={{ ["--gap" as any]: `${gapPx}px` }}
     >
       {/* badge removed: Trusted by teams */}
@@ -108,7 +108,7 @@ export default function ClientsOnlyRail({
         {/* edge fades */}
         <div
           aria-hidden
-          className="pointer-events-none absolute inset-y-0 left-0 w-24"
+          className="pointer-events-none absolute inset-y-0 left-0 w-32"
           style={{
             WebkitMaskImage: "linear-gradient(to right, black, transparent)",
             maskImage: "linear-gradient(to right, black, transparent)",
@@ -117,7 +117,7 @@ export default function ClientsOnlyRail({
         />
         <div
           aria-hidden
-          className="pointer-events-none absolute inset-y-0 right-0 w-24"
+          className="pointer-events-none absolute inset-y-0 right-0 w-32"
           style={{
             WebkitMaskImage: "linear-gradient(to left, black, transparent)",
             maskImage: "linear-gradient(to left, black, transparent)",
@@ -144,18 +144,20 @@ export default function ClientsOnlyRail({
             style={{ gap: "var(--gap)" }}
           >
             {loopItems.map((c, i) => {
-              // Reduce mobile upscaling to avoid blurry icons while keeping desktop scale
-              const baseScale = isMobile ? 1.6 : 2;
+              // Increase visual size roughly 2x. Keep mobile natural image height to avoid blur.
+              const baseScale = isMobile ? 3.2 : 4; // double previous values (1.6->3.2, 2->4)
               const scale = (c.scale ?? 1) * baseScale;
+              // Increase base image height so doubling scale doesn't excessively upscale small assets
+              const adjustedImgH = Math.round(imgH * 1.8);
               const Logo = (
                 <Image
                   src={c.logoSrc}
                   alt={c.alt ?? c.name}
-                  width={Math.round(imgH * 6)} // arbitrary wide cap so aspect isn't constrained
-                  height={imgH}
+                  width={Math.round(adjustedImgH * 6)} // arbitrary wide cap so aspect isn't constrained
+                  height={adjustedImgH}
                   sizes="(max-width: 768px) 100vw, 1200px"
                   style={{
-                    height: imgH,
+                    height: adjustedImgH,
                     width: "auto",
                     transform: `scale(${scale})`,
                     transformOrigin: "center",
