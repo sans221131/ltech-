@@ -217,7 +217,7 @@ export default function DialDrivenShowcase({
         
         {/* MOBILE ONLY: Mantra Text (order-1 on mobile) */}
         <div className="lg:hidden flex items-center justify-center py-1 pb-0">
-          <div className="leading-tight select-none space-y-2 text-center">
+          <div className="leading-tight select-none space-y-0 text-center">
             <h2 className="font-[900] tracking-[-0.04em] text-[9vw] sm:text-[7vw] bg-gradient-to-br from-neutral-900 via-neutral-800 to-neutral-700 bg-clip-text text-transparent animate-[fadeIn_0.6s_ease-out_0.1s_both]">
               {mantra[0]} {mantra[1]} {mantra[2]} {mantra[3]}
             </h2>
@@ -228,7 +228,7 @@ export default function DialDrivenShowcase({
         </div>
 
   {/* Card (order-2 on mobile, left column on desktop) */}
-  <div className="flex items-start justify-center lg:justify-start mb-25 lg:mb-0">
+  <div className="flex items-start justify-center lg:justify-start mb-20 lg:mb-0">
           <div
             className="w-full max-w-[620px] relative"
             style={{ height: "min(340px, 42vh)" }}
