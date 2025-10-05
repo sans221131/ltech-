@@ -453,8 +453,8 @@ export default function DialDrivenShowcase({
               style={{
                 touchAction: "none",
                 cursor: "grab",
-                width: "clamp(180px, 45vw, 260px)",
-                height: "clamp(180px, 45vw, 260px)",
+                width: "clamp(140px, 35vw, 200px)",
+                height: "clamp(140px, 35vw, 200px)",
                 filter: "drop-shadow(0 8px 30px rgba(0,0,0,0.16))",
                 ["--bg" as any]: "#000",
                 ["--center" as any]: "#151515",
