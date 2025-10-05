@@ -43,6 +43,15 @@ export default function ClientsOnlyRail({
   className = "",
 }: Props) {
   const reducedMotion = useReducedMotion();
+  
+  // Detect mobile for faster speed and larger icons
+  const [isMobile, setIsMobile] = useState(false);
+  useEffect(() => {
+    const checkMobile = () => setIsMobile(window.innerWidth < 768);
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
 
   // Pause when offscreen
   const sectionRef = useRef<HTMLElement | null>(null);
@@ -67,14 +76,17 @@ export default function ClientsOnlyRail({
     const el = laneRef.current;
     if (!el) return;
     const w = el.scrollWidth / 2; // doubled content
-    const pxps = Math.max(20, Math.min(140, speedPxPerSec));
+    // Use faster speed on mobile (2.5x faster)
+    const adjustedSpeed = isMobile ? speedPxPerSec * 3 : speedPxPerSec;
+    const pxps = Math.max(20, Math.min(140, adjustedSpeed));
     setDuration(Math.max(10, w / pxps));
-  }, [items, speedPxPerSec]);
+  }, [items, speedPxPerSec, isMobile]);
 
   const paused = reducedMotion || !inView;
 
-  // Effective logo height in pixels
-  const imgH = Math.max(28, Math.floor(railHeight * logoHeightRatio));
+  // Effective logo height in pixels - larger on mobile
+  const baseLogoHeight = Math.max(28, Math.floor(railHeight * logoHeightRatio));
+  const imgH = isMobile ? Math.floor(baseLogoHeight * 2) : baseLogoHeight;
 
   return (
     <section
@@ -136,7 +148,9 @@ export default function ClientsOnlyRail({
             style={{ gap: "var(--gap)" }}
           >
             {loopItems.map((c, i) => {
-              const scale = (c.scale ?? 1) * 2; // Apply 1.5x additional scale on top of any per-logo scale
+              // Apply extra scale on mobile for larger icons
+              const baseScale = isMobile ? 3 : 2;
+              const scale = (c.scale ?? 1) * baseScale;
               const Logo = (
                 <Image
                   src={c.logoSrc}
