@@ -35,7 +35,7 @@ export default function Hero({
       aria-labelledby="hero-heading"
     >
       {/* Main Container */}
-  <div className="relative mx-auto px-4 md:px-10 lg:px-16 w-full h-full flex items-center pt-14 pb-8 md:pt-0 md:pb-0" style={{maxWidth: '1400px'}}>
+  <div className="relative mx-auto px-4 md:px-10 lg:px-16 w-full h-full flex items-center pt-14 pb-12 md:pt-0 md:pb-0" style={{maxWidth: '1400px'}}>
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-20 items-center w-full">
           
           {/* Left: Content - Order 2 on mobile, 1 on desktop */}
@@ -74,7 +74,7 @@ export default function Hero({
           </div>
 
           {/* Right: Boids Visualization - Order 1 on mobile, 2 on desktop */}
-          <div className="relative h-[350px] md:h-[500px] lg:h-[800px] flex items-center justify-center order-1 lg:order-2 -mb-4 md:mb-0">
+          <div className="relative h-[350px] md:h-[500px] lg:h-[800px] flex items-center justify-center order-1 lg:order-2 mb-0 md:mb-0">
             {/* Interactive Hint - Above cube, different positioning for mobile vs desktop */}
             <div className="absolute top-1 md:top-20 lg:top-24 left-1/2 -translate-x-1/2 -translate-y-0 md:-translate-y-0 z-10 pointer-events-none">
               <div className="flex items-center gap-2.5 animate-[bounce_2s_ease-in-out_infinite]">

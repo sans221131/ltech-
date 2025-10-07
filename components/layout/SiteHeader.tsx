@@ -10,6 +10,7 @@ import { INDUSTRIES } from "./megaMenuData";
 const NAV_LINKS = [
   { href: "/#process", label: "Process" },
   { href: "/#team", label: "Team" },
+  { href: "/#contact", label: "Contact" },
 ];
 
 export default function SiteHeader() {
@@ -212,10 +213,10 @@ export default function SiteHeader() {
             {/* CTA + Burger */}
             <div className="flex items-center gap-3">
               <Link
-                href="/#submit-brief"
+                href="/invoices"
                 className="hidden lg:inline-flex items-center gap-2.5 px-7 py-3 text-[15px] font-bold text-white bg-[var(--fg)] rounded-full hover:bg-[var(--accent)] hover:shadow-lg transition-all duration-200 border-2 border-transparent hover:border-[var(--accent)] tracking-wide"
               >
-                <span>CONTACT</span>
+                <span>PAY INVOICE</span>
               </Link>
               <button
                 ref={burgerRef}
@@ -354,11 +355,11 @@ export default function SiteHeader() {
 
                   <div className="p-6 border-t border-[var(--border)]">
                     <Link
-                      href="/#submit-brief"
+                      href="/invoices"
                       onClick={() => setMobileMenuOpen(false)}
                       className="flex items-center justify-center gap-2.5 w-full px-7 py-4 text-[15px] font-bold text-white bg-[var(--fg)] rounded-full hover:bg-[var(--accent)] hover:shadow-lg transition-all duration-200 border-2 border-transparent hover:border-[var(--accent)]"
                     >
-                      <span>CONTACT</span>
+                      <span>PAY INVOICE</span>
                     </Link>
                   </div>
                 </div>
