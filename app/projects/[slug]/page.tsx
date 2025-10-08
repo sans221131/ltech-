@@ -5,6 +5,7 @@ import { use } from "react";
 import { notFound } from "next/navigation";
 import Link from "next/link";
 import { PROJECT_SOLUTIONS } from "@/lib/whatwedo/projects";
+import SiteLayout from "@/components/layout/SiteLayout";
 
 export default function ProjectPage({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = use(params);
@@ -15,6 +16,7 @@ export default function ProjectPage({ params }: { params: Promise<{ slug: string
   }
 
   return (
+    <SiteLayout>
     <div className="min-h-screen bg-white">
       {/* Hero Section */}
       <section className="relative pt-32 pb-12 px-6 lg:px-12 border-b border-[var(--border)]">
@@ -322,5 +324,6 @@ export default function ProjectPage({ params }: { params: Promise<{ slug: string
         </div>
       </section>
     </div>
+    </SiteLayout>
   );
 }

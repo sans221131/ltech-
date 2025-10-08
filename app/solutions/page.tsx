@@ -4,6 +4,7 @@ import { useState, useEffect, Suspense } from "react";
 import { useSearchParams } from "next/navigation";
 import Link from "next/link";
 import { INDUSTRIES } from "@/components/layout/megaMenuData";
+import SiteLayout from "@/components/layout/SiteLayout";
 
 function SolutionsContent() {
   const searchParams = useSearchParams();
@@ -185,15 +186,17 @@ function SolutionsContent() {
 
 export default function SolutionsPage() {
   return (
-    <Suspense fallback={
-      <div className="min-h-screen bg-[var(--bg)] flex items-center justify-center">
-        <div className="text-center">
-          <div className="inline-block size-12 border-4 border-[var(--accent)] border-t-transparent rounded-full animate-spin mb-4" />
-          <p className="text-[var(--muted)]">Loading solutions...</p>
+    <SiteLayout>
+      <Suspense fallback={
+        <div className="min-h-screen bg-[var(--bg)] flex items-center justify-center">
+          <div className="text-center">
+            <div className="inline-block size-12 border-4 border-[var(--accent)] border-t-transparent rounded-full animate-spin mb-4" />
+            <p className="text-[var(--muted)]">Loading solutions...</p>
+          </div>
         </div>
-      </div>
-    }>
-      <SolutionsContent />
-    </Suspense>
+      }>
+        <SolutionsContent />
+      </Suspense>
+    </SiteLayout>
   );
 }

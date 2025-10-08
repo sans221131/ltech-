@@ -5,6 +5,7 @@ import { notFound } from "next/navigation";
 import Link from "next/link";
 import { use } from "react";
 import { getServiceData } from "./serviceData";
+import SiteLayout from "@/components/layout/SiteLayout";
 
 const VALID = new Set([
   "ai-agent-development-services",
@@ -27,6 +28,7 @@ export default function ServicePage({ params }: { params: Promise<{ slug: string
   if (!data) notFound();
 
   return (
+    <SiteLayout>
     <main className="relative bg-[var(--bg)] min-h-screen">
       {/* Hero Section */}
       <section className="relative overflow-hidden bg-gradient-to-br from-[var(--accent)]/5 via-white/50 to-[var(--accent)]/3 border-b border-[var(--border)]">
@@ -275,5 +277,6 @@ export default function ServicePage({ params }: { params: Promise<{ slug: string
         </div>
       </section>
     </main>
+    </SiteLayout>
   );
 }

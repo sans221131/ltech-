@@ -1,5 +1,6 @@
 // /app/page.tsx
 
+import SiteLayout from "@/components/layout/SiteLayout";
 import HeroSection from "./sections/hero-section";
 import ClientsOnlyRail, { type Client } from "@/components/hero/ClientsOnlyRail";
 import ServicesSection from "@/components/sections/ServicesSection";
@@ -100,7 +101,7 @@ const SHOWCASE_ITEMS = RAW.map((p: any) => ({
 
 export default function HomePage() {
   return (
-    <>
+    <SiteLayout>
       <HeroSection />
 
       <ClientsOnlyRail
@@ -132,6 +133,6 @@ export default function HomePage() {
       <ProcessScrollDial steps={STEPS} />
       <TeamReliability />
       <SubmitBrief />
-    </>
+    </SiteLayout>
   );
 }
