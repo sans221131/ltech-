@@ -47,7 +47,7 @@ export default function AdminLoginPage() {
               </svg>
             </div>
             <h1 className="text-2xl font-bold text-zinc-900">Admin Login</h1>
-            <p className="text-zinc-600 mt-2">LeafWay Tech Dashboard</p>
+            <p className="text-zinc-600 mt-2">INFYTION Dashboard</p>
           </div>
 
           <form onSubmit={handleSubmit} className="space-y-5">

@@ -225,7 +225,7 @@ export default function SubmitBrief() {
 
                 {formState === "error" && (
                   <div className="mt-6 p-4 rounded-lg bg-red-100 border border-red-300 text-red-900 text-sm">
-                    Something went wrong. Please try again or email us directly at hello@leafway.tech
+                    Something went wrong. Please try again or email us directly at contact@infytion.com
                   </div>
                 )}
               </div>

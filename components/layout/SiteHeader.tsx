@@ -146,7 +146,7 @@ export default function SiteHeader() {
             <Link href="/" className="flex items-center gap-3 group">
               <div className="flex">
                 <span className="font-bold text-[22px] text-[var(--fg)] tracking-tight leading-tight">
-                  LeafWay Tech
+                  INFYTION
                 </span>
               </div>
             </Link>
@@ -274,7 +274,7 @@ export default function SiteHeader() {
                     <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(64,64,64,0.08),transparent_50%)]" aria-hidden="true" />
                     <div className="relative">
                       <p className="text-[10px] font-bold tracking-[0.2em] uppercase text-[var(--muted)] mb-2">Navigation</p>
-                      <h2 className="text-2xl font-bold text-[var(--fg)]">Explore LeafWay</h2>
+                      <h2 className="text-2xl font-bold text-[var(--fg)]">Explore INFYTION</h2>
                     </div>
                   </div>
 

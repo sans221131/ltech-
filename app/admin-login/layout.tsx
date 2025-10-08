@@ -1,6 +1,6 @@
 // app/admin-login/layout.tsx
 export const metadata = {
-  title: "Admin Login - LeafWay Tech",
+  title: "Admin Login - INFYTION PTE LIMITED",
   description: "Admin authentication",
 };
 

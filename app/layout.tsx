@@ -14,7 +14,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "LeafWay Tech",
+  title: "INFYTION PTE LIMITED",
   description: "Architecture-first engineering. Platforms, edge APIs, AI systems.",
   icons: {
     icon: "/file.svg",

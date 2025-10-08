@@ -4,7 +4,7 @@ import { checkAuth } from "@/lib/auth";
 import AdminNav from "./AdminNav";
 
 export const metadata = {
-  title: "Admin Dashboard - LeafWay Tech",
+  title: "Admin Dashboard - INFYTION PTE LIMITED",
   description: "Admin invoice management",
 };
 
