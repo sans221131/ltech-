@@ -1,0 +1,16 @@
+{
+  "/api/admin/invoices/route": "/api/admin/invoices",
+  "/api/admin/login/route": "/api/admin/login",
+  "/api/admin/logout/route": "/api/admin/logout",
+  "/api/invoices/lookup/route": "/api/invoices/lookup",
+  "/api/invoices/pay/route": "/api/invoices/pay",
+  "/_not-found/page": "/_not-found",
+  "/favicon.ico/route": "/favicon.ico",
+  "/page": "/",
+  "/invoices/page": "/invoices",
+  "/projects/[slug]/page": "/projects/[slug]",
+  "/services/[slug]/page": "/services/[slug]",
+  "/solutions/page": "/solutions",
+  "/admin-login/page": "/admin-login",
+  "/admin/invoices/page": "/admin/invoices"
+}

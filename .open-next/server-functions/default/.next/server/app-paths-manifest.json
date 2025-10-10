@@ -1,0 +1,16 @@
+{
+  "/api/admin/invoices/route": "app/api/admin/invoices/route.js",
+  "/api/admin/login/route": "app/api/admin/login/route.js",
+  "/api/admin/logout/route": "app/api/admin/logout/route.js",
+  "/api/invoices/lookup/route": "app/api/invoices/lookup/route.js",
+  "/api/invoices/pay/route": "app/api/invoices/pay/route.js",
+  "/_not-found/page": "app/_not-found/page.js",
+  "/favicon.ico/route": "app/favicon.ico/route.js",
+  "/page": "app/page.js",
+  "/invoices/page": "app/invoices/page.js",
+  "/projects/[slug]/page": "app/projects/[slug]/page.js",
+  "/services/[slug]/page": "app/services/[slug]/page.js",
+  "/solutions/page": "app/solutions/page.js",
+  "/admin-login/page": "app/admin-login/page.js",
+  "/admin/invoices/page": "app/admin/invoices/page.js"
+}
