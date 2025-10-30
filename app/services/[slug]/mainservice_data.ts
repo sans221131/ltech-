@@ -12,7 +12,7 @@ export const MAIN_SERVICE_TITLES: Record<string, string> = {
   "wealth-management": "Wealth Management",
   "insurance-tech": "Insurance Tech",
   "trading-platforms": "Trading Platforms",
-//   "regtech-compliance": "RegTech Compliance",
+  "regtech-compliance": "RegTech Compliance",
 //   "p2p-transfers": "P2P Transfers",
 //   "neobank-core": "Neobank Core",
 //   "credit-scoring": "Credit Scoring",
