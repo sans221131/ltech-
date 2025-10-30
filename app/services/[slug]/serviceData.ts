@@ -1,4 +1,14 @@
 // /app/services/[slug]/serviceData.ts
+import { fintechServices } from "./serviceData-fintech";
+import { healthcareServices } from "./serviceData-healthcare";
+import { ecommerceServices } from "./serviceData-ecommerce";
+import { edtechServices } from "./serviceData-edtech";
+import { logisticsServices } from "./serviceData-logistics";
+import { allRealEstateServices } from "./serviceData-realestate";
+import { allAutomotiveServices } from "./serviceData-automotive";
+import { allTravelServices } from "./serviceData-travel";
+import { allMediaServices } from "./serviceData-media";
+import { allSaasServices } from "./serviceData-saas";
 
 export type ServiceData = {
   title: string;
@@ -12,6 +22,19 @@ export type ServiceData = {
 
 export function getServiceData(slug: string): ServiceData | null {
   const dataMap: Record<string, ServiceData> = {
+    // Import services from industry-specific files
+    ...fintechServices,
+    ...healthcareServices,
+    ...ecommerceServices,
+    ...edtechServices,
+    ...logisticsServices,
+    ...allRealEstateServices,
+    ...allAutomotiveServices,
+    ...allTravelServices,
+    ...allMediaServices,
+    ...allSaasServices,
+    
+    // Original flagship services
     "ai-agent-development-services": {
       title: "AI Agent Development Services",
       tagline:

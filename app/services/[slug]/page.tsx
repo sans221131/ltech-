@@ -5,25 +5,27 @@ import { notFound } from "next/navigation";
 import Link from "next/link";
 import { use } from "react";
 import { getServiceData } from "./serviceData";
+import { MAIN_SERVICE_TITLES } from "./mainservice_data";
 import SiteLayout from "@/components/layout/SiteLayout";
+import { INDUSTRIES } from "@/components/layout/megaMenuData";
 
-const VALID = new Set([
-  "ai-agent-development-services",
-  "offshore-development-services",
-  "software-re-engineering",
-  "cto-as-a-service-for-startups",
-  "product-discovery-and-technical-architecture",
-  "platform-modernization-roadmaps",
-  "data-pipeline-design-and-governance",
-  "realtime-interfaces-and-motion-systems",
-  "observability-and-reliability-readiness",
-  "ai-augmented-operations-automation",
-]);
+// Generate valid slugs from mega menu data
+const VALID = new Set(
+  INDUSTRIES.flatMap(industry => 
+    industry.solutions.map(solution => 
+      solution.href.replace('/services/', '')
+    )
+  )
+);
 
 export default function ServicePage({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = use(params);
+  // Check menu validity
   if (!VALID.has(slug)) notFound();
-  
+
+  // Check mainservice_data toggle — comment out an entry here to hide its page (404)
+  if (!MAIN_SERVICE_TITLES[slug]) notFound();
+
   const data = getServiceData(slug);
   if (!data) notFound();
 
@@ -263,7 +265,7 @@ export default function ServicePage({ params }: { params: Promise<{ slug: string
                         href="/#submit-brief"
                         className="block w-full text-center px-6 py-4 bg-[var(--fg)] text-white font-bold rounded-2xl hover:shadow-2xl hover:scale-[1.03] hover:-translate-y-1 transition-all duration-200 shadow-lg"
                       >
-                        Start a conversation
+                        <span className="text-white">Start a conversation</span>
                       </Link>
                       <button className="block w-full text-center px-6 py-4 bg-white/90 backdrop-blur-sm border-2 border-[var(--border)] text-[var(--fg)] font-semibold rounded-2xl hover:bg-white hover:border-[var(--accent)] hover:shadow-md transition-all duration-200">
                         Download overview

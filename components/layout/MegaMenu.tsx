@@ -157,7 +157,7 @@ export default function MegaMenu({ isOpen, onClose, menuCloseTimeoutRef }: MegaM
                   {activeIndustry.solutions.map((solution, idx) => (
                     <Link
                       key={`${activeIndustry.id}-${solution.title}`}
-                      href={`/solutions?industry=${activeIndustry.id}#${solution.title.toLowerCase().replace(/\s+/g, '-')}`}
+                      href={solution.href}
                       className="group/solution block p-4 rounded-xl hover:bg-gradient-to-br hover:from-[var(--card)] hover:to-white border border-[var(--border)]/40 hover:border-[var(--accent)]/60 transition-colors duration-150 hover:shadow-lg"
                     >
                       <div className="flex items-start gap-3">

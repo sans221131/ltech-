@@ -425,7 +425,7 @@ export default function SiteHeader() {
                           {industry.solutions.map((solution) => (
                             <Link
                               key={`${industry.id}-${solution.title}`}
-                              href="/services/offshore-development-services"
+                              href={solution.href}
                               onClick={() => {
                                 setMobileMenuOpen(false);
                                 setMobileSubmenuOpen(null);
