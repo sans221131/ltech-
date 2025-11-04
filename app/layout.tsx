@@ -34,6 +34,7 @@ export default function RootLayout({
           lora.variable,
           "antialiased",
         ].join(" ")}
+        suppressHydrationWarning
       >
         <div className="relative flex min-h-screen flex-col bg-[var(--bg)] text-[var(--fg)]">
           {children}
