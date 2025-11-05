@@ -451,4 +451,454 @@ export const healthcareServices: Record<string, ServiceData> = {
       { title: "Urgent Care", category: "HEALTHCARE" },
     ],
   },
+
+  "medical-billing": {
+    title: "Medical Billing & Revenue Cycle Management",
+    tagline: "Automated claims processing with denial management and payment posting for maximized reimbursement.",
+    tags: ["Medical Billing", "RCM", "Claims", "Revenue Cycle"],
+    overview:
+      "Optimize revenue cycle with comprehensive medical billing solutions. Automate claims submission to payers, track claim status, manage denials and appeals, post payments, and generate reports—ensuring compliance with coding standards and maximizing clean claim rates.",
+    features: [
+      {
+        title: "Claims Automation",
+        description: "Electronic claims submission to all major payers with real-time eligibility verification and scrubbing.",
+      },
+      {
+        title: "Denial Management",
+        description: "Track denial reasons, automate appeals workflows, and identify patterns to prevent future denials.",
+      },
+      {
+        title: "Payment Posting",
+        description: "Automated ERA/EOB posting with reconciliation and patient responsibility calculation.",
+      },
+      {
+        title: "Revenue Analytics",
+        description: "Track KPIs like days in AR, collection rates, and denial rates by payer, provider, and service.",
+      },
+    ],
+    whenYouNeedThis: [
+      {
+        title: "Claim Denials",
+        description: "High denial rates and slow appeals process causing cash flow problems and lost revenue.",
+      },
+      {
+        title: "AR Management",
+        description: "Days in accounts receivable increasing; need better tracking and follow-up on outstanding claims.",
+      },
+      {
+        title: "Billing Staff Burden",
+        description: "Manual billing processes requiring large staff; need automation to improve efficiency and margins.",
+      },
+    ],
+    industries: [
+      { title: "Medical Practices", category: "HEALTHCARE" },
+      { title: "Hospital Systems", category: "HEALTHCARE" },
+      { title: "Billing Companies", category: "RCM" },
+    ],
+  },
+
+  "drug-discovery": {
+    title: "Drug Discovery & Development Platforms",
+    tagline: "AI-accelerated compound screening and clinical development tools for faster time to market.",
+    tags: ["Drug Discovery", "AI", "Molecular Design", "Clinical Development"],
+    overview:
+      "Accelerate drug discovery with AI-powered platforms that predict compound properties, optimize molecular structures, identify drug targets, and manage preclinical studies. Reduce time and cost from target identification to IND filing with data-driven insights.",
+    features: [
+      {
+        title: "AI Compound Screening",
+        description: "Machine learning models predict binding affinity, toxicity, and pharmacokinetics for virtual screening.",
+      },
+      {
+        title: "Molecular Design Tools",
+        description: "Generative AI suggests novel compounds with desired properties and synthetic feasibility.",
+      },
+      {
+        title: "Target Identification",
+        description: "Analyze genomic and proteomic data to identify disease targets and biomarkers.",
+      },
+      {
+        title: "Preclinical Management",
+        description: "Track in vitro and in vivo studies, manage compound libraries, and integrate analytical data.",
+      },
+    ],
+    whenYouNeedThis: [
+      {
+        title: "R&D Efficiency",
+        description: "Traditional discovery methods too slow and expensive; need AI to screen larger compound spaces faster.",
+      },
+      {
+        title: "Failed Clinical Trials",
+        description: "Compounds failing in trials due to poor prediction of human efficacy and safety; need better modeling.",
+      },
+      {
+        title: "Competitive Pressure",
+        description: "Competitors using AI for discovery gaining speed advantage; need to modernize research approach.",
+      },
+    ],
+    industries: [
+      { title: "Pharmaceutical Companies", category: "PHARMA" },
+      { title: "Biotech Startups", category: "BIOTECH" },
+      { title: "Research Institutions", category: "ACADEMIC" },
+    ],
+  },
+
+  "mental-health-apps": {
+    title: "Mental Health & Behavioral Health Apps",
+    tagline: "Teletherapy, mood tracking, and crisis intervention tools with measurement-based care.",
+    tags: ["Mental Health", "Teletherapy", "Behavioral Health", "Wellness"],
+    overview:
+      "Support mental health delivery with specialized digital platforms. Enable video therapy sessions, asynchronous messaging, mood and symptom tracking, crisis protocols, measurement-based care tools, and integration with EHR systems—all with enhanced privacy protections.",
+    features: [
+      {
+        title: "Teletherapy Platform",
+        description: "HIPAA-compliant video therapy with secure messaging, session notes, and treatment planning.",
+      },
+      {
+        title: "Mood & Symptom Tracking",
+        description: "Patient-reported outcomes with validated scales like PHQ-9, GAD-7 to inform treatment decisions.",
+      },
+      {
+        title: "Crisis Intervention",
+        description: "Risk assessment protocols, safety planning tools, and integration with crisis hotlines.",
+      },
+      {
+        title: "Measurement-Based Care",
+        description: "Track outcomes over time, identify deterioration early, and demonstrate treatment effectiveness.",
+      },
+    ],
+    whenYouNeedThis: [
+      {
+        title: "Access Barriers",
+        description: "Long waitlists for mental health care; teletherapy can increase capacity and reach underserved areas.",
+      },
+      {
+        title: "Outcome Measurement",
+        description: "Payers requiring outcome data for reimbursement; need systematic tracking of patient progress.",
+      },
+      {
+        title: "Patient Engagement",
+        description: "High dropout rates in therapy; need tools to engage patients between sessions and support adherence.",
+      },
+    ],
+    industries: [
+      { title: "Mental Health Clinics", category: "BEHAVIORAL HEALTH" },
+      { title: "Employee Assistance", category: "CORPORATE WELLNESS" },
+      { title: "Telehealth Providers", category: "TELEHEALTH" },
+    ],
+  },
+
+  "care-coordination": {
+    title: "Care Coordination & Case Management",
+    tagline: "Multi-disciplinary care team collaboration with care plans and patient engagement tools.",
+    tags: ["Care Coordination", "Case Management", "Team Collaboration", "Care Plans"],
+    overview:
+      "Enable seamless care coordination across providers, settings, and organizations. Manage complex patient cases with shared care plans, team communication, task assignment, transition of care workflows, and social determinants screening—improving outcomes for high-risk populations.",
+    features: [
+      {
+        title: "Shared Care Plans",
+        description: "Collaborative care planning with goals, interventions, and progress tracking visible to entire care team.",
+      },
+      {
+        title: "Team Communication",
+        description: "HIPAA-compliant messaging, care team directories, and case conferencing tools.",
+      },
+      {
+        title: "Transition Management",
+        description: "Hospital discharge planning, post-acute care coordination, and medication reconciliation workflows.",
+      },
+      {
+        title: "SDOH Screening",
+        description: "Screen for social determinants like housing, food insecurity, and transportation; connect to resources.",
+      },
+    ],
+    whenYouNeedThis: [
+      {
+        title: "Readmission Rates",
+        description: "Patients readmitted due to poor care coordination during transitions; need systematic handoff processes.",
+      },
+      {
+        title: "Complex Patients",
+        description: "Managing complex patients with multiple providers and conditions; communication gaps causing poor outcomes.",
+      },
+      {
+        title: "Value-Based Care",
+        description: "ACO or bundle contracts requiring care coordination capabilities to manage total cost of care.",
+      },
+    ],
+    industries: [
+      { title: "Health Plans", category: "MANAGED CARE" },
+      { title: "ACOs", category: "HEALTHCARE" },
+      { title: "Home Health Agencies", category: "POST-ACUTE" },
+    ],
+  },
+
+  "medical-devices": {
+    title: "Medical Device Software & IoT Platforms",
+    tagline: "FDA-compliant device software with cloud connectivity and real-time data streaming.",
+    tags: ["Medical Devices", "IoT", "FDA Compliance", "Connected Health"],
+    overview:
+      "Develop FDA-compliant software for medical devices or Software as a Medical Device (SaMD). Support device control, data acquisition, cloud connectivity, OTA updates, and regulatory compliance with IEC 62304, ISO 13485, and FDA 21 CFR Part 820 requirements.",
+    features: [
+      {
+        title: "Device Control Software",
+        description: "Embedded software for device operation, user interface, and safety-critical functions.",
+      },
+      {
+        title: "Cloud Connectivity",
+        description: "Secure IoT protocols for real-time device data streaming to cloud platforms and EHR integration.",
+      },
+      {
+        title: "OTA Updates",
+        description: "Over-the-air software updates with version management and FDA change control compliance.",
+      },
+      {
+        title: "Regulatory Documentation",
+        description: "Software development lifecycle documentation meeting FDA and international regulatory requirements.",
+      },
+    ],
+    whenYouNeedThis: [
+      {
+        title: "Device Development",
+        description: "Developing new medical device but lack expertise in FDA software compliance and validation.",
+      },
+      {
+        title: "Connected Device Strategy",
+        description: "Want to add cloud connectivity and remote monitoring to existing devices for competitive advantage.",
+      },
+      {
+        title: "SaMD Launch",
+        description: "Creating standalone software product that qualifies as medical device requiring FDA clearance.",
+      },
+    ],
+    industries: [
+      { title: "Medical Device Manufacturers", category: "MED TECH" },
+      { title: "Digital Health Startups", category: "DIGITAL HEALTH" },
+      { title: "Contract Manufacturers", category: "MANUFACTURING" },
+    ],
+  },
+
+  "health-insurance": {
+    title: "Health Insurance Core Systems",
+    tagline: "Policy administration, claims adjudication, and member portals for payers and TPAs.",
+    tags: ["Insurance", "Claims Processing", "Policy Admin", "Member Services"],
+    overview:
+      "Modernize health insurance operations with comprehensive core systems. Manage policy administration, benefits configuration, claims adjudication, provider networks, member portals, and regulatory reporting—enabling rapid product launches and operational efficiency.",
+    features: [
+      {
+        title: "Policy Administration",
+        description: "Flexible benefit plan configuration, enrollment processing, premium billing, and eligibility management.",
+      },
+      {
+        title: "Claims Adjudication",
+        description: "Automated claims processing with edits, repricing, COB, and authorization requirements enforcement.",
+      },
+      {
+        title: "Provider Network",
+        description: "Provider credentialing, contract management, fee schedules, and network adequacy reporting.",
+      },
+      {
+        title: "Member Portal",
+        description: "Self-service for ID cards, claims status, explanation of benefits, and provider directory.",
+      },
+    ],
+    whenYouNeedThis: [
+      {
+        title: "Legacy Systems",
+        description: "Mainframe systems preventing product innovation and creating operational inefficiencies.",
+      },
+      {
+        title: "Market Expansion",
+        description: "Entering new markets or product lines but can't configure current system for new benefit designs.",
+      },
+      {
+        title: "TPA Services",
+        description: "Want to offer third-party administration services but need modern, scalable platform.",
+      },
+    ],
+    industries: [
+      { title: "Health Plans", category: "INSURANCE" },
+      { title: "Third Party Administrators", category: "TPA" },
+      { title: "Self-Insured Employers", category: "CORPORATE" },
+    ],
+  },
+
+  "genomics-platforms": {
+    title: "Genomics & Precision Medicine Platforms",
+    tagline: "NGS data analysis, variant interpretation, and clinical genomics workflows.",
+    tags: ["Genomics", "Precision Medicine", "NGS", "Variant Analysis"],
+    overview:
+      "Enable precision medicine with comprehensive genomics platforms. Process next-generation sequencing data, interpret variants using clinical databases, generate reports compliant with ACMG guidelines, and integrate with EHR for clinical decision support—supporting oncology, rare disease, and pharmacogenomics.",
+    features: [
+      {
+        title: "NGS Pipeline",
+        description: "Automated bioinformatics pipeline for sequence alignment, variant calling, and quality control.",
+      },
+      {
+        title: "Variant Interpretation",
+        description: "Clinical variant classification using ClinVar, COSMIC, and literature with ACMG criteria.",
+      },
+      {
+        title: "Clinical Reporting",
+        description: "Generate patient reports with actionable variants, therapy recommendations, and clinical trial matching.",
+      },
+      {
+        title: "EHR Integration",
+        description: "Deliver genomic insights within clinical workflow with CDS hooks and SMART on FHIR apps.",
+      },
+    ],
+    whenYouNeedThis: [
+      {
+        title: "Precision Medicine Program",
+        description: "Launching precision medicine initiative but lack bioinformatics infrastructure and expertise.",
+      },
+      {
+        title: "Report Turnaround Time",
+        description: "Manual variant interpretation causing long turnaround times for actionable results.",
+      },
+      {
+        title: "Clinical Integration",
+        description: "Genomic data siloed from EHR; clinicians not using results because of access friction.",
+      },
+    ],
+    industries: [
+      { title: "Cancer Centers", category: "ONCOLOGY" },
+      { title: "Genetic Testing Labs", category: "DIAGNOSTICS" },
+      { title: "Academic Medical Centers", category: "RESEARCH" },
+    ],
+  },
+
+  "nutrition-tracking": {
+    title: "Nutrition & Wellness Tracking Apps",
+    tagline: "Food logging, meal planning, and nutrition coaching with health condition-specific guidance.",
+    tags: ["Nutrition", "Wellness", "Diet", "Food Tracking"],
+    overview:
+      "Support healthy eating and therapeutic diets with comprehensive nutrition platforms. Enable food logging with barcode scanning, provide personalized meal plans, track macros and micronutrients, integrate with wearables, and offer condition-specific guidance for diabetes, heart disease, and weight management.",
+    features: [
+      {
+        title: "Food Database & Logging",
+        description: "Comprehensive food database with barcode scanning, recipe builder, and restaurant menus.",
+      },
+      {
+        title: "Meal Planning",
+        description: "Personalized meal plans based on dietary preferences, health goals, and medical conditions.",
+      },
+      {
+        title: "Nutrition Coaching",
+        description: "In-app messaging with registered dietitians, educational content, and goal-setting tools.",
+      },
+      {
+        title: "Health Integration",
+        description: "Sync with glucose monitors, fitness trackers, and EHR for comprehensive health picture.",
+      },
+    ],
+    whenYouNeedThis: [
+      {
+        title: "Chronic Disease Management",
+        description: "Patients with diabetes, obesity, or heart disease need nutrition support but can't see dietitian frequently.",
+      },
+      {
+        title: "Preventive Programs",
+        description: "Employer wellness or health plan programs need scalable nutrition intervention tools.",
+      },
+      {
+        title: "Patient Engagement",
+        description: "Want to improve diet adherence for better outcomes but lack tools for ongoing monitoring and support.",
+      },
+    ],
+    industries: [
+      { title: "Wellness Programs", category: "CORPORATE WELLNESS" },
+      { title: "Weight Management", category: "HEALTHCARE" },
+      { title: "Chronic Disease Programs", category: "MANAGED CARE" },
+    ],
+  },
+
+  "hospital-management": {
+    title: "Hospital Management & Operations Systems",
+    tagline: "Integrated HMS for bed management, staff scheduling, supply chain, and financial operations.",
+    tags: ["Hospital Management", "HMS", "Operations", "Resource Planning"],
+    overview:
+      "Optimize hospital operations with comprehensive management systems. Coordinate bed placement, staff scheduling, OR scheduling, supply chain, patient flow, billing, and financial reporting—providing real-time visibility into resource utilization and operational efficiency across the enterprise.",
+    features: [
+      {
+        title: "Bed Management",
+        description: "Real-time bed status, patient placement algorithms, transfer coordination, and discharge planning.",
+      },
+      {
+        title: "Staff Scheduling",
+        description: "Workforce management with credential tracking, shift scheduling, time & attendance, and skill mix optimization.",
+      },
+      {
+        title: "OR Management",
+        description: "Surgery scheduling, case coordination, preference cards, and OR utilization analytics.",
+      },
+      {
+        title: "Supply Chain",
+        description: "Inventory management, purchasing, vendor management, and clinical supply integration with EHR.",
+      },
+    ],
+    whenYouNeedThis: [
+      {
+        title: "Capacity Constraints",
+        description: "Boarding patients in ED due to lack of bed visibility and inefficient patient placement processes.",
+      },
+      {
+        title: "Operational Inefficiency",
+        description: "Siloed systems creating manual workflows, data entry duplication, and lack of real-time visibility.",
+      },
+      {
+        title: "Financial Pressure",
+        description: "Need to reduce costs and improve margins through better resource utilization and supply chain management.",
+      },
+    ],
+    industries: [
+      { title: "Hospital Systems", category: "HEALTHCARE" },
+      { title: "Academic Medical Centers", category: "HEALTHCARE" },
+      { title: "Ambulatory Surgery Centers", category: "OUTPATIENT" },
+    ],
+  },
+
+  "diagnostics-ai": {
+    title: "AI-Powered Diagnostics & Clinical Decision Support",
+    tagline: "Machine learning models for disease detection, diagnosis assistance, and treatment recommendations.",
+    tags: ["AI Diagnostics", "Machine Learning", "Clinical Decision Support", "Medical AI"],
+    overview:
+      "Augment clinical expertise with AI-powered diagnostic tools. Deploy machine learning models for medical image analysis, early disease detection, diagnosis suggestions, treatment protocol recommendations, and risk prediction—improving accuracy, speed, and consistency of clinical decisions.",
+    features: [
+      {
+        title: "Medical Image Analysis",
+        description: "Deep learning models for radiology, pathology, dermatology, and ophthalmology image interpretation.",
+      },
+      {
+        title: "Diagnosis Assistance",
+        description: "Differential diagnosis suggestions based on symptoms, labs, imaging, and patient history.",
+      },
+      {
+        title: "Treatment Recommendations",
+        description: "Evidence-based treatment protocols personalized to patient characteristics and comorbidities.",
+      },
+      {
+        title: "Risk Prediction",
+        description: "Predict patient deterioration, readmission risk, or disease progression using ML models.",
+      },
+    ],
+    whenYouNeedThis: [
+      {
+        title: "Diagnostic Accuracy",
+        description: "Variability in diagnostic accuracy or missed findings; AI can provide second opinion and improve consistency.",
+      },
+      {
+        title: "Specialist Shortage",
+        description: "Lack of specialists in certain areas; AI can extend capacity and provide guidance to generalists.",
+      },
+      {
+        title: "Complex Decisions",
+        description: "Complex patients with multiple conditions; AI can synthesize large amounts of data for decision support.",
+      },
+    ],
+    industries: [
+      { title: "Radiology Groups", category: "DIAGNOSTICS" },
+      { title: "Hospital Systems", category: "HEALTHCARE" },
+      { title: "Pathology Labs", category: "DIAGNOSTICS" },
+    ],
+  },
 };

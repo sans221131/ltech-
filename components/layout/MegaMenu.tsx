@@ -3,6 +3,8 @@
 import { useState, useEffect, useRef } from "react";
 import Link from "next/link";
 import { INDUSTRIES, type Industry } from "./megaMenuData";
+import { MAIN_SERVICE_TITLES } from "@/app/services/[slug]/mainservice_data";
+import { slugFromHref } from "./menuUtils";
 
 interface MegaMenuProps {
   isOpen: boolean;
@@ -132,7 +134,7 @@ export default function MegaMenu({ isOpen, onClose, menuCloseTimeoutRef }: MegaM
                         </h3>
                       </div>
                       <p className="text-[15px] text-[var(--muted)] max-w-3xl">
-                        {activeIndustry.description} • {activeIndustry.solutions.length} solutions available
+                        {activeIndustry.description} • {activeIndustry.solutions.filter(s => MAIN_SERVICE_TITLES.hasOwnProperty(slugFromHref(s.href))).length} solutions available
                       </p>
                     </div>                    <Link
                       href={`/solutions?industry=${activeIndustry.id}`}
@@ -154,25 +156,33 @@ export default function MegaMenu({ isOpen, onClose, menuCloseTimeoutRef }: MegaM
 
                 {/* 5 columns x 4 rows grid - optimized for performance */}
                 <div className="grid grid-cols-5 gap-x-4 gap-y-4 overflow-y-auto pr-4 custom-scrollbar" style={{ maxHeight: "calc(100vh - 360px)" }}>
-                  {activeIndustry.solutions.map((solution, idx) => (
-                    <Link
-                      key={`${activeIndustry.id}-${solution.title}`}
-                      href={solution.href}
-                      className="group/solution block p-4 rounded-xl hover:bg-gradient-to-br hover:from-[var(--card)] hover:to-white border border-[var(--border)]/40 hover:border-[var(--accent)]/60 transition-colors duration-150 hover:shadow-lg"
-                    >
-                      <div className="flex items-start gap-3">
-                        <div className="size-2 rounded-full bg-[var(--accent)]/40 group-hover/solution:bg-[var(--accent)] mt-1.5 flex-shrink-0 transition-colors duration-150" />
-                        <div className="flex-1 min-w-0">
-                          <h4 className="text-[14px] font-semibold text-[var(--fg)] mb-1.5 leading-tight group-hover/solution:text-[var(--accent)] transition-colors duration-150">
-                            {solution.title}
-                          </h4>
-                          <p className="text-[12px] text-[var(--muted)] leading-snug line-clamp-2">
-                            {solution.description}
-                          </p>
-                        </div>
-                      </div>
-                    </Link>
-                  ))}
+                  {activeIndustry.solutions
+                    .filter((solution) => {
+                      const slug = slugFromHref(solution.href);
+                      return MAIN_SERVICE_TITLES.hasOwnProperty(slug);
+                    })
+                    .map((solution, idx) => {
+                      const slug = slugFromHref(solution.href);
+                      return (
+                        <Link
+                          key={`${activeIndustry.id}-${solution.title}`}
+                          href={solution.href}
+                          className="group/solution block p-4 rounded-xl hover:bg-gradient-to-br hover:from-[var(--card)] hover:to-white border border-[var(--border)]/40 hover:border-[var(--accent)]/60 transition-colors duration-150 hover:shadow-lg"
+                        >
+                          <div className="flex items-start gap-3">
+                            <div className="size-2 rounded-full bg-[var(--accent)]/40 group-hover/solution:bg-[var(--accent)] mt-1.5 flex-shrink-0 transition-colors duration-150" />
+                            <div className="flex-1 min-w-0">
+                              <h4 className="text-[14px] font-semibold text-[var(--fg)] mb-1.5 leading-tight group-hover/solution:text-[var(--accent)] transition-colors duration-150">
+                                {MAIN_SERVICE_TITLES[slug] || solution.title}
+                              </h4>
+                              <p className="text-[12px] text-[var(--muted)] leading-snug line-clamp-2">
+                                {solution.description}
+                              </p>
+                            </div>
+                          </div>
+                        </Link>
+                      );
+                    })}
                 </div>
 
                 {/* Footer note */}

@@ -6,6 +6,8 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import MegaMenu from "./MegaMenu";
 import { INDUSTRIES } from "./megaMenuData";
+import { MAIN_SERVICE_TITLES } from "@/app/services/[slug]/mainservice_data";
+import { slugFromHref } from "./menuUtils";
 
 const NAV_LINKS = [
   { href: "/#process", label: "Process" },
@@ -417,34 +419,42 @@ export default function SiteHeader() {
                         <div className="flex items-center gap-2 mb-4">
                           <div className="size-2 rounded-full bg-[var(--accent)]" />
                           <h4 className="text-base font-bold text-[var(--fg)]">{industry.name}</h4>
-                          <span className="text-xs text-[var(--muted)]">({industry.solutions.length})</span>
+                          <span className="text-xs text-[var(--muted)]">({industry.solutions.filter(s => MAIN_SERVICE_TITLES.hasOwnProperty(slugFromHref(s.href))).length})</span>
                         </div>
 
                         {/* Services grid */}
                         <div className="space-y-2">
-                          {industry.solutions.map((solution) => (
-                            <Link
-                              key={`${industry.id}-${solution.title}`}
-                              href={solution.href}
-                              onClick={() => {
-                                setMobileMenuOpen(false);
-                                setMobileSubmenuOpen(null);
-                              }}
-                              className="group flex items-center gap-3 p-3 rounded-lg bg-white border border-[var(--border)] hover:border-[var(--accent)] hover:shadow-md transition-all duration-200"
-                            >
-                              <div className="size-8 rounded-lg bg-[var(--card)] group-hover:bg-[var(--accent)]/10 flex items-center justify-center flex-shrink-0 transition-all">
-                                <div className="size-1.5 rounded-full bg-[var(--accent)]" />
-                              </div>
-                              <div className="flex-1 min-w-0">
-                                <div className="font-medium text-sm text-[var(--fg)] group-hover:text-[var(--accent)] transition-colors">
-                                  {solution.title}
-                                </div>
-                              </div>
-                              <svg className="w-4 h-4 text-[var(--muted)] group-hover:text-[var(--accent)] transition-colors flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2} aria-hidden="true">
-                                <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
-                              </svg>
-                            </Link>
-                          ))}
+                          {industry.solutions
+                            .filter((solution) => {
+                              const slug = slugFromHref(solution.href);
+                              return MAIN_SERVICE_TITLES.hasOwnProperty(slug);
+                            })
+                            .map((solution) => {
+                              const slug = slugFromHref(solution.href);
+                              return (
+                                <Link
+                                  key={`${industry.id}-${solution.title}`}
+                                  href={solution.href}
+                                  onClick={() => {
+                                    setMobileMenuOpen(false);
+                                    setMobileSubmenuOpen(null);
+                                  }}
+                                  className="group flex items-center gap-3 p-3 rounded-lg bg-white border border-[var(--border)] hover:border-[var(--accent)] hover:shadow-md transition-all duration-200"
+                                >
+                                  <div className="size-8 rounded-lg bg-[var(--card)] group-hover:bg-[var(--accent)]/10 flex items-center justify-center flex-shrink-0 transition-all">
+                                    <div className="size-1.5 rounded-full bg-[var(--accent)]" />
+                                  </div>
+                                  <div className="flex-1 min-w-0">
+                                    <div className="font-medium text-sm text-[var(--fg)] group-hover:text-[var(--accent)] transition-colors">
+                                      {MAIN_SERVICE_TITLES[slug] || solution.title}
+                                    </div>
+                                  </div>
+                                  <svg className="w-4 h-4 text-[var(--muted)] group-hover:text-[var(--accent)] transition-colors flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2} aria-hidden="true">
+                                    <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
+                                  </svg>
+                                </Link>
+                              );
+                            })}
                         </div>
                       </div>
                     ))}

@@ -496,4 +496,94 @@ export const ecommerceServices: Record<string, ServiceData> = {
       { title: "Media & Entertainment", category: "CONTENT" },
     ],
   },
+
+  "live-shopping": {
+    title: "Live Shopping & Video Commerce",
+    tagline: "Interactive livestream shopping experiences with real-time engagement and instant purchasing.",
+    tags: ["Live Shopping", "Video Commerce", "Social Selling", "Livestream"],
+    overview:
+      "Bring the excitement of TV shopping to digital with live commerce platforms. Enable influencers and brands to showcase products via livestream video, interact with viewers through chat and polls, feature products during streams, and enable instant one-click purchasing—creating engaging shopping experiences that drive conversion.",
+    features: [
+      {
+        title: "Live Streaming",
+        description: "HD livestream with chat, emoji reactions, viewer counts, and screen sharing for product demos.",
+      },
+      {
+        title: "Product Showcasing",
+        description: "Pin products to video with instant 'Add to Cart' buttons; viewers purchase without leaving stream.",
+      },
+      {
+        title: "Audience Engagement",
+        description: "Live chat, polls, Q&A sessions, limited-time offers, and flash sales during broadcasts.",
+      },
+      {
+        title: "Analytics & Recording",
+        description: "Track viewership, engagement, conversion by product, and save recordings for on-demand viewing.",
+      },
+    ],
+    whenYouNeedThis: [
+      {
+        title: "Engagement Innovation",
+        description: "Static product pages not engaging customers; need interactive format to showcase product benefits.",
+      },
+      {
+        title: "Product Education",
+        description: "Complex products requiring demonstration or styling advice; video format allows real-time education.",
+      },
+      {
+        title: "Social Commerce Strategy",
+        description: "Want to leverage influencers and create social shopping events to drive traffic and sales spikes.",
+      },
+    ],
+    industries: [
+      { title: "Fashion & Beauty", category: "RETAIL" },
+      { title: "Home Shopping Networks", category: "MEDIA" },
+      { title: "Creator Economy", category: "SOCIAL" },
+    ],
+  },
+
+  "social-commerce": {
+    title: "Social Commerce & Shoppable Content",
+    tagline: "Shoppable posts, influencer marketplaces, and social media integrations for native shopping.",
+    tags: ["Social Commerce", "Influencer", "Shoppable Posts", "Instagram Shopping"],
+    overview:
+      "Turn social media into sales channels with integrated social commerce. Create shoppable posts and stories, manage influencer partnerships, enable native checkout on social platforms, track social attribution, and build community-driven shopping experiences—meeting customers where they already spend time.",
+    features: [
+      {
+        title: "Shoppable Content",
+        description: "Tag products in social posts and stories with direct purchase links; integrate with Instagram, TikTok, Pinterest.",
+      },
+      {
+        title: "Influencer Marketplace",
+        description: "Connect with influencers, manage campaigns, provide affiliate links, and track sales attribution.",
+      },
+      {
+        title: "Social Checkout",
+        description: "Enable native in-app purchasing on social platforms with integrated inventory and order management.",
+      },
+      {
+        title: "UGC Integration",
+        description: "Collect and display user-generated content as social proof; enable customers to shop looks from photos.",
+      },
+    ],
+    whenYouNeedThis: [
+      {
+        title: "Social Media ROI",
+        description: "Strong social media presence but can't track or drive direct sales from social channels.",
+      },
+      {
+        title: "Discovery Shopping",
+        description: "Target audience discovers products through social media; need frictionless path from discovery to purchase.",
+      },
+      {
+        title: "Influencer Marketing",
+        description: "Running influencer campaigns but lack infrastructure to manage partnerships and attribute sales.",
+      },
+    ],
+    industries: [
+      { title: "Fashion & Apparel", category: "RETAIL" },
+      { title: "Beauty & Cosmetics", category: "RETAIL" },
+      { title: "Lifestyle Brands", category: "DTC" },
+    ],
+  },
 };
