@@ -586,4 +586,172 @@ export const ecommerceServices: Record<string, ServiceData> = {
       { title: "Lifestyle Brands", category: "DTC" },
     ],
   },
+
+  "warehouse-system": {
+    title: "E-Commerce Warehouse Management",
+    tagline: "Logistics automation with pick-pack-ship workflows, inventory tracking, and shipping integration.",
+    tags: ["Warehouse", "Logistics", "Fulfillment", "Inventory"],
+    overview:
+      "Optimize warehouse operations with integrated WMS designed for e-commerce. Streamline receiving, putaway, picking, packing, and shipping processes. Barcode scanning, multi-location tracking, batch picking, and automated carrier selection—reducing errors and speeding up fulfillment.",
+    features: [
+      { title: "Pick-Pack Workflows", description: "Optimized picking routes, batch picking for multiple orders, packing stations with dimension capture." },
+      { title: "Inventory Tracking", description: "Real-time stock levels by location, bin management, cycle counting, and automated reorder points." },
+      { title: "Shipping Integration", description: "Rate shopping across carriers, automated label printing, tracking number assignment, and manifesting." },
+      { title: "Returns Processing", description: "Receive returns with QC inspection, restocking workflows, and refund/exchange automation." },
+    ],
+    whenYouNeedThis: [
+      { title: "Manual Fulfillment", description: "Paper-based picking and packing causing errors, delays, and inability to scale operations." },
+      { title: "Inventory Accuracy", description: "Stock discrepancies between system and physical inventory causing oversells and stockouts." },
+      { title: "Fulfillment Speed", description: "Customers expect same-day/next-day shipping; current processes too slow to meet expectations." },
+    ],
+    industries: [
+      { title: "E-Commerce Fulfillment", category: "RETAIL" },
+      { title: "DTC Brands", category: "CONSUMER" },
+      { title: "Multi-Channel Retail", category: "OMNICHANNEL" },
+    ],
+  },
+
+  "returns-portal": {
+    title: "Returns & RMA Management",
+    tagline: "Self-service returns portal with automated RMA, refund processing, and analytics.",
+    tags: ["Returns", "RMA", "Customer Service", "Reverse Logistics"],
+    overview:
+      "Streamline returns with customer-friendly self-service portal. Automate RMA generation, provide prepaid shipping labels, track return shipments, inspect returned items, process refunds or exchanges automatically, and analyze return reasons to reduce future returns.",
+    features: [
+      { title: "Self-Service Portal", description: "Customers initiate returns, select reason, get instant RMA and prepaid label without contacting support." },
+      { title: "Return Reasons Analytics", description: "Track why customers return items; identify quality issues, sizing problems, or misleading descriptions." },
+      { title: "Refund Automation", description: "Automatically process refunds or issue store credit once return is received and inspected." },
+      { title: "Restocking Workflows", description: "QC inspection checklists, damage documentation, and automated inventory restocking or disposal." },
+    ],
+    whenYouNeedThis: [
+      { title: "Returns Volume", description: "High returns volume overwhelming customer service; need self-service to reduce support tickets." },
+      { title: "Manual RMA Process", description: "Processing returns via email and phone; inefficient and provides poor customer experience." },
+      { title: "Return Insights", description: "Don't understand why customers return products; need data to reduce returns and improve quality." },
+    ],
+    industries: [
+      { title: "Fashion E-Commerce", category: "APPAREL" },
+      { title: "Consumer Electronics", category: "TECH" },
+      { title: "Home Goods", category: "FURNITURE" },
+    ],
+  },
+
+  "gift-registry": {
+    title: "Gift Registry & Wishlist Platform",
+    tagline: "Wedding, baby, and event registries with group gifting and thank-you card management.",
+    tags: ["Gift Registry", "Wishlist", "Events", "Group Gifting"],
+    overview:
+      "Enable customers to create registries for weddings, baby showers, birthdays, and holidays. Public or private registry links, group gifting for expensive items, purchase tracking to avoid duplicates, address collection for gift shipping, and thank-you card management—creating sticky customer relationships.",
+    features: [
+      { title: "Multi-Event Registries", description: "Support weddings, baby showers, birthdays, housewarmings with event-specific features and templates." },
+      { title: "Group Gifting", description: "Multiple people contribute toward expensive items; registry owner gets full value once goal reached." },
+      { title: "Duplicate Prevention", description: "Real-time purchase tracking prevents duplicate gifts; guests see what's already been purchased." },
+      { title: "Thank-You Management", description: "Track who purchased what, collect gift messages, manage thank-you card mailing list." },
+    ],
+    whenYouNeedThis: [
+      { title: "Customer Retention", description: "Registries create long-term customer relationships; capture life events for repeat business." },
+      { title: "Competitive Feature", description: "Customers expect registry functionality for gift-appropriate products; lacking it loses sales to competitors." },
+      { title: "Viral Growth", description: "Each registry shared with dozens of potential new customers; registries drive customer acquisition." },
+    ],
+    industries: [
+      { title: "Home Goods", category: "FURNITURE" },
+      { title: "Baby Products", category: "CHILDREN" },
+      { title: "Kitchen & Dining", category: "HOUSEWARES" },
+    ],
+  },
+
+  "b2b-portal": {
+    title: "B2B Trade Portal & Account Management",
+    tagline: "Wholesale customer portal with custom pricing, approval workflows, and account teams.",
+    tags: ["B2B Portal", "Trade Accounts", "Wholesale", "Enterprise Sales"],
+    overview:
+      "Provide enterprise-grade B2B experience for wholesale customers. Multi-user accounts with role-based permissions, approval workflows for large orders, customer-specific pricing and catalogs, purchase order management, net terms, account representatives, and detailed order history—professionalizing your wholesale channel.",
+    features: [
+      { title: "Multi-User Accounts", description: "Company accounts with multiple users; roles for purchaser, approver, and admin with permission controls." },
+      { title: "Approval Workflows", description: "Set spending limits requiring manager approval; purchase order workflows with multi-step sign-off." },
+      { title: "Custom Pricing", description: "Customer-specific pricing tiers, contract pricing, volume discounts displayed automatically to qualified buyers." },
+      { title: "Account Management", description: "Assign sales reps to accounts; reps can place orders on behalf of customers and manage relationships." },
+    ],
+    whenYouNeedThis: [
+      { title: "B2B Complexity", description: "Wholesale customers have procurement processes requiring multi-user accounts and approval workflows." },
+      { title: "Enterprise Customers", description: "Large B2B customers expect professional portal experience with features like PO management." },
+      { title: "Sales Team Efficiency", description: "Account managers spending too much time on order entry; need customer self-service." },
+    ],
+    industries: [
+      { title: "B2B Wholesale", category: "DISTRIBUTION" },
+      { title: "Manufacturing", category: "INDUSTRIAL" },
+      { title: "Office Supplies", category: "BUSINESS SERVICES" },
+    ],
+  },
+
+  "dropshipping": {
+    title: "Dropshipping Automation Platform",
+    tagline: "Supplier integration with automated order routing, inventory sync, and shipment tracking.",
+    tags: ["Dropshipping", "Supplier Management", "Order Automation", "Fulfillment"],
+    overview:
+      "Scale dropshipping operations with automated supplier integration. Import product catalogs from suppliers, sync inventory in real-time, automatically forward orders with customer details, track shipments, manage supplier relationships, and maintain brand consistency—all without holding inventory.",
+    features: [
+      { title: "Supplier Network", description: "Connect to dropshipping suppliers via API or CSV imports; centralized supplier catalog management." },
+      { title: "Auto Order Forwarding", description: "Forward orders to suppliers automatically with custom formatting, routing rules, and notification preferences." },
+      { title: "Inventory Synchronization", description: "Sync supplier stock levels multiple times daily; prevent overselling with real-time availability checks." },
+      { title: "Profit Tracking", description: "Track supplier costs vs. selling price; calculate margins by product, supplier, and order." },
+    ],
+    whenYouNeedThis: [
+      { title: "Zero Inventory Risk", description: "Want to expand product selection without inventory investment, warehousing costs, or fulfillment overhead." },
+      { title: "Manual Supplier Orders", description: "Manually forwarding orders to suppliers is time-consuming and error-prone; need automation." },
+      { title: "Inventory Challenges", description: "Out-of-stock issues with dropship products causing customer complaints; need real-time sync." },
+    ],
+    industries: [
+      { title: "E-Commerce Startups", category: "ONLINE RETAIL" },
+      { title: "Niche Retailers", category: "SPECIALTY" },
+      { title: "Print-on-Demand", category: "CUSTOM PRODUCTS" },
+    ],
+  },
+
+  "pos-integration": {
+    title: "Omnichannel POS Integration",
+    tagline: "Unified commerce with real-time inventory sync between online and retail stores.",
+    tags: ["POS", "Omnichannel", "Retail Integration", "Unified Commerce"],
+    overview:
+      "Connect online and offline channels with integrated POS system. Real-time inventory synchronization across stores and e-commerce, buy-online-pickup-in-store (BOPIS), ship-from-store fulfillment, unified customer profiles, and centralized reporting—delivering seamless omnichannel experiences.",
+    features: [
+      { title: "Real-Time Inventory Sync", description: "Inventory updates instantly across all channels; prevent overselling and enable accurate stock visibility." },
+      { title: "BOPIS & Curbside", description: "Buy online, pick up in store with ready-for-pickup notifications and in-store pickup workflows." },
+      { title: "Ship-From-Store", description: "Fulfill online orders from retail stores; turn stores into mini fulfillment centers for faster delivery." },
+      { title: "Unified Customer Data", description: "Single customer profile across channels; online purchases earn in-store loyalty points and vice versa." },
+    ],
+    whenYouNeedThis: [
+      { title: "Omnichannel Strategy", description: "Have both online and physical stores but they operate in silos; customers expect unified experience." },
+      { title: "Inventory Inefficiency", description: "Stock sitting in stores while online shows out-of-stock; can't leverage full inventory network." },
+      { title: "Customer Expectations", description: "Customers want BOPIS and ship-from-store; lack of omnichannel features losing sales to competitors." },
+    ],
+    industries: [
+      { title: "Multi-Location Retail", category: "BRICK-AND-MORTAR" },
+      { title: "Fashion Retailers", category: "APPAREL" },
+      { title: "Specialty Stores", category: "RETAIL" },
+    ],
+  },
+
+  "search-filters": {
+    title: "Advanced Search & Product Discovery",
+    tagline: "AI-powered search with faceted filtering, auto-suggestions, and visual search.",
+    tags: ["Search", "Product Discovery", "Filters", "AI Search"],
+    overview:
+      "Help customers find products faster with intelligent search and discovery. AI-powered search understands synonyms and intent, faceted filtering by attributes, autocomplete suggestions, search analytics, visual search by image, and personalized results based on behavior—reducing time-to-purchase and improving conversion.",
+    features: [
+      { title: "Intelligent Search", description: "NLP understands natural language queries, handles typos, synonyms, and shows relevant results even with imperfect input." },
+      { title: "Faceted Filtering", description: "Filter by price, brand, size, color, rating with dynamic filter options based on search results." },
+      { title: "Visual Search", description: "Upload photo to find similar products; perfect for fashion and home decor where visual match matters." },
+      { title: "Search Analytics", description: "Track popular searches, zero-result queries, and search-to-conversion rates; optimize catalog and SEO." },
+    ],
+    whenYouNeedThis: [
+      { title: "Large Catalog", description: "Thousands of products making it hard for customers to find what they want; poor search drives abandonment." },
+      { title: "Low Conversion", description: "Customers search but don't find; zero-result searches or irrelevant results hurting conversion rates." },
+      { title: "Mobile Experience", description: "Mobile users need quick product discovery; robust filtering is essential for small screens." },
+    ],
+    industries: [
+      { title: "Fashion E-Commerce", category: "APPAREL" },
+      { title: "Marketplace Platforms", category: "MULTI-VENDOR" },
+      { title: "Electronics Retail", category: "CONSUMER TECH" },
+    ],
+  },
 };
