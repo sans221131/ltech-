@@ -4,6 +4,7 @@
 import Link from "next/link";
 import { useMemo } from "react";
 import { CardContainer, CardBody, CardItem } from "@/components/ui/3d-card";
+import MAIN_SERVICE_TITLES from "@/app/services/[slug]/mainservice_data";
 
 type Service = {
   title: string;
@@ -33,19 +34,50 @@ const slugify = (s: string) =>
     .replace(/(^-|-$)+/g, "");
 
 export default function ServicesSection() {
-  const services: Service[] = useMemo(
-    () =>
-      SERVICES_TITLES.map((t) => {
-        const slug = slugify(t);
+  const services: Service[] = useMemo(() => {
+    // Build a simple fuzzy match to MAIN_SERVICE_TITLES values/keys.
+    const mainEntries = Object.entries(MAIN_SERVICE_TITLES);
+
+    const findClosest = (title: string) => {
+      const words = title
+        .toLowerCase()
+        .replace(/[^a-z0-9\s]+/g, " ")
+        .split(/\s+/)
+        .filter(Boolean);
+
+      let best: { key: string; value: string; score: number } | null = null;
+      for (const [key, value] of mainEntries) {
+        const hay = (key + " " + value).toLowerCase();
+        let score = 0;
+        for (const w of words) {
+          if (hay.includes(w)) score += 1;
+        }
+        if (score > 0 && (!best || score > best.score)) {
+          best = { key, value, score };
+        }
+      }
+      return best;
+    };
+
+    return SERVICES_TITLES.map((t) => {
+      const slug = slugify(t);
+      const match = findClosest(t);
+      if (match) {
         return {
-          title: t,
-          slug,
-          href: `/services/${slug}`,
+          title: match.value,
+          slug: match.key,
+          href: `/services/${match.key}`,
           blurb: getBlurb(t),
-        };
-      }),
-    []
-  );
+        } as Service;
+      }
+      return {
+        title: t,
+        slug,
+        href: `/services/${slug}`,
+        blurb: getBlurb(t),
+      } as Service;
+    });
+  }, []);
 
   return (
     <section
@@ -84,7 +116,7 @@ export default function ServicesSection() {
         >
           {services.map((svc, idx) => (
             <li
-              key={svc.slug}
+              key={`${svc.slug}-${idx}`}
               style={{
                 animation: `fadeInUp 0.6s ease-out ${idx * 0.05}s both`,
               }}

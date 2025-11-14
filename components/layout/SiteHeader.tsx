@@ -11,8 +11,8 @@ import { slugFromHref } from "./menuUtils";
 
 const NAV_LINKS = [
   { href: "/#process", label: "Process" },
-  { href: "/#team", label: "Team" },
-  { href: "/#contact", label: "Contact" },
+  { href: "/#team-reliability", label: "Team" },
+  { href: "/#submit-brief", label: "Contact" },
 ];
 
 export default function SiteHeader() {
@@ -319,7 +319,7 @@ export default function SiteHeader() {
                     </Link>
 
                     <Link
-                      href="/#team"
+                      href="/#team-reliability"
                       onClick={() => setMobileMenuOpen(false)}
                       className="group flex items-center gap-4 p-4 rounded-xl bg-white border border-[var(--border)] hover:border-[var(--accent)] hover:shadow-lg transition-all duration-200"
                     >
