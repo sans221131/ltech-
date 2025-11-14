@@ -5,7 +5,7 @@ export const MAIN_SERVICE_TITLES: Record<string, string> = {
   // FinTech
   "payment-gateway": "Payment Gateway",
   "digital-banking": "Digital Banking",
-  "blockchain-wallets": "Blockchain Wallets",
+  // "blockchain-wallets": "Blockchain Wallets",
   "kyc-automation": "KYC Automation",
   "fraud-detection": "Fraud Detection",
   "lending-platforms": "Lending Platforms",

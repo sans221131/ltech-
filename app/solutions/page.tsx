@@ -4,6 +4,7 @@ import { useState, useEffect, Suspense } from "react";
 import { useSearchParams } from "next/navigation";
 import Link from "next/link";
 import { INDUSTRIES } from "@/components/layout/megaMenuData";
+import MAIN_SERVICE_TITLES from "@/app/services/[slug]/mainservice_data";
 import SiteLayout from "@/components/layout/SiteLayout";
 
 function SolutionsContent() {
@@ -19,6 +20,18 @@ function SolutionsContent() {
   }, [industryParam]);
 
   const currentIndustry = INDUSTRIES.find(ind => ind.id === activeIndustry) || INDUSTRIES[0];
+
+  const slugFromHref = (href: string | undefined) => {
+    if (!href) return "";
+    return href.replace(/^\/services\//, "").replace(/^\/solutions\//, "").replace(/\/$/, "");
+  };
+
+  const isAvailable = (href?: string) => {
+    const slug = slugFromHref(href);
+    return slug ? Object.prototype.hasOwnProperty.call(MAIN_SERVICE_TITLES, slug) : false;
+  };
+
+  const visibleSolutions = currentIndustry.solutions.filter((s) => isAvailable(s.href));
 
   return (
     <div className="min-h-screen bg-[var(--bg)]">
@@ -81,7 +94,7 @@ function SolutionsContent() {
                             ? "text-white/80"
                             : "text-[var(--muted)]"
                         ].join(" ")}>
-                          {industry.solutions.length} solutions
+                          {industry.solutions.filter(s => isAvailable(s.href)).length} solutions
                         </div>
                       </button>
                     ))}
@@ -97,13 +110,13 @@ function SolutionsContent() {
                   {currentIndustry.name}
                 </h2>
                 <p className="text-base text-[var(--muted)]">
-                  {currentIndustry.description} • {currentIndustry.solutions.length} solutions available
+                  {currentIndustry.description} • {visibleSolutions.length} solutions available
                 </p>
               </div>
 
               {/* Solutions Grid */}
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                {currentIndustry.solutions.map((solution, idx) => (
+                {visibleSolutions.map((solution, idx) => (
                   <Link
                     key={`${currentIndustry.id}-${idx}`}
                     href={solution.href}
