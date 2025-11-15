@@ -2,138 +2,138 @@
 import { ServiceData } from "./serviceData";
 
 export const fintechServices: Record<string, ServiceData> = {
-  "payment-gateway": {
-    title: "Payment Gateway Solutions",
-    tagline: "Secure, compliant payment processing infrastructure that scales with your transaction volume.",
-    tags: ["Payments", "PCI-DSS", "API Integration", "Real-time"],
+  "quantitative-risk-labs": {
+    title: "Quantitative Risk Labs",
+    tagline: "Bespoke risk modeling and stress-testing platforms for institutional finance.",
+    tags: ["Risk", "Quantitative", "Stress Testing", "Monte Carlo"],
     overview:
-      "Build robust payment processing systems with multi-currency support, fraud detection, and PCI-DSS compliance. Our solutions handle high-volume transactions with sub-second latency, support multiple payment methods, and provide detailed reconciliation tools for your finance team.",
+      "Design advanced quantitative toolsets that simulate market shocks, run scenario analysis, and calibrate risk models at portfolio scale. Our labs integrate market data, factor models, and custom scenarios to deliver actionable capital and liquidity forecasts.",
     features: [
       {
-        title: "Multi-Payment Method Support",
-        description: "Accept credit cards, digital wallets, ACH, wire transfers, and cryptocurrency with unified API.",
+        title: "Scenario Simulation Engine",
+        description: "Run large-scale Monte Carlo and historical-scenario simulations with distributed compute and reproducible pipelines.",
       },
       {
-        title: "Fraud Detection Engine",
-        description: "ML-powered fraud scoring with velocity checks, device fingerprinting, and real-time risk assessment.",
+        title: "Model Governance",
+        description: "Versioned models, automated validation, and explainability reports to satisfy audit and regulator requirements.",
       },
       {
-        title: "PCI-DSS Compliance",
-        description: "Tokenization, secure vaults, and audit logging that meet Level 1 PCI requirements out of the box.",
+        title: "Portfolio Attribution",
+        description: "Decompose P&L and risk contributions across factors, instruments, and desks with interactive dashboards.",
       },
       {
-        title: "Reconciliation & Reporting",
-        description: "Automated settlement matching, chargeback management, and detailed transaction reporting dashboards.",
+        title: "Real-Time Risk Feeds",
+        description: "Low-latency ingestion of market and position data to compute intraday exposures and breach alerts.",
       },
     ],
     whenYouNeedThis: [
       {
-        title: "Scaling Transaction Volume",
-        description: "Current payment provider can't handle peak loads; need infrastructure that scales to millions of transactions per day.",
+        title: "Regulatory Stress Tests",
+        description: "Automate capital and liquidity stress testing to meet regulator timelines and reporting formats.",
       },
       {
-        title: "International Expansion",
-        description: "Entering new markets requires local payment methods, multi-currency support, and regional compliance.",
+        title: "New Product Risk",
+        description: "Assess risk impact of novel financial products or structured trades before go-live.",
       },
       {
-        title: "Cost Optimization",
-        description: "Payment processing fees eating into margins; need to negotiate better rates or own more of the stack.",
+        title: "Model Risk Management",
+        description: "Consolidate model catalogue, run validations, and maintain reproducibility for governance.",
       },
     ],
     industries: [
-      { title: "E-Commerce Platforms", category: "RETAIL" },
-      { title: "Subscription Services", category: "SAAS" },
-      { title: "Marketplace Platforms", category: "MARKETPLACE" },
+      { title: "Investment Banks", category: "FINANCIAL SERVICES" },
+      { title: "Hedge Funds", category: "ASSET MANAGEMENT" },
+      { title: "Treasury", category: "CORPORATE" },
     ],
   },
 
-  "digital-banking": {
-    title: "Digital Banking Core Systems",
-    tagline: "Modern core banking infrastructure for neobanks and financial institutions.",
-    tags: ["Core Banking", "Account Management", "Ledger", "Compliance"],
+  "real-time-liquidity-orchestration": {
+    title: "Real-Time Liquidity Orchestration",
+    tagline: "Dynamic liquidity routing and funding orchestration across accounts and rails.",
+    tags: ["Liquidity", "Treasury", "Orchestration", "Real-Time"],
     overview:
-      "Launch digital banking products with a flexible core system built on modern architecture. Support multiple account types, real-time ledger updates, automated compliance reporting, and seamless integration with payment networks and third-party services.",
+      "Optimize intraday liquidity and funding costs with an orchestration layer that routes payments, borrows from credit lines, and sweeps balances in real time. Reduce overdraft risk and minimize funding costs using predictive models and policy-driven routing across multiple bank accounts and settlement rails.",
     features: [
       {
-        title: "Real-Time Ledger",
-        description: "Double-entry accounting system with ACID guarantees and instant balance updates for all transactions.",
+        title: "Dynamic Routing",
+        description: "Route outgoing payments through the most cost-effective rails based on liquidity, fees, and timing constraints.",
       },
       {
-        title: "Multi-Product Support",
-        description: "Checking, savings, loans, credit cards, and investment accounts managed through unified platform.",
+        title: "Auto-Funding Policies",
+        description: "Automatically draw on credit facilities or execute intraday sweeps to meet payment obligations.",
       },
       {
-        title: "Regulatory Reporting",
-        description: "Automated OFAC screening, CTR/SAR filing, and audit trail generation for compliance requirements.",
+        title: "Predictive Liquidity Models",
+        description: "Machine-learning forecasts for cash flows and balance trajectories to preempt shortfalls.",
       },
       {
-        title: "Open Banking APIs",
-        description: "RESTful APIs with OAuth2 for account aggregation, payment initiation, and third-party integrations.",
+        title: "Centralized Treasury Dashboard",
+        description: "Real-time view of balances, exposures, and funding decisions with simulation capabilities.",
       },
     ],
     whenYouNeedThis: [
       {
-        title: "Legacy System Constraints",
-        description: "Mainframe-based core can't support new digital products; innovation is blocked by technical limitations.",
+        title: "High Payment Volume",
+        description: "Manage liquidity efficiently when processing large numbers of payments across regions.",
       },
       {
-        title: "Neobank Launch",
-        description: "Starting a digital-first bank or fintech product; need modern core without legacy baggage.",
+        title: "Cost Reduction",
+        description: "Reduce fees and borrowing costs by optimizing rail selection and timing of transfers.",
       },
       {
-        title: "API Monetization",
-        description: "Want to offer Banking-as-a-Service (BaaS) to partners but current system lacks API capabilities.",
+        title: "Treasury Consolidation",
+        description: "Centralize treasury functions for multi-entity organizations to improve visibility and control.",
       },
     ],
     industries: [
-      { title: "Retail Banking", category: "FINANCIAL SERVICES" },
-      { title: "Neobanks", category: "FINTECH" },
-      { title: "Credit Unions", category: "FINANCIAL SERVICES" },
-    ],
-  },
-
-  "blockchain-wallets": {
-    title: "Blockchain & Crypto Wallet Infrastructure",
-    tagline: "Secure custody, multi-chain support, and compliant crypto transaction processing.",
-    tags: ["Blockchain", "Cryptocurrency", "Web3", "Custody"],
-    overview:
-      "Build enterprise-grade cryptocurrency wallets with institutional custody standards. Support multiple blockchains, implement secure key management, provide transaction batching, and ensure compliance with crypto regulations including travel rule and AML requirements.",
-    features: [
-      {
-        title: "Multi-Chain Support",
-        description: "Support Bitcoin, Ethereum, Solana, and 50+ chains with unified wallet interface and gas optimization.",
-      },
-      {
-        title: "HSM-Based Key Management",
-        description: "Hardware security modules for private key storage with multi-signature approval workflows.",
-      },
-      {
-        title: "DeFi Protocol Integration",
-        description: "Connect to DEXs, lending protocols, and staking services with automated yield optimization.",
-      },
-      {
-        title: "Compliance & Travel Rule",
-        description: "VASP identification, travel rule compliance, and transaction monitoring for regulatory requirements.",
-      },
-    ],
-    whenYouNeedThis: [
-      {
-        title: "Crypto Product Launch",
-        description: "Adding crypto trading, custody, or DeFi features but lack blockchain infrastructure expertise.",
-      },
-      {
-        title: "Institutional Custody Needs",
-        description: "Need enterprise-grade security and insurance for managing customer crypto assets at scale.",
-      },
-      {
-        title: "Regulatory Compliance",
-        description: "Operating in jurisdictions with strict crypto regulations; need compliant infrastructure from day one.",
-      },
-    ],
-    industries: [
-      { title: "Crypto Exchanges", category: "CRYPTOCURRENCY" },
-      { title: "Wealth Management", category: "FINANCIAL SERVICES" },
+      { title: "Banks", category: "FINANCIAL SERVICES" },
       { title: "Payment Processors", category: "FINTECH" },
+      { title: "Large Corporates", category: "CORPORATE" },
+    ],
+  },
+
+  "privacy-preserving-analytics": {
+    title: "Privacy-Preserving Financial Analytics",
+    tagline: "Federated and differential-privacy analytics for sensitive financial datasets.",
+    tags: ["Privacy", "Federated Learning", "Differential Privacy", "Analytics"],
+    overview:
+      "Enable banks and fintechs to extract insights from cross-institutional data without exposing raw customer data. Solutions include federated model training, differential privacy guarantees, and encrypted aggregation for secure analytics and benchmarking.",
+    features: [
+      {
+        title: "Federated Model Training",
+        description: "Train ML models across partner institutions without centralizing PII, reducing privacy and compliance risk.",
+      },
+      {
+        title: "Differential Privacy Guards",
+        description: "Built-in DP mechanisms to bound information leakage while preserving analytical utility.",
+      },
+      {
+        title: "Secure Aggregation",
+        description: "Encrypted aggregation primitives for computing statistics across datasets without revealing individual records.",
+      },
+      {
+        title: "Privacy Audits",
+        description: "Automated privacy budget tracking and audit-ready reports for compliance teams.",
+      },
+    ],
+    whenYouNeedThis: [
+      {
+        title: "Cross-Institution Insights",
+        description: "Benchmark performance or detect fraud across institutions without sharing raw data.",
+      },
+      {
+        title: "Regulatory Constraints",
+        description: "Operate in privacy-sensitive jurisdictions while maintaining analytical capabilities.",
+      },
+      {
+        title: "Model Collaboration",
+        description: "Collaborate on models with partners while preserving customer confidentiality.",
+      },
+    ],
+    industries: [
+      { title: "Banks", category: "FINANCIAL SERVICES" },
+      { title: "Payment Networks", category: "FINTECH" },
+      { title: "RegTech", category: "COMPLIANCE" },
     ],
   },
 
@@ -362,48 +362,48 @@ export const fintechServices: Record<string, ServiceData> = {
     ],
   },
 
-  "trading-platforms": {
-    title: "Real-Time Trading & Exchange Platforms",
-    tagline: "Low-latency order matching, market data distribution, and risk management for trading platforms.",
-    tags: ["Trading", "Exchange", "Market Data", "Low Latency"],
+  "tokenized-assets-platform": {
+    title: "Tokenized Assets Platform",
+    tagline: "Issue, manage, and trade tokenized securities and real-world assets with full lifecycle controls.",
+    tags: ["Tokenization", "Securities", "Asset Management", "Compliance"],
     overview:
-      "Build professional-grade trading infrastructure with microsecond-level order matching, real-time market data feeds, and robust risk controls. Support equities, options, futures, forex, and crypto with institutional-quality execution and regulatory compliance.",
+      "Platformize the issuance and lifecycle management of tokenized assets—real estate, private equity, debt instruments, and collectibles. Provide custody, regulatory controls, fractional ownership, and secondary market infrastructure with compliance baked in.",
     features: [
       {
-        title: "Order Matching Engine",
-        description: "Sub-millisecond matching with price-time priority, order types (limit, market, stop), and fill algorithms.",
+        title: "Issuance Workflows",
+        description: "KYC'd onboarding, cap table management, and automated legal document generation for token issuances.",
       },
       {
-        title: "Market Data Distribution",
-        description: "Real-time quote and trade feeds with WebSocket streaming, historical data APIs, and market depth.",
+        title: "Custody & Transfer",
+        description: "Secure custody solutions with on-chain settlement and off-chain legal registries to maintain compliance.",
       },
       {
-        title: "Risk Management",
-        description: "Pre-trade risk checks, position limits, margin calculations, and circuit breaker mechanisms.",
+        title: "Fractional Ownership",
+        description: "Support fractionalized tokens with dividend distribution, voting, and transfer restrictions.",
       },
       {
-        title: "Regulatory Compliance",
-        description: "Trade reporting, order audit trails, best execution monitoring, and regulator connectivity.",
+        title: "Secondary Market Support",
+        description: "Order books, OTC matchmaking, and compliant secondary trading with settlement guarantees.",
       },
     ],
     whenYouNeedThis: [
       {
-        title: "Exchange Platform Launch",
-        description: "Building new trading venue for stocks, derivatives, or digital assets; need institutional-grade infrastructure.",
+        title: "Unlock Illiquid Assets",
+        description: "Enable liquidity for traditionally illiquid assets via compliant tokenization and secondary markets.",
       },
       {
-        title: "Latency Competitiveness",
-        description: "Current platform losing market share to faster competitors; need to optimize execution speed.",
+        title: "Fractional Investment",
+        description: "Offer smaller investment tickets by fractionalizing ownership and automating distributions.",
       },
       {
-        title: "Product Expansion",
-        description: "Adding new asset classes or order types; existing system can't support required functionality.",
+        title: "Regulatory Readiness",
+        description: "Operate token markets within regulatory guardrails and investor protections.",
       },
     ],
     industries: [
-      { title: "Stock Exchanges", category: "CAPITAL MARKETS" },
-      { title: "Crypto Exchanges", category: "CRYPTOCURRENCY" },
-      { title: "Brokerage Firms", category: "FINANCIAL SERVICES" },
+      { title: "Real Estate", category: "INVESTMENTS" },
+      { title: "Private Markets", category: "ASSET MANAGEMENT" },
+      { title: "Capital Markets", category: "FINANCIAL SERVICES" },
     ],
   },
 
@@ -452,27 +452,27 @@ export const fintechServices: Record<string, ServiceData> = {
     ],
   },
 
-  "p2p-transfers": {
-    title: "Peer-to-Peer Transfer Platform",
-    tagline: "Instant P2P payments with social features and multi-currency support.",
-    tags: ["P2P", "Payments", "Social", "Transfers"],
+  "embedded-credit-underwriting": {
+    title: "Embedded Credit Underwriting",
+    tagline: "Real-time credit decisions for embedded finance using alternative signals.",
+    tags: ["Underwriting", "Embedded Finance", "Risk", "API"],
     overview:
-      "Enable seamless person-to-person money transfers with instant settlement, social payment features, and multi-currency support. Build the next generation of P2P payment apps with real-time notifications, split bills, and group payments functionality.",
+      "Enable instant credit decisions at the point of checkout or within partner apps by combining transactional signals, device telemetry, and alternative data. Provide a fully API-driven underwriting engine that supports configurable policies and risk-based pricing for embedded lenders.",
     features: [
-      { title: "Instant Transfers", description: "Real-time money movement between users with immediate availability." },
-      { title: "Social Features", description: "Payment requests, split bills, and social feed of transaction activity." },
-      { title: "Multi-Currency", description: "Support multiple currencies with real-time FX conversion and low fees." },
-      { title: "Integration", description: "Connect to bank accounts, cards, and digital wallets for funding sources." },
+      { title: "Real-Time Decisioning", description: "Low-latency credit decisions with transparent scoring and configurable thresholds." },
+      { title: "Alternative Data", description: "Use bank transaction flows, utility payments, and behavioral signals for thin-file customers." },
+      { title: "Policy Engine", description: "Rule-based and ML-backed policies with per-partner customization and override workflows." },
+      { title: "Risk-Based Pricing", description: "Dynamic pricing and limits based on predicted loss, tenure, and product type." },
     ],
     whenYouNeedThis: [
-      { title: "P2P Product Launch", description: "Building Venmo/Cash App competitor or adding P2P to existing app." },
-      { title: "User Engagement", description: "Need social features to drive payment volume and user retention." },
-      { title: "International Transfers", description: "Users sending money across borders; need compliant remittance infrastructure." },
+      { title: "Embed Credit", description: "Offer point-of-sale installment or BNPL within merchant checkout flows." },
+      { title: "Thin-File Customers", description: "Underwrite customers without traditional bureau histories using alternative signals." },
+      { title: "Partner Platforms", description: "Monetize partner traffic with white-label credit products and APIs." },
     ],
     industries: [
-      { title: "Payment Apps", category: "FINTECH" },
-      { title: "Social Platforms", category: "SOCIAL" },
-      { title: "Remittance", category: "CROSS-BORDER" },
+      { title: "Retail", category: "E-COMMERCE" },
+      { title: "Marketplaces", category: "PLATFORM" },
+      { title: "Embedded Finance", category: "BAAS" },
     ],
   },
 
@@ -524,27 +524,27 @@ export const fintechServices: Record<string, ServiceData> = {
     ],
   },
 
-  "open-banking-apis": {
-    title: "Open Banking & API Infrastructure",
-    tagline: "Secure APIs for account aggregation, payment initiation, and financial data sharing.",
-    tags: ["Open Banking", "APIs", "PSD2", "Financial Data"],
+  "synthetic-data-engine": {
+    title: "Synthetic Data Engine",
+    tagline: "Generate privacy-safe synthetic financial datasets for model training and testing.",
+    tags: ["Synthetic Data", "Privacy", "ML", "Testing"],
     overview:
-      "Implement open banking standards with secure APIs for account information services (AIS) and payment initiation services (PIS). Enable third-party access to banking data with customer consent, strong customer authentication, and comprehensive audit trails.",
+      "Create high-fidelity, privacy-preserving synthetic datasets that mirror production distributions for model development, QA, and analytics. Supports domain constraints, correlation preservation, and rapid dataset generation to accelerate data science workflows without exposing real customer data.",
     features: [
-      { title: "Account Aggregation", description: "Read-only access to account balances, transactions, and beneficiary data." },
-      { title: "Payment Initiation", description: "Trigger payments from customer accounts with SCA and transaction monitoring." },
-      { title: "OAuth2 & Security", description: "Strong customer authentication with consent management and token lifecycle." },
-      { title: "Regulatory Compliance", description: "PSD2, UK Open Banking, and Consumer Data Right (CDR) compliance." },
+      { title: "Statistical Fidelity", description: "Preserve key distributions and correlations so models trained on synthetic data generalize to production." },
+      { title: "Privacy Controls", description: "Differential privacy and k-anonymity modes to ensure synthetic datasets are safe for sharing." },
+      { title: "Scenario Generation", description: "Create rare-event scenarios and edge cases for stress-testing models and pipelines." },
+      { title: "Test Data Pipelines", description: "Automated pipelines to refresh synthetic datasets and seed testing environments reproducibly." },
     ],
     whenYouNeedThis: [
-      { title: "Open Banking Mandate", description: "Regulatory requirement to provide APIs; need compliant implementation." },
-      { title: "Data Monetization", description: "Want to offer banking data to partners and fintechs for revenue sharing." },
-      { title: "Ecosystem Strategy", description: "Building platform with third-party developers; need robust API program." },
+      { title: "Model Development", description: "Train and validate ML models without exposing PII or working with limited datasets." },
+      { title: "QA Environments", description: "Populate staging systems with realistic data for end-to-end testing." },
+      { title: "Data Sharing", description: "Share datasets with partners or vendors while protecting customer privacy." },
     ],
     industries: [
-      { title: "Banking", category: "FINANCIAL SERVICES" },
-      { title: "Fintech Platforms", category: "FINTECH" },
-      { title: "Data Providers", category: "FINANCIAL DATA" },
+      { title: "Banks", category: "FINANCIAL SERVICES" },
+      { title: "Fintech", category: "FINTECH" },
+      { title: "Data Science", category: "ML" },
     ],
   },
 
@@ -596,51 +596,51 @@ export const fintechServices: Record<string, ServiceData> = {
     ],
   },
 
-  "bill-payment": {
-    title: "Automated Bill Payment & Billing Systems",
-    tagline: "Recurring bill payment automation with reminders and multi-biller support.",
-    tags: ["Bill Payment", "Recurring Payments", "Automation", "Reminders"],
+  "regulatory-automation-hub": {
+    title: "Regulatory Automation Hub",
+    tagline: "Rule-driven regulatory observability, automated filings and compliance workflows.",
+    tags: ["Regulatory", "Automation", "Reporting", "Compliance"],
     overview:
-      "Build comprehensive bill payment solutions that handle recurring payments, one-time bills, and payment reminders. Connect to thousands of billers for utilities, subscriptions, loans, and services with automated payment processing and confirmation.",
+      "Automate regulatory reporting and ongoing compliance tasks with a centralized rule engine, document generation, and submission pipelines. Map business events to reporting obligations, schedule submissions, and retain audit-ready artifacts to reduce manual work and regulatory risk.",
     features: [
-      { title: "Biller Network", description: "Integration with utility companies, telecom, insurance, and loan servicers for payments." },
-      { title: "Payment Scheduling", description: "One-time, recurring, and custom schedule payments with automatic execution." },
-      { title: "Smart Reminders", description: "Due date notifications, low balance alerts, and payment confirmation messages." },
-      { title: "Account Linking", description: "Connect bank accounts, debit cards, and credit cards as funding sources." },
+      { title: "Rule Engine", description: "Express regulatory rules as data-driven policies that trigger reports and alerts." },
+      { title: "Automated Filings", description: "Generate and submit regulator-specific reports (CTR, SAR, tax forms) with validation." },
+      { title: "Compliance Dashboard", description: "Unified view of obligations, deadlines, evidence, and remediation tasks." },
+      { title: "Evidence Management", description: "Attach transaction-level evidence and maintain immutable audit trails for exams." },
     ],
     whenYouNeedThis: [
-      { title: "Financial Wellness", description: "Helping users avoid late fees and manage cash flow with automated bill pay." },
-      { title: "Banking Features", description: "Adding bill payment to banking app as retention and engagement feature." },
-      { title: "Payment Aggregation", description: "Users want single place to manage all recurring payments and subscriptions." },
+      { title: "High Reporting Burden", description: "Multiple jurisdictions and frequent filings causing operational strain." },
+      { title: "Audit Readiness", description: "Prepare evidence and reports quickly when regulators request examinations." },
+      { title: "Policy-as-Code", description: "Define compliance rules in code and deploy across environments with confidence." },
     ],
     industries: [
-      { title: "Digital Banking", category: "FINTECH" },
-      { title: "Personal Finance", category: "PFM" },
-      { title: "Bill Payment Services", category: "PAYMENTS" },
+      { title: "Banks", category: "FINANCIAL SERVICES" },
+      { title: "Payment Processors", category: "FINTECH" },
+      { title: "Capital Markets", category: "REGULATORY" },
     ],
   },
 
-  "fx-trading": {
-    title: "Foreign Exchange Trading Platform",
-    tagline: "Multi-currency trading with real-time rates, hedging tools, and settlement.",
-    tags: ["FX", "Forex", "Currency Trading", "Hedging"],
+  "smart-contract-orchestration": {
+    title: "Smart Contract Orchestration",
+    tagline: "Enterprise orchestration for multi-party programmable agreements and workflows.",
+    tags: ["Orchestration", "Smart Contracts", "Workflow", "Automation"],
     overview:
-      "Build professional FX trading platforms with real-time spot rates, forward contracts, options, and algorithmic trading. Serve corporate treasurers, investment managers, and retail traders with institutional-grade execution and risk management.",
+      "Coordinate on-chain and off-chain operations with an orchestration layer that manages smart contract lifecycles, dispute resolution hooks, and integration with legacy systems. Ideal for tokenized assets, syndicated lending, and automated settlements where business logic spans multiple parties.",
     features: [
-      { title: "Real-Time Pricing", description: "Streaming FX rates from multiple liquidity providers with smart order routing." },
-      { title: "Multi-Product Support", description: "Spot, forward, swap, and options trading with margin and leverage controls." },
-      { title: "Risk Management", description: "Position monitoring, VaR calculations, and hedging strategy recommendations." },
-      { title: "Settlement & Clearing", description: "Integration with SWIFT, correspondent banks, and payment rails for settlement." },
+      { title: "Workflow Designer", description: "Visual designer for composing multi-step, multi-party contract workflows with retry and compensation semantics." },
+      { title: "On/Off-Chain Bridges", description: "Integrations that securely sync contract state with enterprise systems and oracles." },
+      { title: "Policy Enforcement", description: "Enforce compliance checks and KYC gates as preconditions to contract execution." },
+      { title: "Monitoring & Observability", description: "End-to-end tracing of events across chains and participants with alerting and replay capabilities." },
     ],
     whenYouNeedThis: [
-      { title: "Corporate Treasury", description: "Managing foreign exchange exposure; need tools for hedging and execution." },
-      { title: "FX Platform Launch", description: "Building retail or institutional FX trading platform; need market connectivity." },
-      { title: "Execution Quality", description: "Current FX provider has wide spreads; need direct market access." },
+      { title: "Cross-Party Automation", description: "Automate agreements between counterparties while preserving legal enforceability." },
+      { title: "Hybrid Systems", description: "Coordinate blockchain workflows with existing banking and settlement systems." },
+      { title: "Operational Resilience", description: "Provide retries, compensation, and manual intervention tools for automated contracts." },
     ],
     industries: [
-      { title: "Forex Brokers", category: "CAPITAL MARKETS" },
-      { title: "Treasury Management", category: "CORPORATE" },
-      { title: "Fintech", category: "PAYMENTS" },
+      { title: "Syndicated Lending", category: "CAPITAL MARKETS" },
+      { title: "Asset Tokenization", category: "INVESTMENTS" },
+      { title: "Trade Finance", category: "COMMERCE" },
     ],
   },
 
