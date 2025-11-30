@@ -691,4 +691,148 @@ export const logisticsServices: Record<string, ServiceData> = {
       { title: "Bus Companies", category: "PASSENGER TRANSPORT" },
     ],
   },
+
+  "customs-broker": {
+    title: "Customs Broker & Clearance Services",
+    tagline: "Integrated brokerage platform to manage duties, documentation, and customs workflows.",
+    tags: ["Customs", "Brokerage", "Trade", "Compliance"],
+    overview:
+      "Provide a centralized customs brokerage layer that automates tariff classification, duty calculation, and electronic submission of customs declarations. Integrate with freight forwarders and ERP systems to streamline cross-border shipments and reduce clearance delays.",
+    features: [
+      { title: "HS Code Classification", description: "Automated HS code suggestion and validation with human-in-the-loop review for edge cases." },
+      { title: "Duty & Tax Calculation", description: "Real-time duty, VAT and tax estimation across jurisdictions with landed cost visibility." },
+      { title: "Electronic Filing", description: "Generate and file customs declarations, commercial invoices, and certificates of origin via EDI/API." },
+      { title: "Compliance Screening", description: "Sanctions and restricted-party screening with audit trails for inspections." },
+    ],
+    whenYouNeedThis: [
+      { title: "Cross-Border Complexity", description: "Expanding internationally and struggling with customs paperwork and unexpected duties." },
+      { title: "Clearance Delays", description: "Frequent holds at border leading to late deliveries and penalty fees." },
+      { title: "Regulatory Risk", description: "Need centralized control and auditability for trade compliance and documentation." },
+    ],
+    industries: [
+      { title: "Importers/Exporters", category: "TRADE" },
+      { title: "Freight Forwarders", category: "LOGISTICS" },
+      { title: "E-Commerce", category: "RETAIL" },
+    ],
+  },
+
+  "3pl-platform": {
+    title: "3PL Management Platform",
+    tagline: "Orchestrate third-party logistics with inventory visibility, billing, and SLA monitoring.",
+    tags: ["3PL", "Fulfillment", "WMS", "Partner Network"],
+    overview:
+      "Coordinate distributed fulfillment across multiple 3PL partners with centralized order routing, inventory synchronization, billing reconciliation, and SLA monitoring. Provide merchants with a single pane of glass to manage multi-warehouse fulfillment and carrier selection.",
+    features: [
+      { title: "Multi-Warehouse Inventory", description: "Aggregate stock across 3PLs with real-time availability and transfer management." },
+      { title: "Order Routing", description: "Route orders to the best 3PL based on cost, SLA, inventory and location." },
+      { title: "Partner Billing", description: "Automate chargeback/billing reconciliation and invoicing between merchants and 3PLs." },
+      { title: "SLA & KPI Dashboards", description: "Measure on-time rates, accuracy, and throughput per partner with alerts for SLA breaches." },
+    ],
+    whenYouNeedThis: [
+      { title: "Scaling Fulfillment", description: "Expanding into new regions and needing multiple 3PL partners to meet demand." },
+      { title: "Operational Complexity", description: "Multiple warehouses producing inconsistent inventory and order routing issues." },
+      { title: "Cost Control", description: "Need to compare partner performance, pricing and recoveries to optimize spend." },
+    ],
+    industries: [
+      { title: "E-Commerce Merchants", category: "RETAIL" },
+      { title: "Brand Manufacturers", category: "CPG" },
+      { title: "3PL Operators", category: "LOGISTICS" },
+    ],
+  },
+
+  "carrier-portal": {
+    title: "Carrier Portal & Partner Integration",
+    tagline: "A secure portal for carriers to receive loads, update status, and submit documents.",
+    tags: ["Carrier Portal", "Partner Integration", "EDI", "Visibility"],
+    overview:
+      "Provide carriers and partners a lightweight portal to receive load assignments, update ETAs, submit proof-of-delivery and upload required documents. Integrates with TMS and ERP systems to keep shipment status synchronized without heavy technical lift for small carriers.",
+    features: [
+      { title: "Load Assignment", description: "Send loads to carriers with rate confirmations, required docs and routing info." },
+      { title: "Status Updates", description: "Simple status API and portal UI for ETAs, pickup, in-transit and delivered events." },
+      { title: "Document Exchange", description: "Upload BOLs, inspection reports, and customs paperwork with secure access controls." },
+      { title: "Mobile-Friendly", description: "Carrier portal optimized for phone use and low-bandwidth regions." },
+    ],
+    whenYouNeedThis: [
+      { title: "Small Carrier Network", description: "Many carriers lack APIs; need an easy way to communicate and collect shipment data." },
+      { title: "Visibility", description: "Need timely ETAs and status updates from partners to improve customer communication." },
+      { title: "Document Handling", description: "Require proof-of-delivery and customs docs submitted promptly to clear billing and customs." },
+    ],
+    industries: [
+      { title: "Freight Carriers", category: "LOGISTICS" },
+      { title: "Courier Services", category: "COURIER" },
+      { title: "3PL Providers", category: "LOGISTICS" },
+    ],
+  },
+
+  "demand-forecasting": {
+    title: "Demand Forecasting & Inventory Planning",
+    tagline: "Accurate demand forecasts that drive inventory and replenishment decisions.",
+    tags: ["Forecasting", "Inventory Planning", "ML", "Replenishment"],
+    overview:
+      "Improve inventory turns and service levels with machine-learning driven demand forecasts. Combine POS, channel, promotions, seasonality and external signals to create probabilistic forecasts and automated replenishment orders for warehouses and suppliers.",
+    features: [
+      { title: "Multi-Horizon Forecasts", description: "Short, medium and long-term forecasts with confidence intervals and scenario comparisons." },
+      { title: "Promotion & Event Modeling", description: "Adjust forecasts for marketing promotions, holidays and product launches." },
+      { title: "Automated Replenishment", description: "Convert forecasts into purchase orders and transfer suggestions with safety-stock policies." },
+      { title: "Bias & Accuracy Monitoring", description: "Track forecast accuracy by SKU, location and channel with automated retraining triggers." },
+    ],
+    whenYouNeedThis: [
+      { title: "Stockouts or Overstocks", description: "Frequent stock imbalances leading to lost sales or excess holding costs." },
+      { title: "Complex Assortment", description: "Large SKU catalogs across multiple locations needing data-driven planning." },
+      { title: "Promotional Volatility", description: "Unable to plan inventory around marketing events or seasonality." },
+    ],
+    industries: [
+      { title: "Retail", category: "RETAIL" },
+      { title: "CPG", category: "CONSUMER" },
+      { title: "E-Commerce", category: "RETAIL" },
+    ],
+  },
+
+  "shipping-labels": {
+    title: "Shipping Label & Carrier Integration",
+    tagline: "Label generation, rate shopping, and carrier API integrations for multi-carrier shipping.",
+    tags: ["Shipping Labels", "Carrier APIs", "Rate Shopping", "Label Printing"],
+    overview:
+      "Streamline label creation and carrier integration with a unified service that supports label formats, rate shopping, batch printing, and carrier-specific requirements. Supports thermal printers, postage, and label compliance for global shipments.",
+    features: [
+      { title: "Rate Shopping", description: "Compare carrier rates and transit times to select optimal option per shipment." },
+      { title: "Label Generation", description: "Produce carrier-compliant labels (ZPL, PDF) and manage printer queues for fulfillment centers." },
+      { title: "Batch Processing", description: "Create and print labels in bulk with manifest and pallet support for high-throughput warehouses." },
+      { title: "Carrier Integrations", description: "Connect to major carriers for booking, tracking and returns workflows via unified API." },
+    ],
+    whenYouNeedThis: [
+      { title: "Multiple Carriers", description: "Need consistent label generation across different carrier formats and regions." },
+      { title: "High-Volume Fulfillment", description: "Large batch printing and manifest needs in fulfillment centers." },
+      { title: "Global Shipments", description: "Require compliance with carrier label standards across countries." },
+    ],
+    industries: [
+      { title: "E-Commerce", category: "RETAIL" },
+      { title: "3PLs", category: "LOGISTICS" },
+      { title: "Manufacturing", category: "PRODUCTION" },
+    ],
+  },
+
+  "geo-fencing": {
+    title: "Geo-Fencing & Location Alerts",
+    tagline: "Location-based triggers and geofence automation for dispatch, security, and customer notifications.",
+    tags: ["Geo-Fencing", "Location", "Alerts", "Dispatch"],
+    overview:
+      "Use geofencing to automate workflows when vehicles or assets enter/exit zones. Trigger notifications for customers, start/stop shift timers, automate gate access, and detect route deviations—improving security and operational responsiveness.",
+    features: [
+      { title: "Zone Management", description: "Define geofence polygons for depots, customer sites, and restricted zones with easy UI." },
+      { title: "Event Triggers", description: "Fire webhooks or notifications on enter/exit with customizable conditions and grace periods." },
+      { title: "Reporting & Alerts", description: "Historical reports of zone visits and real-time alerts for exceptions or route deviations." },
+      { title: "Security Integration", description: "Integrate with gate systems and access control to automate secure entry for vetted vehicles." },
+    ],
+    whenYouNeedThis: [
+      { title: "Customer Notifications", description: "Want to notify customers when drivers approach delivery windows automatically." },
+      { title: "Site Security", description: "Need alerts when assets enter restricted areas or unauthorized zones." },
+      { title: "Operational Automation", description: "Trigger shift logs, dock prep or gate opens when vehicle arrives to facility." },
+    ],
+    industries: [
+      { title: "Last-Mile Delivery", category: "E-COMMERCE" },
+      { title: "Distribution", category: "WHOLESALE" },
+      { title: "Security & Access", category: "FACILITIES" },
+    ],
+  },
 };
